@@ -3,3 +3,10 @@ git add .
 git commit -m "comentario de la subida"
 
 git push origin master
+
+
+//para traer todo del main
+
+git pull origin main
+
+
