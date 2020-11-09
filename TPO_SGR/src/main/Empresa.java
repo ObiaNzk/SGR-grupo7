@@ -17,4 +17,7 @@ public class Empresa {
     private String correoElectronico;
     private List<Accionista> accionistaList;
 
+    public TamañoEmpresaEnum getTamañoEmpresaEnum() {
+        return tamañoEmpresaEnum;
+    }
 }
