@@ -1,5 +1,6 @@
 package main;
 
+import Responses.ConsultaConsolidadaResponse;
 import Responses.PromedioTasaDescuentoYTotal;
 import enums.EstadoDocumentacion;
 import enums.TamañoEmpresaEnum;
@@ -43,7 +44,7 @@ public class Sistema {
         return sgr.getPorcentajeDeComision(tipoDeOperacionEnum);
     }
 
-    public Integer consultaConsolidada(Socio socio){
+    public ConsultaConsolidadaResponse consultaConsolidada(Socio socio){
         return sgr.consultaConsolidada(socio);
     }
 

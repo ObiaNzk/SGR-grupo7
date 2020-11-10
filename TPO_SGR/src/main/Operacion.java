@@ -1,5 +1,6 @@
 package main;
 
+import documentaciones.DocumentosOperacion;
 import enums.EstadoOperacionEnum;
 import enums.TipoDeOperacionEnum;
 
@@ -16,6 +17,7 @@ public class Operacion {
     private Integer MontoUtilizado;
     private String NumeroCertificadoGarantia;
     private Integer TasaDeDescuento;
+    private DocumentosOperacion documentosOperacion;
 
     public TipoDeOperacionEnum getTipoDeOperacion() {
         return TipoDeOperacion;
@@ -44,5 +46,17 @@ public class Operacion {
 
     public Integer getTasaDeDescuento() {
         return TasaDeDescuento;
+    }
+
+    public Integer getMontoUtilizado() {
+        return MontoUtilizado;
+    }
+
+    public void setMontoUtilizado(Integer montoUtilizado) {
+        MontoUtilizado = montoUtilizado;
+    }
+
+    public DocumentosOperacion getDocumentosOperacion() {
+        return documentosOperacion;
     }
 }

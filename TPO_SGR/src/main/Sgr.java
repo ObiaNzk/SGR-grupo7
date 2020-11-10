@@ -1,5 +1,6 @@
 package main;
 
+import Responses.ConsultaConsolidadaResponse;
 import Responses.PromedioTasaDescuentoYTotal;
 import documentaciones.DocumentosOperacion;
 import enums.EstadoOperacionEnum;
@@ -7,6 +8,9 @@ import enums.TamañoEmpresaEnum;
 import enums.TipoDeOperacionEnum;
 import operaciones.Comision;
 import operaciones.ContraGarantia;
+import operaciones.Cuota;
+import operaciones.Prestamo;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,8 +89,38 @@ public class Sgr {
         return comision.getComisionPorTipo(tipoDeOperacionEnum);
     }
 
-    public Integer consultaConsolidada(Socio socio){
-        return 1;
+    public ConsultaConsolidadaResponse consultaConsolidada(Socio socio){
+        List<Operacion>  operacionesRiesgoVivo = new ArrayList<Operacion>();
+        List<Operacion>  operacionesTotalUtilizado = new ArrayList<Operacion>();
+        Integer totalRiesgoVivo = 0;
+        Integer totalUtilizado = 0 ;
+        for (Operacion operacion : socio.getOperacionList()){
+            if(operacion.getFechaVencimiento().after(new Date())){
+                if(operacion.getEstadoOperacion() == EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO){
+                    operacionesTotalUtilizado.add((operacion));
+                    if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){
+                        for (Cuota cuota: operacion.getDocumentosOperacion().getPrestamo().getCuotas()){
+                            if(!cuota.isPagado() && cuota.getFechaVencimiento().before(new Date())){
+                                totalUtilizado += cuota.getMonto();
+                            }
+                        }
+                    }
+                    totalUtilizado += operacion.getMontoUtilizado();
+                }
+                if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO){
+                    operacionesRiesgoVivo.add(operacion);
+                    if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){
+                        for (Cuota cuota: operacion.getDocumentosOperacion().getPrestamo().getCuotas()){
+                            if(!cuota.isPagado() && cuota.getFechaVencimiento().before(new Date())){
+                                totalRiesgoVivo += cuota.getMonto();
+                            }
+                        }
+                    }
+                    totalRiesgoVivo += operacion.getMontoUtilizado();
+                }
+            }
+        }
+        return new ConsultaConsolidadaResponse(operacionesRiesgoVivo,operacionesTotalUtilizado, totalRiesgoVivo, totalUtilizado);
     }
 
     public PromedioTasaDescuentoYTotal promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
