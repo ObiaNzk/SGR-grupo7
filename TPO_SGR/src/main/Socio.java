@@ -2,7 +2,7 @@ package main;
 
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
-import operaciones.Comisiones;
+import operaciones.Comision;
 import operaciones.ContraGarantia;
 
 import java.util.Date;
@@ -13,7 +13,7 @@ public class Socio {
     private TipoDeSocio tipoDeSocio;
     private List<ContraGarantia> contraGarantiaList;
     private Integer lineaDeCredito;
-    private List<Comisiones> comisionesList;
+    private List<Comision> comisionesList;
     private List<Operacion> operacionList;
     private List<String> facturasList;
     private List<String> accionesSgr;
@@ -41,5 +41,9 @@ public class Socio {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
     }
 }

@@ -1,10 +1,12 @@
 package main;
 
+import Responses.ConsultaConsolidadaResponse;
+import Responses.PromedioTasaDescuentoYTotal;
 import enums.EstadoDocumentacion;
 import enums.TamañoEmpresaEnum;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
-import operaciones.Comisiones;
+import operaciones.Comision;
 
 import java.util.Date;
 import java.util.List;
@@ -30,24 +32,24 @@ public class Sistema {
         return null;
     }
 
-    public List<Comisiones> comisionesEnUnDia(Date fecha){
-        return null;
+    public List<Comision> comisionesEnUnDia(Date fecha){
+        return sgr.comisionesEnunDia(fecha);
     }
 
-    public List<Operacion> operacionesDeSocio(String nombre, Date fechaDesde, Date fechaHasta){
-        return null;
+    public List<Operacion> operacionesDeSocio(Socio socio, Date fechaDesde, Date fechaHasta){
+        return sgr.operacionesDeSocio(socio, fechaDesde, fechaHasta);
     }
 
     public Integer getPorcentajeDeComisiones(TipoDeOperacionEnum tipoDeOperacionEnum){
-        return null;
+        return sgr.getPorcentajeDeComision(tipoDeOperacionEnum);
     }
 
-    public void consultaConsolidada(String nombre){
-
+    public ConsultaConsolidadaResponse consultaConsolidada(Socio socio){
+        return sgr.consultaConsolidada(socio);
     }
 
-    public double promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
-        return 123;
+    public PromedioTasaDescuentoYTotal promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
+        return sgr.promedioTasaDescuentoYTotalOperado(tamañoEmpresaEnum, fechaDesde, fechaHasta);
     }
 
 }
