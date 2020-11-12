@@ -167,7 +167,7 @@ public class Sgr {
             operacion.setFechaMonetizado(new Date());
             operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
             Comision comision = new Comision(operacion);
-            socio.AddComision(comision);
+            socio.AgregarComision(comision);
             return;
         }
         if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO2){
