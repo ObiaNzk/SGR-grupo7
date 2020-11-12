@@ -1,10 +1,10 @@
 package main;
 
+import constants.Constants;
 import documentaciones.DocumentosOperacion;
-import dtos.LineaDeCreditoDTO;
+import dtos.SolicitudGarantiaDTO;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
-import operaciones.Cheque;
 import operaciones.Comision;
 import operaciones.ContraGarantia;
 import operaciones.LineaDeCredito;
@@ -25,6 +25,7 @@ public class Socio {
     private String nombre;
     private Date vigenciaLineaCredito;
     private Empresa empresa;
+    private Integer fdr;
 
 
     public List<Operacion> getOperacionList() {
@@ -51,6 +52,9 @@ public class Socio {
         return lineaDeCredito;
     }
 
+    public Integer getFdr() {
+        return fdr;
+    }
 
     public void setLineaDeCredito(LineaDeCredito lineaDeCredito) {
         this.lineaDeCredito = lineaDeCredito;
@@ -66,64 +70,69 @@ public class Socio {
 
     public boolean excedeMaximoFDR(Integer FDR, Operacion operacion){
 
-        double porcentajeOperacion = operacion.getMonto() * 0.05;
+        double porcentajeFdr = this.getFdr() * 0.05;
 
-        if( FDR > porcentajeOperacion ){
+        if( porcentajeFdr < operacion.getMonto() ){
             return true;
         }
         return false;
     }
 
 
-    public LineaDeCreditoDTO solicitarGarantia(DocumentosOperacion documentosOperacion){
+    public SolicitudGarantiaDTO solicitarGarantia(DocumentosOperacion documentosOperacion, Operacion operacion){
 
-        LineaDeCreditoDTO responseDTO = new LineaDeCreditoDTO();
+        SolicitudGarantiaDTO responseDTO = new SolicitudGarantiaDTO();
+        if(!excedeMaximoFDR(this.getFdr(), operacion)) {
+            if (lineaDeCreditoIsVigente()) {
+                return this.validateDocumentacion(documentosOperacion);
 
-        if(lineaDeCreditoIsVigente()) {
-            return this.validateDocumentacion(documentosOperacion);
-
-        } else {
-            responseDTO.setError(Boolean.TRUE);
-            responseDTO.setErrorMesagge("Linea de credito vencida");
-            return responseDTO;
+            } else {
+                responseDTO.setError(Boolean.TRUE);
+                responseDTO.setErrorMessage(Constants.ERROR_LINEA_CRED_VENCIDA);
+                return responseDTO;
+            }
         }
+
+        responseDTO.setError(Boolean.TRUE);
+        responseDTO.setErrorMessage(Constants.ERROR_OPERACION_EXCEDE_FDR);
+        return responseDTO;
 
     }
 
 
-    public LineaDeCreditoDTO validateDocumentacion(DocumentosOperacion documentosOperacion) {
+    public SolicitudGarantiaDTO validateDocumentacion(DocumentosOperacion documentosOperacion) {
 
-        LineaDeCreditoDTO responseDTO = new LineaDeCreditoDTO();
+        SolicitudGarantiaDTO responseDTO = new SolicitudGarantiaDTO();
 
             if (TipoDeOperacionEnum.TIPO1.equals(documentosOperacion.getTipoDeOperacion())) {
                 if (documentosOperacion.getCheque().validateDocumentacionCompleta()) {
                     responseDTO.setError(Boolean.FALSE);
-                    responseDTO.setErrorMesagge("Solicitud de contragarantia exitosa");
+                    responseDTO.setMesagge(Constants.SOLICITUD_EXITOSA);
                     return responseDTO;
                 }
 
                 responseDTO.setError(Boolean.TRUE);
-                responseDTO.setErrorMesagge("Por favor verifique la documentación faltante");
+                responseDTO.setErrorMessage(Constants.ERROR_FALTA_DOCUMENTACION);
 
             } else if (TipoDeOperacionEnum.TIPO2.equals(documentosOperacion.getTipoDeOperacion())) {
                 if (documentosOperacion.getCuentaCorriente().validateDocumentacionCompleta()) {
                     responseDTO.setError(Boolean.FALSE);
-                    responseDTO.setErrorMesagge("Solicitud de contragarantia exitosa");
+                    responseDTO.setMesagge(Constants.SOLICITUD_EXITOSA);
                     return responseDTO;
                 }
 
                 responseDTO.setError(Boolean.TRUE);
-                responseDTO.setErrorMesagge("Por favor verifique la documentación faltante");
+                responseDTO.setErrorMessage(Constants.ERROR_FALTA_DOCUMENTACION);
 
             } else {
                 if (documentosOperacion.getPrestamo().validateDocumentacionCompleta()) {
                     responseDTO.setError(Boolean.FALSE);
-                    responseDTO.setErrorMesagge("Solicitud de contragarantia exitosa");
+                    responseDTO.setMesagge(Constants.SOLICITUD_EXITOSA);
                     return responseDTO;
                 }
 
                 responseDTO.setError(Boolean.TRUE);
-                responseDTO.setErrorMesagge("Por favor verifique la documentación faltante");
+                responseDTO.setErrorMessage(Constants.ERROR_FALTA_DOCUMENTACION);
             }
 
         return responseDTO;
