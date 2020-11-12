@@ -3,7 +3,7 @@ package main;
 import Responses.ConsultaConsolidadaResponse;
 import Responses.PromedioTasaDescuentoYTotal;
 import documentaciones.DocumentosOperacion;
-import dtos.SolicitudGarantiaDTO;
+import dtos.OperacionesDTO;
 import enums.EstadoDocumentacion;
 import enums.TamañoEmpresaEnum;
 import enums.TipoDeOperacionEnum;
@@ -55,7 +55,7 @@ public class Sistema {
         return sgr.promedioTasaDescuentoYTotalOperado(tamañoEmpresaEnum, fechaDesde, fechaHasta);
     }
 
-    public SolicitudGarantiaDTO solicitarGarantiaOperacion(Socio socio, Operacion operacion, DocumentosOperacion documentosOperacion){
+    public OperacionesDTO solicitarGarantiaOperacion(Socio socio, Operacion operacion, DocumentosOperacion documentosOperacion){
         return socio.solicitarGarantia(documentosOperacion, operacion);
     }
 

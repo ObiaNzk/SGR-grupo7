@@ -2,7 +2,7 @@ package main;
 
 import constants.Constants;
 import documentaciones.DocumentosOperacion;
-import dtos.SolicitudGarantiaDTO;
+import dtos.OperacionesDTO;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
 import operaciones.Comision;
@@ -19,7 +19,7 @@ public class Socio {
     private LineaDeCredito lineaDeCredito;
     private List<Comision> comisionesList;
     private List<Operacion> operacionList;
-    private List<String> facturasList;
+    private List<Double> facturasList;
     private List<String> accionesSgr;
     private TipoDeOperacionEnum tipoDeOperacionEnum;
     private String nombre;
@@ -56,6 +56,10 @@ public class Socio {
         return fdr;
     }
 
+    public List<Double> getFacturasList() {
+        return facturasList;
+    }
+
     public void setLineaDeCredito(LineaDeCredito lineaDeCredito) {
         this.lineaDeCredito = lineaDeCredito;
     }
@@ -79,30 +83,38 @@ public class Socio {
     }
 
 
-    public SolicitudGarantiaDTO solicitarGarantia(DocumentosOperacion documentosOperacion, Operacion operacion){
+    public OperacionesDTO solicitarGarantia(DocumentosOperacion documentosOperacion, Operacion operacion){
 
-        SolicitudGarantiaDTO responseDTO = new SolicitudGarantiaDTO();
-        if(!excedeMaximoFDR(this.getFdr(), operacion)) {
-            if (lineaDeCreditoIsVigente()) {
-                return this.validateDocumentacion(documentosOperacion);
+        OperacionesDTO responseDTO = new OperacionesDTO();
 
-            } else {
-                responseDTO.setError(Boolean.TRUE);
-                responseDTO.setErrorMessage(Constants.ERROR_LINEA_CRED_VENCIDA);
-                return responseDTO;
+        if(!validateFacturasVencidasParaOperar()){
+            if(!excedeMaximoFDR(this.getFdr(), operacion)) {
+                if (lineaDeCreditoIsVigente()) {
+                    return this.validateDocumentacion(documentosOperacion);
+
+                } else {
+                    responseDTO.setError(Boolean.TRUE);
+                    responseDTO.setErrorMessage(Constants.ERROR_LINEA_CRED_VENCIDA);
+
+                }
             }
+
+            responseDTO.setError(Boolean.TRUE);
+            responseDTO.setErrorMessage(Constants.ERROR_OPERACION_EXCEDE_FDR);
+
+        } else {
+            responseDTO.setError(Boolean.TRUE);
+            responseDTO.setErrorMessage(Constants.ERROR_DEBE_FACTURAS);
+
         }
 
-        responseDTO.setError(Boolean.TRUE);
-        responseDTO.setErrorMessage(Constants.ERROR_OPERACION_EXCEDE_FDR);
         return responseDTO;
-
     }
 
 
-    public SolicitudGarantiaDTO validateDocumentacion(DocumentosOperacion documentosOperacion) {
+    public OperacionesDTO validateDocumentacion(DocumentosOperacion documentosOperacion) {
 
-        SolicitudGarantiaDTO responseDTO = new SolicitudGarantiaDTO();
+        OperacionesDTO responseDTO = new OperacionesDTO();
 
             if (TipoDeOperacionEnum.TIPO1.equals(documentosOperacion.getTipoDeOperacion())) {
                 if (documentosOperacion.getCheque().validateDocumentacionCompleta()) {
@@ -136,6 +148,24 @@ public class Socio {
             }
 
         return responseDTO;
+    }
+
+    public boolean validateFacturasVencidasParaOperar(){
+
+        double montoFacturasVencidas = 0;
+        double porcentajeLineaCredito = this.lineaDeCredito.getMonto() * 0.10;
+
+        if(!this.getFacturasList().isEmpty()){
+            for(Double facturas : this.getFacturasList()){
+                montoFacturasVencidas += facturas;
+            }
+
+            if(porcentajeLineaCredito < montoFacturasVencidas){
+                return true;
+            }
+        }
+        return false;
+
     }
 
 
