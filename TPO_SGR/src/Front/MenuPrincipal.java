@@ -10,8 +10,9 @@ public class MenuPrincipal extends JFrame{
     private JPanel pnlMenu;
     private JButton button1;
     private JButton consultasSGRButton;
-    private JButton test2Button;
+    private JButton sociosButton;
     private JButton test3Button;
+    private JButton button2;
     private MenuPrincipal self;
 
     public MenuPrincipal(String titulo) {
@@ -48,16 +49,19 @@ public class MenuPrincipal extends JFrame{
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OperacionesDisponibles frame = new OperacionesDisponibles(self, "Ingrese los datos del cheque. ");
+                OperacionesDisponibles frame = new OperacionesDisponibles(self, "Seleccione un tipo de operación. ");
                 frame.setVisible(true);
 
+
             }
+
+
         });
     }
 
     public static void main(String[] args)
     {
-        MenuPrincipal frame = new MenuPrincipal("Pantalla de Carga Operacion Test");
+        MenuPrincipal frame = new MenuPrincipal(" Hola ADMIN, selecciona una opción. ");
 
         frame.setVisible(true);
 
