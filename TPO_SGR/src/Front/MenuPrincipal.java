@@ -1,5 +1,9 @@
 package Front;
 
+import Front.ConsultasSGR.ConsultasSGR;
+import Front.OperacionesSocios.PanelSolapadoOperaciones;
+import Front.ABMSocios.ABMSocios;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +15,6 @@ public class MenuPrincipal extends JFrame{
     private JButton button1;
     private JButton consultasSGRButton;
     private JButton sociosButton;
-    private JButton test3Button;
-    private JButton button2;
     private MenuPrincipal self;
 
     public MenuPrincipal(String titulo) {
@@ -43,13 +45,28 @@ public class MenuPrincipal extends JFrame{
 
         this.asociarEventos();
         this.self = this;
+        consultasSGRButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultasSGR frame = new ConsultasSGR(self, "Operatoria Disponible");
+                frame.setVisible(true);
+
+            }
+        });
+        sociosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ABMSocios frame = new ABMSocios( self,"Seleccione el tipo de operatoria para socio.");
+                frame.setVisible(true);
+            }
+        });
     }
 
     private void asociarEventos(){
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OperacionesDisponibles frame = new OperacionesDisponibles(self, "Seleccione un tipo de operación. ");
+                PanelSolapadoOperaciones frame = new PanelSolapadoOperaciones(self, "Seleccione un tipo de operación. ");
                 frame.setVisible(true);
 
 

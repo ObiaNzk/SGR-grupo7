@@ -1,15 +1,16 @@
-package Front;
+package Front.OperacionesSocios;
 
 import javax.swing.*;
 import java.awt.*;
 //Extiende de Jdialog para utilizar los métodos que le dan vida la interfaz.
-public class OperacionesDisponibles extends JDialog {
+public class PanelSolapadoOperaciones extends JDialog {
 
     private JPanel pnlPrincipal;
     private JDesktopPane DesktopPaneSolapaUno;
     private JDesktopPane DesktopPaneSolapa2;
+    private JTabbedPane tabbedPane1;
 
-    public OperacionesDisponibles(Window owner, String titulo) {
+    public PanelSolapadoOperaciones(Window owner, String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
         super(owner, titulo);
 
@@ -27,11 +28,11 @@ public class OperacionesDisponibles extends JDialog {
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        SelectorOperacionesSocios1 solapaframe = new SelectorOperacionesSocios1("SOCIOS PARTÍCIPES");
+        SelectorOperacionesSociosParticipes solapaframe = new SelectorOperacionesSociosParticipes("SOCIOS PARTÍCIPES");
         solapaframe.setVisible(true);
         DesktopPaneSolapaUno.add(solapaframe);
 
-        SelectorOperacionesSocios2 solapaframe2 = new SelectorOperacionesSocios2 ("SOCIOS PROTECTORES");
+        SelectoOperacionesSociosProtectores solapaframe2 = new SelectoOperacionesSociosProtectores("SOCIOS PROTECTORES");
         solapaframe2.setVisible(true);
         DesktopPaneSolapa2.add(solapaframe2);
 
