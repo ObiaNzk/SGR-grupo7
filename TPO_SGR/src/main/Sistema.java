@@ -1,14 +1,11 @@
 package main;
 
 import Interfaces.IOperacionGastos;
-import Responses.ConsultaConsolidadaResponse;
-import Responses.PromedioTasaDescuentoYTotal;
+import dtos.ConsultaConsolidadaResponseDTO;
+import dtos.PromedioTasaDescuentoYTotalDTO;
 import documentaciones.DocumentosOperacion;
 import dtos.OperacionesDTO;
-import enums.EstadoDocumentacion;
-import enums.TamañoEmpresaEnum;
-import enums.TipoDeOperacionEnum;
-import enums.TipoDeSocio;
+import enums.*;
 import operaciones.Comision;
 
 import java.util.Date;
@@ -52,16 +49,22 @@ public class Sistema {
         sgr.RealizarOperacion(socio ,operacion, gasto);
     }
 
-    public ConsultaConsolidadaResponse consultaConsolidada(Socio socio){
+    public ConsultaConsolidadaResponseDTO consultaConsolidada(Socio socio){
         return sgr.consultaConsolidada(socio);
     }
 
-    public PromedioTasaDescuentoYTotal promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
+    public PromedioTasaDescuentoYTotalDTO promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
         return sgr.promedioTasaDescuentoYTotalOperado(tamañoEmpresaEnum, fechaDesde, fechaHasta);
     }
 
     public OperacionesDTO solicitarGarantiaOperacion(Socio socio, Operacion operacion, DocumentosOperacion documentosOperacion){
         return socio.solicitarGarantia(documentosOperacion, operacion);
+    }
+
+    public void MonetizarOperacion(Socio socio, Operacion operacion){
+        operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+        operacion.setFechaMonetizado(new Date());
+        socio.AgregarComision(new Comision(operacion));
     }
 
 //Singleton sistema

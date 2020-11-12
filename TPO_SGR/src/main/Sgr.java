@@ -4,8 +4,8 @@ import Interfaces.IOperacionGastos;
 import Request.OperacionCheque;
 import Request.OperacionCuentaCorriente;
 import Request.OperacionCuota;
-import Responses.ConsultaConsolidadaResponse;
-import Responses.PromedioTasaDescuentoYTotal;
+import dtos.ConsultaConsolidadaResponseDTO;
+import dtos.PromedioTasaDescuentoYTotalDTO;
 import documentaciones.DocumentosOperacion;
 import enums.EstadoOperacionEnum;
 import enums.TamañoEmpresaEnum;
@@ -13,7 +13,6 @@ import enums.TipoDeOperacionEnum;
 import operaciones.Comision;
 import operaciones.ContraGarantia;
 import operaciones.Cuota;
-import operaciones.Prestamo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -93,7 +92,7 @@ public class Sgr {
         return comision.getComisionPorTipo(tipoDeOperacionEnum);
     }
 
-    public ConsultaConsolidadaResponse consultaConsolidada(Socio socio){
+    public ConsultaConsolidadaResponseDTO consultaConsolidada(Socio socio){
         List<Operacion>  operacionesRiesgoVivo = new ArrayList<Operacion>();
         List<Operacion>  operacionesTotalUtilizado = new ArrayList<Operacion>();
         Integer totalRiesgoVivo = 0;
@@ -124,10 +123,10 @@ public class Sgr {
                 }
             }
         }
-        return new ConsultaConsolidadaResponse(operacionesRiesgoVivo,operacionesTotalUtilizado, totalRiesgoVivo, totalUtilizado);
+        return new ConsultaConsolidadaResponseDTO(operacionesRiesgoVivo,operacionesTotalUtilizado, totalRiesgoVivo, totalUtilizado);
     }
 
-    public PromedioTasaDescuentoYTotal promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
+    public PromedioTasaDescuentoYTotalDTO promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
         List<Integer> tasaDescuentos = new ArrayList<Integer>();
         List<Integer> montos = new ArrayList<Integer>();
         Integer tasaTotal = 0;
@@ -155,7 +154,7 @@ public class Sgr {
         }
         promedioTasa = tasaTotal/tasaDescuentos.size();
         promedioMonto = montoTotal/montos.size();
-        return new PromedioTasaDescuentoYTotal(promedioTasa,promedioMonto);
+        return new PromedioTasaDescuentoYTotalDTO(promedioTasa,promedioMonto);
     }
 
     public void RealizarOperacion(Socio socio,Operacion operacion, IOperacionGastos gasto) {

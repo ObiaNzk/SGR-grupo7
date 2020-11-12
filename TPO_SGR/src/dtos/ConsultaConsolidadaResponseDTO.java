@@ -1,17 +1,17 @@
-package Responses;
+package dtos;
 
 import main.Operacion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultaConsolidadaResponse {
+public class ConsultaConsolidadaResponseDTO {
     private List<Operacion> operacionesRiesgoVivo;
     private List<Operacion>  operacionesTotalUtilizado;
     private Integer totalRiesgoVivo ;
     private Integer totalUtilizado ;
 
-    public ConsultaConsolidadaResponse(List<Operacion> operacionesRiesgoVivo, List<Operacion> operacionesTotalUtilizado, Integer totalRiesgoVivo, Integer totalUtilizado ){
+    public ConsultaConsolidadaResponseDTO(List<Operacion> operacionesRiesgoVivo, List<Operacion> operacionesTotalUtilizado, Integer totalRiesgoVivo, Integer totalUtilizado ){
         this.operacionesRiesgoVivo = operacionesRiesgoVivo;
         this.operacionesTotalUtilizado = operacionesTotalUtilizado;
         this.totalRiesgoVivo = totalRiesgoVivo;

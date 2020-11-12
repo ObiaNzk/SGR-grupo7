@@ -1,11 +1,11 @@
-package Responses;
+package dtos;
 
-public class PromedioTasaDescuentoYTotal {
+public class PromedioTasaDescuentoYTotalDTO {
     private double promedioTasa;
     private double promedioMonto;
 
 
-    public PromedioTasaDescuentoYTotal(double promedioTasa, double promedioMonto){
+    public PromedioTasaDescuentoYTotalDTO(double promedioTasa, double promedioMonto){
         promedioTasa = promedioTasa;
         promedioMonto = promedioMonto;
     }
