@@ -18,4 +18,16 @@ public class Cuota {
     public boolean isPagado() {
         return Pagado;
     }
+
+    public void setMonto(Integer monto) {
+        Monto = monto;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        FechaVencimiento = fechaVencimiento;
+    }
+
+    public void setPagado(boolean pagado) {
+        Pagado = pagado;
+    }
 }

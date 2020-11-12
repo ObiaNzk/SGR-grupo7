@@ -59,4 +59,20 @@ public class Operacion {
     public DocumentosOperacion getDocumentosOperacion() {
         return documentosOperacion;
     }
+
+    public void setEstadoOperacion(EstadoOperacionEnum estadoOperacion) {
+        EstadoOperacion = estadoOperacion;
+    }
+
+    public void setFechaMonetizado(Date fechaMonetizado) {
+        FechaMonetizado = fechaMonetizado;
+    }
+
+    public void setNumeroCertificadoGarantia(String numeroCertificadoGarantia) {
+        NumeroCertificadoGarantia = numeroCertificadoGarantia;
+    }
+
+    public void setTasaDeDescuento(Integer tasaDeDescuento) {
+        TasaDeDescuento = tasaDeDescuento;
+    }
 }

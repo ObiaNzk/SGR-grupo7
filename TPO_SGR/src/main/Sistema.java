@@ -1,5 +1,6 @@
 package main;
 
+import Interfaces.IOperacionGastos;
 import Responses.ConsultaConsolidadaResponse;
 import Responses.PromedioTasaDescuentoYTotal;
 import enums.EstadoDocumentacion;
@@ -16,32 +17,36 @@ public class Sistema {
     private Sgr sgr;
     private List<Solicitante> solicitanteList;
 
-    public Solicitante solicitud(Empresa empresa, TipoDeSocio tipoDeSocio){
+    public Solicitante solicitud(Empresa empresa, TipoDeSocio tipoDeSocio) {
         return null;
     }
 
     public void presentarDocumentacion(Solicitante solicitante, String estatuto, String balanceCertificado1, String balanceCertificado2,
-                                       String balanceCertificado3, String bienesSocios){
+                                       String balanceCertificado3, String bienesSocios) {
     }
 
-    public EstadoDocumentacion revisarDocumentacion(Solicitante solicitante){
+    public EstadoDocumentacion revisarDocumentacion(Solicitante solicitante) {
         return null;
     }
 
-    public Socio crearSocios(){
+    public Socio crearSocios() {
         return null;
     }
 
-    public List<Comision> comisionesEnUnDia(Date fecha){
+    public List<Comision> comisionesEnUnDia(Date fecha) {
         return sgr.comisionesEnunDia(fecha);
     }
 
-    public List<Operacion> operacionesDeSocio(Socio socio, Date fechaDesde, Date fechaHasta){
+    public List<Operacion> operacionesDeSocio(Socio socio, Date fechaDesde, Date fechaHasta) {
         return sgr.operacionesDeSocio(socio, fechaDesde, fechaHasta);
     }
 
-    public Integer getPorcentajeDeComisiones(TipoDeOperacionEnum tipoDeOperacionEnum){
+    public Integer getPorcentajeDeComisiones(TipoDeOperacionEnum tipoDeOperacionEnum) {
         return sgr.getPorcentajeDeComision(tipoDeOperacionEnum);
+    }
+
+    public void RealizarOperacion(Socio socio,Operacion operacion, IOperacionGastos gasto){
+        sgr.RealizarOperacion(socio ,operacion, gasto);
     }
 
     public ConsultaConsolidadaResponse consultaConsolidada(Socio socio){

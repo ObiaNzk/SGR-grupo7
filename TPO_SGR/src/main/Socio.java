@@ -46,4 +46,68 @@ public class Socio {
     public Empresa getEmpresa() {
         return empresa;
     }
+
+    public TipoDeSocio getTipoDeSocio() {
+        return tipoDeSocio;
+    }
+
+    public void setTipoDeSocio(TipoDeSocio tipoDeSocio) {
+        this.tipoDeSocio = tipoDeSocio;
+    }
+
+    public List<ContraGarantia> getContraGarantiaList() {
+        return contraGarantiaList;
+    }
+
+    public void setContraGarantiaList(List<ContraGarantia> contraGarantiaList) {
+        this.contraGarantiaList = contraGarantiaList;
+    }
+
+    public void setLineaDeCredito(Integer lineaDeCredito) {
+        this.lineaDeCredito = lineaDeCredito;
+    }
+
+    public List<Comision> getComisionesList() {
+        return comisionesList;
+    }
+
+    public void AddComision(Comision comision) {
+        this.comisionesList.add(comision);
+    }
+
+    public void setOperacionList(List<Operacion> operacionList) {
+        this.operacionList = operacionList;
+    }
+
+    public List<String> getFacturasList() {
+        return facturasList;
+    }
+
+    public void setFacturasList(List<String> facturasList) {
+        this.facturasList = facturasList;
+    }
+
+    public void setAccionesSgr(List<String> accionesSgr) {
+        this.accionesSgr = accionesSgr;
+    }
+
+    public void setTipoDeOperacionEnum(TipoDeOperacionEnum tipoDeOperacionEnum) {
+        this.tipoDeOperacionEnum = tipoDeOperacionEnum;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getVigenciaLineaCredito() {
+        return vigenciaLineaCredito;
+    }
+
+    public void setVigenciaLineaCredito(Date vigenciaLineaCredito) {
+        this.vigenciaLineaCredito = vigenciaLineaCredito;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 }

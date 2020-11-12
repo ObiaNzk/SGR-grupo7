@@ -1,5 +1,9 @@
 package main;
 
+import Interfaces.IOperacionGastos;
+import Request.OperacionCheque;
+import Request.OperacionCuentaCorriente;
+import Request.OperacionCuota;
 import Responses.ConsultaConsolidadaResponse;
 import Responses.PromedioTasaDescuentoYTotal;
 import documentaciones.DocumentosOperacion;
@@ -154,4 +158,28 @@ public class Sgr {
         return new PromedioTasaDescuentoYTotal(promedioTasa,promedioMonto);
     }
 
+    public void RealizarOperacion(Socio socio,Operacion operacion, IOperacionGastos gasto) {
+
+        if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO1){
+            OperacionCheque gastoCheque = (OperacionCheque) gasto;
+            operacion.setMontoUtilizado(operacion.getMonto());
+            operacion.setTasaDeDescuento(gastoCheque.getTasaDescuento());
+            operacion.setFechaMonetizado(new Date());
+            operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+            Comision comision = new Comision(operacion);
+            socio.AddComision(comision);
+            return;
+        }
+        if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO2){
+            OperacionCuentaCorriente gastoCuentaCorriente = (OperacionCuentaCorriente)gasto;
+            operacion.setMontoUtilizado(gastoCuentaCorriente.getMontoUtilizado());
+            return;
+        }
+        if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){
+            OperacionCuota gastoCuota = (OperacionCuota)gasto;
+            gastoCuota.getCuota().setPagado(true);
+            return;
+        }
+
+    }
 }
