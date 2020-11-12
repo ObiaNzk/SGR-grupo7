@@ -5,16 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class OperatoriaCheque extends JFrame{
+public class MenuPrincipal extends JFrame{
     private JPanel pnlPrincipal;
     private JPanel pnlMenu;
     private JButton button1;
+    private JButton consultasSGRButton;
+    private JButton sociosButton;
+    private JButton test3Button;
     private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private OperatoriaCheque self;
+    private MenuPrincipal self;
 
-    public OperatoriaCheque(String titulo) {
+    public MenuPrincipal(String titulo) {
         super(titulo);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -48,16 +49,19 @@ public class OperatoriaCheque extends JFrame{
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CargarDatosCheque frame = new CargarDatosCheque(self, "Ingrese los datos del cheque. ");
+                OperacionesDisponibles frame = new OperacionesDisponibles(self, "Seleccione un tipo de operación. ");
                 frame.setVisible(true);
 
+
             }
+
+
         });
     }
 
     public static void main(String[] args)
     {
-        OperatoriaCheque frame = new OperatoriaCheque("Pantalla de Carga Operacion Test");
+        MenuPrincipal frame = new MenuPrincipal(" Hola ADMIN, selecciona una opción. ");
 
         frame.setVisible(true);
 
