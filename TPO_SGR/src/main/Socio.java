@@ -9,6 +9,7 @@ import operaciones.Comision;
 import operaciones.ContraGarantia;
 import operaciones.LineaDeCredito;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -169,6 +170,15 @@ public class Socio {
         return false;
 
     }
+    public void ComprarAcciones (List<String> acciones){
+        this.accionesSgr.addAll(acciones);
+    }
 
-
+    public List<String> VenderAcciones(Integer cantidadDeAcciones) {
+        List<String> acciones = new ArrayList<String>();
+        for (int i = 0; i < cantidadDeAcciones; ++i) {
+            acciones.add(this.accionesSgr.remove(i));
+        }
+        return acciones;
+    }
 }

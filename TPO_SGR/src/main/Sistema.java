@@ -46,7 +46,7 @@ public class Sistema {
     }
 
     public void RealizarOperacion(Socio socio,Operacion operacion, IOperacionGastos gasto){
-        sgr.RealizarOperacion(socio ,operacion, gasto);
+        sgr.RealizarOperacion(socio, operacion, gasto);
     }
 
     public ConsultaConsolidadaResponseDTO consultaConsolidada(Socio socio){
@@ -65,6 +65,9 @@ public class Sistema {
         operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
         operacion.setFechaMonetizado(new Date());
         socio.AgregarComision(new Comision(operacion));
+    }
+    public void VentaDeAcciones(Socio socioQueVende, Socio socioQueCompra, Integer cantidadDeAcciones){
+        sgr.VentaDeAcciones(socioQueVende, socioQueCompra, cantidadDeAcciones);
     }
 
 //Singleton sistema

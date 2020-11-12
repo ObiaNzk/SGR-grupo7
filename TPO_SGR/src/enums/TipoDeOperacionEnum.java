@@ -4,6 +4,7 @@ public enum TipoDeOperacionEnum {
 
     TIPO1,
     TIPO2,
-    TIPO3;
+    TIPO3,
+    PROTECTOR;
 
 }

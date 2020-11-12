@@ -179,6 +179,9 @@ public class Sgr {
             gastoCuota.getCuota().setPagado(true);
             return;
         }
+    }
 
+    public void VentaDeAcciones(Socio socioQueVende, Socio socioQueCompra, Integer cantidadDeAcciones) {
+        socioQueCompra.ComprarAcciones(socioQueVende.VenderAcciones(cantidadDeAcciones));
     }
 }
