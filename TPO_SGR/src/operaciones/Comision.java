@@ -12,18 +12,19 @@ public class Comision {
     private Date FechaCreacion;
     private Date FechaFacturacion;
     private Integer Comision;
-    private Integer Monto;
+    private float Monto;
     private ComisionEstadoEnum Estado;
 
     public Comision(){
 
     }
     public Comision(Operacion operacion){
-        Comision = getComisionPorTipo(operacion.getTipoDeOperacion());
-        TipoDeOperacion = operacion.getTipoDeOperacion();
-        FechaCreacion = new Date();
-        Monto = operacion.getMonto();
-        Estado = ComisionEstadoEnum.CALCULADO;
+        Integer comision = getComisionPorTipo(operacion.getTipoDeOperacion());
+        this.Comision = comision;
+        this.TipoDeOperacion = operacion.getTipoDeOperacion();
+        this.FechaCreacion = new Date();
+        this.Monto = (float)comision/operacion.getMonto();
+        this.Estado = ComisionEstadoEnum.CALCULADO;
     }
     public TipoDeOperacionEnum getTipoDeOperacion() {
         return TipoDeOperacion;
@@ -41,7 +42,7 @@ public class Comision {
         return Comision;
     }
 
-    public Integer getMonto() {
+    public float getMonto() {
         return Monto;
     }
 

@@ -1,29 +1,57 @@
 package main;
 
-import Responses.ConsultaConsolidadaResponse;
-import Responses.PromedioTasaDescuentoYTotal;
+import Interfaces.IOperacionGastos;
+import Request.OperacionCheque;
+import Request.OperacionCuentaCorriente;
+import Request.OperacionCuota;
+import dtos.ConsultaConsolidadaResponseDTO;
+import dtos.PromedioTasaDescuentoYTotalDTO;
 import documentaciones.DocumentosOperacion;
 import enums.EstadoOperacionEnum;
 import enums.TamañoEmpresaEnum;
 import enums.TipoDeOperacionEnum;
+import enums.TipoDeSocio;
 import operaciones.Comision;
 import operaciones.ContraGarantia;
 import operaciones.Cuota;
-import operaciones.Prestamo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 public class Sgr {
 
     private String nombre;
+<<<<<<< HEAD
     private List<Socio> sociosProtectores;
     private List<Socio> sociosParticipes;
     private static Sgr instance;
 
 
+=======
+    private List<Socio> socios;
 
+    public Sgr(){
+        socios = new ArrayList<Socio>();
+        Socio socioPrincipalParticipe = new Socio();
+        socioPrincipalParticipe.setTipoDeSocio(TipoDeSocio.PARTICIPE);
+        socioPrincipalParticipe.setAccionesSgrA(new ArrayList<String>(Collections.nCopies(100,"accion A")));
+        socioPrincipalParticipe.setNombre("Socio General Participe");
+
+        Socio socioPrincipalProtector = new Socio();
+        socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
+        socioPrincipalProtector.setAccionesSgrB(new ArrayList<String>(Collections.nCopies(100,"accion B")));
+        socioPrincipalProtector.setNombre("Socio General Protector");
+
+        this.socios.add(socioPrincipalParticipe);
+        this.socios.add(socioPrincipalProtector);
+    }
+>>>>>>> c3be6ededd929e2d05c14f3f06921191c8e107d7
+
+    public List<Socio> GetSocios(){
+        return this.socios;
+    }
     public void agregarSocio(Socio socio){
 
     }
@@ -75,7 +103,7 @@ public class Sgr {
 
     public List<Comision> comisionesEnunDia(Date fecha){
         List<Comision> comisiones =  new ArrayList<Comision>();
-        for (Socio socio: sociosParticipes){
+        for (Socio socio: socios){
             for (Operacion operacion: socio.getOperacionList()){
                 if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO1 && operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO && operacion.getFechaMonetizado() == fecha){
                    comisiones.add(new Comision(operacion));
@@ -100,7 +128,7 @@ public class Sgr {
         return comision.getComisionPorTipo(tipoDeOperacionEnum);
     }
 
-    public ConsultaConsolidadaResponse consultaConsolidada(Socio socio){
+    public ConsultaConsolidadaResponseDTO consultaConsolidada(Socio socio){
         List<Operacion>  operacionesRiesgoVivo = new ArrayList<Operacion>();
         List<Operacion>  operacionesTotalUtilizado = new ArrayList<Operacion>();
         Integer totalRiesgoVivo = 0;
@@ -131,17 +159,17 @@ public class Sgr {
                 }
             }
         }
-        return new ConsultaConsolidadaResponse(operacionesRiesgoVivo,operacionesTotalUtilizado, totalRiesgoVivo, totalUtilizado);
+        return new ConsultaConsolidadaResponseDTO(operacionesRiesgoVivo,operacionesTotalUtilizado, totalRiesgoVivo, totalUtilizado);
     }
 
-    public PromedioTasaDescuentoYTotal promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
+    public PromedioTasaDescuentoYTotalDTO promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
         List<Integer> tasaDescuentos = new ArrayList<Integer>();
         List<Integer> montos = new ArrayList<Integer>();
         Integer tasaTotal = 0;
         double promedioTasa;
         double promedioMonto;
         Integer montoTotal = 0;
-        for (Socio socio: sociosParticipes){
+        for (Socio socio: socios){
             if(socio.getEmpresa().getTamañoEmpresaEnum() == tamañoEmpresaEnum){
                 for(Operacion operacion: socio.getOperacionList()){
                     if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO &&
@@ -162,9 +190,34 @@ public class Sgr {
         }
         promedioTasa = tasaTotal/tasaDescuentos.size();
         promedioMonto = montoTotal/montos.size();
-        return new PromedioTasaDescuentoYTotal(promedioTasa,promedioMonto);
+        return new PromedioTasaDescuentoYTotalDTO(promedioTasa,promedioMonto);
     }
 
+    public void RealizarOperacion(Socio socio,Operacion operacion, IOperacionGastos gasto) {
+
+        if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO1){
+            OperacionCheque gastoCheque = (OperacionCheque) gasto;
+            operacion.setMontoUtilizado(operacion.getMonto());
+            operacion.setTasaDeDescuento(gastoCheque.getTasaDescuento());
+            operacion.setFechaMonetizado(new Date());
+            operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+            Comision comision = new Comision(operacion);
+            socio.AgregarComision(comision);
+            return;
+        }
+        if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO2){
+            OperacionCuentaCorriente gastoCuentaCorriente = (OperacionCuentaCorriente)gasto;
+            operacion.setMontoUtilizado(gastoCuentaCorriente.getMontoUtilizado());
+            return;
+        }
+        if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){
+            OperacionCuota gastoCuota = (OperacionCuota)gasto;
+            gastoCuota.getCuota().setPagado(true);
+            return;
+        }
+    }
+
+<<<<<<< HEAD
     public static Sgr getInstance() {
         if(instance == null){
             instance = new Sgr();
@@ -172,4 +225,9 @@ public class Sgr {
         return instance;
     }
 
+=======
+    public void VentaDeAcciones(Socio socioQueVende, Socio socioQueCompra, Integer cantidadDeAcciones) {
+        socioQueCompra.ComprarAcciones(socioQueVende.VenderAcciones(cantidadDeAcciones));
+    }
+>>>>>>> c3be6ededd929e2d05c14f3f06921191c8e107d7
 }

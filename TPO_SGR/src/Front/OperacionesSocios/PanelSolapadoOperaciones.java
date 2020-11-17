@@ -1,16 +1,21 @@
-package Front;
+package Front.OperacionesSocios;
 
 import javax.swing.*;
 import java.awt.*;
 //Extiende de Jdialog para utilizar los métodos que le dan vida la interfaz.
-public class OperacionesDisponibles extends JDialog {
+public class PanelSolapadoOperaciones extends JDialog {
 
     private JPanel pnlPrincipal;
     private JTabbedPane tabbedPane1;
     private JPanel pnlSocios;
     private JDesktopPane DesktopPaneSolapaUno;
+<<<<<<< HEAD:TPO_SGR/src/Front/OperacionesDisponibles.java
+=======
+    private JDesktopPane DesktopPaneSolapa2;
+    private JTabbedPane tabbedPane1;
+>>>>>>> c3be6ededd929e2d05c14f3f06921191c8e107d7:TPO_SGR/src/Front/OperacionesSocios/PanelSolapadoOperaciones.java
 
-    public OperacionesDisponibles(Window owner, String titulo) {
+    public PanelSolapadoOperaciones(Window owner, String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
         super(owner, titulo);
 
@@ -28,13 +33,19 @@ public class OperacionesDisponibles extends JDialog {
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        SelectorOperacionesSocios1 solapaframe = new SelectorOperacionesSocios1("SOCIOS PARTÍCIPES");
+        SelectorOperacionesSociosParticipes solapaframe = new SelectorOperacionesSociosParticipes("SOCIOS PARTÍCIPES");
         solapaframe.setVisible(true);
         DesktopPaneSolapaUno.add(solapaframe);
 
+<<<<<<< HEAD:TPO_SGR/src/Front/OperacionesDisponibles.java
 //        SelectorOperacionesSocios2 solapaframe2 = new SelectorOperacionesSocios2 ("SOCIOS PROTECTORES");
 //        solapaframe2.setVisible(true);
 //        DesktopPaneSolapa2.add(solapaframe2);
+=======
+        SelectoOperacionesSociosProtectores solapaframe2 = new SelectoOperacionesSociosProtectores("SOCIOS PROTECTORES");
+        solapaframe2.setVisible(true);
+        DesktopPaneSolapa2.add(solapaframe2);
+>>>>>>> c3be6ededd929e2d05c14f3f06921191c8e107d7:TPO_SGR/src/Front/OperacionesSocios/PanelSolapadoOperaciones.java
 
 
     }

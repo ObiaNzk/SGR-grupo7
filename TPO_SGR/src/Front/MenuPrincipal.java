@@ -1,6 +1,12 @@
 package Front;
 
+<<<<<<< HEAD
 import Front.ComboBox.*;
+=======
+import Front.ConsultasSGR.ConsultasSGR;
+import Front.OperacionesSocios.PanelSolapadoOperaciones;
+import Front.ABMSocios.ABMSocios;
+>>>>>>> c3be6ededd929e2d05c14f3f06921191c8e107d7
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,11 +19,14 @@ public class MenuPrincipal extends JFrame{
     private JButton button1;
     private JButton consultasSGRButton;
     private JButton sociosButton;
+<<<<<<< HEAD
     private JButton comisionesEnUnDiaButton;
     private JButton promediosTasasChequesPagaresButton;
     private JButton consultarPorcentajeComisionSegunButton;
     private JButton consultaConsolidadaButton;
     private JButton crearEmpresaButton;
+=======
+>>>>>>> c3be6ededd929e2d05c14f3f06921191c8e107d7
     private MenuPrincipal self;
     private JComboBox<String> comboBoxSocio;
 
@@ -49,6 +58,7 @@ public class MenuPrincipal extends JFrame{
 
         this.asociarEventos();
         this.self = this;
+<<<<<<< HEAD
 
 
         comisionesEnUnDiaButton.addActionListener(new ActionListener() {
@@ -84,6 +94,20 @@ public class MenuPrincipal extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 CrearEmpresa frame = new CrearEmpresa(self);
+=======
+        consultasSGRButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultasSGR frame = new ConsultasSGR(self, "Operatoria Disponible");
+                frame.setVisible(true);
+
+            }
+        });
+        sociosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ABMSocios frame = new ABMSocios( self,"Seleccione el tipo de operatoria para socio.");
+>>>>>>> c3be6ededd929e2d05c14f3f06921191c8e107d7
                 frame.setVisible(true);
             }
         });
@@ -93,7 +117,7 @@ public class MenuPrincipal extends JFrame{
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OperacionesDisponibles frame = new OperacionesDisponibles(self, "Seleccione un tipo de operación. ");
+                PanelSolapadoOperaciones frame = new PanelSolapadoOperaciones(self, "Seleccione un tipo de operación. ");
                 frame.setVisible(true);
             }
 
