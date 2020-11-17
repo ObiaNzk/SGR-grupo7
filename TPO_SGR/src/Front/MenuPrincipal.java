@@ -17,6 +17,7 @@ public class MenuPrincipal extends JFrame{
     private JButton promediosTasasChequesPagaresButton;
     private JButton consultarPorcentajeComisionSegunButton;
     private JButton consultaConsolidadaButton;
+    private JButton crearEmpresaButton;
     private MenuPrincipal self;
     private JComboBox<String> comboBoxSocio;
 
@@ -75,6 +76,14 @@ public class MenuPrincipal extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 ConsultaConsolidadaView frame = new ConsultaConsolidadaView();
+                frame.setVisible(true);
+            }
+        });
+        crearEmpresaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                CrearEmpresa frame = new CrearEmpresa(self);
                 frame.setVisible(true);
             }
         });
