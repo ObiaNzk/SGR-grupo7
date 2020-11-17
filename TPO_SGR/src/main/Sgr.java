@@ -10,19 +10,36 @@ import documentaciones.DocumentosOperacion;
 import enums.EstadoOperacionEnum;
 import enums.TamañoEmpresaEnum;
 import enums.TipoDeOperacionEnum;
+import enums.TipoDeSocio;
 import operaciones.Comision;
 import operaciones.ContraGarantia;
 import operaciones.Cuota;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 public class Sgr {
 
     private String nombre;
-    private List<Socio> sociosProtectores;
-    private List<Socio> sociosParticipes;
+    private List<Socio> socios;
+
+    public Sgr(){
+        socios = new ArrayList<Socio>();
+        Socio socioPrincipalParticipe = new Socio();
+        socioPrincipalParticipe.setTipoDeSocio(TipoDeSocio.PARTICIPE);
+        socioPrincipalParticipe.setAccionesSgrA(new ArrayList<String>(Collections.nCopies(100,"accion A")));
+        socioPrincipalParticipe.setNombre("Socio General Participe");
+
+        Socio socioPrincipalProtector = new Socio();
+        socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
+        socioPrincipalProtector.setAccionesSgrB(new ArrayList<String>(Collections.nCopies(100,"accion B")));
+        socioPrincipalProtector.setNombre("Socio General Protector");
+
+        this.socios.add(socioPrincipalParticipe);
+        this.socios.add(socioPrincipalProtector);
+    }
 
     public void agregarSocio(Socio socio){
 
@@ -67,7 +84,7 @@ public class Sgr {
 
     public List<Comision> comisionesEnunDia(Date fecha){
         List<Comision> comisiones =  new ArrayList<Comision>();
-        for (Socio socio: sociosParticipes){
+        for (Socio socio: socios){
             for (Operacion operacion: socio.getOperacionList()){
                 if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO1 && operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO && operacion.getFechaMonetizado() == fecha){
                    comisiones.add(new Comision(operacion));
@@ -133,7 +150,7 @@ public class Sgr {
         double promedioTasa;
         double promedioMonto;
         Integer montoTotal = 0;
-        for (Socio socio: sociosParticipes){
+        for (Socio socio: socios){
             if(socio.getEmpresa().getTamañoEmpresaEnum() == tamañoEmpresaEnum){
                 for(Operacion operacion: socio.getOperacionList()){
                     if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO &&

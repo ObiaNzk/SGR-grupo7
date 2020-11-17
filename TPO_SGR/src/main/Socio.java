@@ -21,7 +21,8 @@ public class Socio {
     private List<Comision> comisionesList;
     private List<Operacion> operacionList;
     private List<Double> facturasList;
-    private List<String> accionesSgr;
+    private List<String> accionesSgrA;
+    private List<String> accionesSgrB;
     private TipoDeOperacionEnum tipoDeOperacionEnum;
     private String nombre;
     private Date vigenciaLineaCredito;
@@ -33,10 +34,6 @@ public class Socio {
     }
     public List<Operacion> getOperacionList() {
         return operacionList;
-    }
-
-    public List<String> getAccionesSgr() {
-        return accionesSgr;
     }
 
     public TipoDeOperacionEnum getTipoDeOperacionEnum() {
@@ -171,14 +168,96 @@ public class Socio {
 
     }
     public void ComprarAcciones (List<String> acciones){
-        this.accionesSgr.addAll(acciones);
+        if(this.tipoDeSocio == TipoDeSocio.PARTICIPE) {
+            this.accionesSgrA.addAll(acciones);
+        }else{
+            this.accionesSgrB.addAll(acciones);
+        }
+
+
     }
 
     public List<String> VenderAcciones(Integer cantidadDeAcciones) {
         List<String> acciones = new ArrayList<String>();
         for (int i = 0; i < cantidadDeAcciones; ++i) {
-            acciones.add(this.accionesSgr.remove(i));
+            if(this.tipoDeSocio == TipoDeSocio.PARTICIPE) {
+                acciones.add(this.accionesSgrA.remove(i));
+            }else{
+                acciones.add(this.accionesSgrB.remove(i));
+            }
         }
         return acciones;
+    }
+
+    public TipoDeSocio getTipoDeSocio() {
+        return tipoDeSocio;
+    }
+
+    public void setTipoDeSocio(TipoDeSocio tipoDeSocio) {
+        this.tipoDeSocio = tipoDeSocio;
+    }
+
+    public List<ContraGarantia> getContraGarantiaList() {
+        return contraGarantiaList;
+    }
+
+    public void setContraGarantiaList(List<ContraGarantia> contraGarantiaList) {
+        this.contraGarantiaList = contraGarantiaList;
+    }
+
+    public List<Comision> getComisionesList() {
+        return comisionesList;
+    }
+
+    public void setComisionesList(List<Comision> comisionesList) {
+        this.comisionesList = comisionesList;
+    }
+
+    public void setOperacionList(List<Operacion> operacionList) {
+        this.operacionList = operacionList;
+    }
+
+    public void setFacturasList(List<Double> facturasList) {
+        this.facturasList = facturasList;
+    }
+
+    public void setTipoDeOperacionEnum(TipoDeOperacionEnum tipoDeOperacionEnum) {
+        this.tipoDeOperacionEnum = tipoDeOperacionEnum;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getVigenciaLineaCredito() {
+        return vigenciaLineaCredito;
+    }
+
+    public void setVigenciaLineaCredito(Date vigenciaLineaCredito) {
+        this.vigenciaLineaCredito = vigenciaLineaCredito;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public void setFdr(Integer fdr) {
+        this.fdr = fdr;
+    }
+
+    public List<String> getAccionesSgrA() {
+        return accionesSgrA;
+    }
+
+    public void setAccionesSgrA(List<String> accionesSgrA) {
+        this.accionesSgrA = accionesSgrA;
+    }
+
+    public List<String> getAccionesSgrB() {
+        return accionesSgrB;
+    }
+
+    public void setAccionesSgrB(List<String> accionesSgrB) {
+        this.accionesSgrB = accionesSgrB;
     }
 }
