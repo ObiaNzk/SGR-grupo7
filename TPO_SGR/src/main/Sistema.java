@@ -19,6 +19,10 @@ public class Sistema {
     private List<Solicitante> solicitanteList;
     private static Sistema instance;
 
+    public Sgr getSgr() {
+        return sgr;
+    }
+
     public Solicitante solicitud(Empresa empresa, TipoDeSocio tipoDeSocio){
         return null;
     }
@@ -36,23 +40,23 @@ public class Sistema {
     }
 
     public List<Comision> comisionesEnUnDia(Date fecha){
-        return sgr.comisionesEnunDia(fecha);
+        return sgr.getInstance().comisionesEnunDia(fecha);
     }
 
     public List<Operacion> operacionesDeSocio(Socio socio, Date fechaDesde, Date fechaHasta){
-        return sgr.operacionesDeSocio(socio, fechaDesde, fechaHasta);
+        return sgr.getInstance().operacionesDeSocio(socio, fechaDesde, fechaHasta);
     }
 
     public Integer getPorcentajeDeComisiones(TipoDeOperacionEnum tipoDeOperacionEnum){
-        return sgr.getPorcentajeDeComision(tipoDeOperacionEnum);
+        return sgr.getInstance().getPorcentajeDeComision(tipoDeOperacionEnum);
     }
 
     public ConsultaConsolidadaResponse consultaConsolidada(Socio socio){
-        return sgr.consultaConsolidada(socio);
+        return sgr.getInstance().consultaConsolidada(socio);
     }
 
     public PromedioTasaDescuentoYTotal promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
-        return sgr.promedioTasaDescuentoYTotalOperado(tamañoEmpresaEnum, fechaDesde, fechaHasta);
+        return sgr.getInstance().promedioTasaDescuentoYTotalOperado(tamañoEmpresaEnum, fechaDesde, fechaHasta);
     }
 
     public OperacionesDTO solicitarGarantiaOperacion(Socio socio, Operacion operacion, DocumentosOperacion documentosOperacion){
@@ -61,12 +65,14 @@ public class Sistema {
 
 //Singleton sistema
 
-    public Sistema getInstance(){
-        if(this.instance == null){
+    public static Sistema getInstance(){
+        if(instance == null){
             instance = new Sistema();
         }
 
         return instance;
     }
+
+
 
 }

@@ -1,5 +1,7 @@
 package Front;
 
+import Front.ComboBox.*;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,9 +13,12 @@ public class MenuPrincipal extends JFrame{
     private JButton button1;
     private JButton consultasSGRButton;
     private JButton sociosButton;
-    private JButton test3Button;
-    private JButton button2;
+    private JButton comisionesEnUnDiaButton;
+    private JButton promediosTasasChequesPagaresButton;
+    private JButton consultarPorcentajeComisionSegunButton;
+    private JButton consultaConsolidadaButton;
     private MenuPrincipal self;
+    private JComboBox<String> comboBoxSocio;
 
     public MenuPrincipal(String titulo) {
         super(titulo);
@@ -43,6 +48,36 @@ public class MenuPrincipal extends JFrame{
 
         this.asociarEventos();
         this.self = this;
+
+
+        comisionesEnUnDiaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ComisionesEnUnDia frame = new ComisionesEnUnDia(self, "Comisiones en un dia");
+                frame.setVisible(true);
+            }
+        });
+        promediosTasasChequesPagaresButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ValorPromedioTasaYCheques frame = new ValorPromedioTasaYCheques(self);
+                frame.setVisible(true);
+            }
+        });
+        consultarPorcentajeComisionSegunButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultarPorcentajeComisionPorOp frame = new ConsultarPorcentajeComisionPorOp(self);
+                frame.setVisible(true);
+            }
+        });
+        consultaConsolidadaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultaConsolidadaView frame = new ConsultaConsolidadaView();
+                frame.setVisible(true);
+            }
+        });
     }
 
     private void asociarEventos(){
@@ -51,12 +86,19 @@ public class MenuPrincipal extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 OperacionesDisponibles frame = new OperacionesDisponibles(self, "Seleccione un tipo de operación. ");
                 frame.setVisible(true);
-
-
             }
 
 
         });
+
+        sociosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OperacionesMonetizadasView frameSocios = new OperacionesMonetizadasView(self);
+                frameSocios.setVisible(true);
+            }
+        });
+
     }
 
     public static void main(String[] args)
@@ -64,7 +106,6 @@ public class MenuPrincipal extends JFrame{
         MenuPrincipal frame = new MenuPrincipal(" Hola ADMIN, selecciona una opción. ");
 
         frame.setVisible(true);
-
 
     }
 

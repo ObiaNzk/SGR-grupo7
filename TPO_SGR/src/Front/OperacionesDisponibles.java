@@ -6,8 +6,9 @@ import java.awt.*;
 public class OperacionesDisponibles extends JDialog {
 
     private JPanel pnlPrincipal;
+    private JTabbedPane tabbedPane1;
+    private JPanel pnlSocios;
     private JDesktopPane DesktopPaneSolapaUno;
-    private JDesktopPane DesktopPaneSolapa2;
 
     public OperacionesDisponibles(Window owner, String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
@@ -31,9 +32,9 @@ public class OperacionesDisponibles extends JDialog {
         solapaframe.setVisible(true);
         DesktopPaneSolapaUno.add(solapaframe);
 
-        SelectorOperacionesSocios2 solapaframe2 = new SelectorOperacionesSocios2 ("SOCIOS PROTECTORES");
-        solapaframe2.setVisible(true);
-        DesktopPaneSolapa2.add(solapaframe2);
+//        SelectorOperacionesSocios2 solapaframe2 = new SelectorOperacionesSocios2 ("SOCIOS PROTECTORES");
+//        solapaframe2.setVisible(true);
+//        DesktopPaneSolapa2.add(solapaframe2);
 
 
     }

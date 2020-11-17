@@ -28,6 +28,50 @@ public class Socio {
     private Integer fdr;
 
 
+    public void setTipoDeSocio(TipoDeSocio tipoDeSocio) {
+        this.tipoDeSocio = tipoDeSocio;
+    }
+
+    public void setContraGarantiaList(List<ContraGarantia> contraGarantiaList) {
+        this.contraGarantiaList = contraGarantiaList;
+    }
+
+    public void setComisionesList(List<Comision> comisionesList) {
+        this.comisionesList = comisionesList;
+    }
+
+    public void setOperacionList(List<Operacion> operacionList) {
+        this.operacionList = operacionList;
+    }
+
+    public void setFacturasList(List<Double> facturasList) {
+        this.facturasList = facturasList;
+    }
+
+    public void setAccionesSgr(List<String> accionesSgr) {
+        this.accionesSgr = accionesSgr;
+    }
+
+    public void setTipoDeOperacionEnum(TipoDeOperacionEnum tipoDeOperacionEnum) {
+        this.tipoDeOperacionEnum = tipoDeOperacionEnum;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setVigenciaLineaCredito(Date vigenciaLineaCredito) {
+        this.vigenciaLineaCredito = vigenciaLineaCredito;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public void setFdr(Integer fdr) {
+        this.fdr = fdr;
+    }
+
     public List<Operacion> getOperacionList() {
         return operacionList;
     }
@@ -63,6 +107,7 @@ public class Socio {
     public void setLineaDeCredito(LineaDeCredito lineaDeCredito) {
         this.lineaDeCredito = lineaDeCredito;
     }
+
 
     public boolean lineaDeCreditoIsVigente(){
         Date date = new Date();
@@ -168,5 +213,10 @@ public class Socio {
 
     }
 
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre +
+                "   Tipo: " + tipoDeSocio ;
 
+    }
 }

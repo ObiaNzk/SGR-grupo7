@@ -58,4 +58,13 @@ public class Comision {
     public Integer getComisionPorTipo(TipoDeOperacionEnum tipoDeOperacion){
         return (tipoDeOperacion == TipoDeOperacionEnum.TIPO1 || tipoDeOperacion == TipoDeOperacionEnum.TIPO2 ) ? 3 : 4;
     }
+
+    @Override
+    public String toString() {
+        return "Comision{" +
+                "FechaFacturacion=" + FechaFacturacion +
+                ", Comision=" + Comision +
+                ", Monto=" + Monto +
+                '}';
+    }
 }

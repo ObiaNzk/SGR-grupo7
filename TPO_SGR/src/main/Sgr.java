@@ -20,6 +20,9 @@ public class Sgr {
     private String nombre;
     private List<Socio> sociosProtectores;
     private List<Socio> sociosParticipes;
+    private static Sgr instance;
+
+
 
     public void agregarSocio(Socio socio){
 
@@ -60,6 +63,14 @@ public class Sgr {
     //REVISAR EN DIAGRAMA
     public void venderAcciones(){
 
+    }
+
+    public List<Socio> getSociosProtectores() {
+        return sociosProtectores;
+    }
+
+    public List<Socio> getSociosParticipes() {
+        return sociosParticipes;
     }
 
     public List<Comision> comisionesEnunDia(Date fecha){
@@ -152,6 +163,13 @@ public class Sgr {
         promedioTasa = tasaTotal/tasaDescuentos.size();
         promedioMonto = montoTotal/montos.size();
         return new PromedioTasaDescuentoYTotal(promedioTasa,promedioMonto);
+    }
+
+    public static Sgr getInstance() {
+        if(instance == null){
+            instance = new Sgr();
+        }
+        return instance;
     }
 
 }
