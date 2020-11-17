@@ -41,6 +41,9 @@ public class Sgr {
         this.socios.add(socioPrincipalProtector);
     }
 
+    public List<Socio> GetSocios(){
+        return this.socios;
+    }
     public void agregarSocio(Socio socio){
 
     }
