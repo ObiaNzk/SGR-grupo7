@@ -37,6 +37,29 @@ public class Sgr {
         socioPrincipalParticipe.setFdr(999999999);
         socioPrincipalParticipe.setEmpresa(empresa);
 
+        //operaciones para probar el consolidado
+        Operacion operacion = new Operacion();
+        operacion.setTipoDeOperacion(TipoDeOperacionEnum.TIPO1);
+        operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+        operacion.setFechaMonetizado(new Date());
+        Calendar cal = Calendar.getInstance();
+        cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
+        Date date = cal.getTime();
+        operacion.setFechaVencimiento(date);
+        operacion.setMonto(100);
+        operacion.setMontoUtilizado(100);
+        socioPrincipalParticipe.AgregarOperacion(operacion);
+
+        Operacion operacion2 = new Operacion();
+        operacion2.setTipoDeOperacion(TipoDeOperacionEnum.TIPO2);
+        operacion2.setEstadoOperacion(EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO);
+        operacion2.setFechaMonetizado(new Date());
+        operacion2.setFechaVencimiento(date);
+        operacion2.setMonto(100000);
+        operacion2.setMontoUtilizado(1000);
+        socioPrincipalParticipe.AgregarOperacion(operacion2);
+
+
         Socio socioPrincipalProtector = new Socio();
         socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
         socioPrincipalProtector.setAccionesSgrB(new ArrayList<String>(Collections.nCopies(100,"accion B")));
@@ -51,6 +74,15 @@ public class Sgr {
 
     public List<Socio> GetSocios(){
         return this.socios;
+    }
+    public List<Socio> GetSociosPorTipo(TipoDeSocio tipoDeSocio){
+        List<Socio> socios = new ArrayList<Socio>();
+        for(Socio socio: this.socios){
+            if (socio.getTipoDeSocio() == tipoDeSocio){
+                socios.add(socio);
+            }
+        }
+        return socios;
     }
     public void agregarSocio(Socio socio){
 
@@ -151,7 +183,7 @@ public class Sgr {
                 }
             }
         }
-        return new ConsultaConsolidadaResponseDTO(operacionesRiesgoVivo,operacionesTotalUtilizado, totalRiesgoVivo, totalUtilizado);
+        return new ConsultaConsolidadaResponseDTO(operacionesRiesgoVivo,operacionesTotalUtilizado, totalRiesgoVivo, totalUtilizado+totalRiesgoVivo);
     }
 
     public PromedioTasaDescuentoYTotalDTO promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){

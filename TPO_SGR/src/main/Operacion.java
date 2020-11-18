@@ -75,4 +75,24 @@ public class Operacion {
     public void setTasaDeDescuento(Integer tasaDeDescuento) {
         TasaDeDescuento = tasaDeDescuento;
     }
+
+    public void setTipoDeOperacion(TipoDeOperacionEnum tipoDeOperacion) {
+        TipoDeOperacion = tipoDeOperacion;
+    }
+
+    public void setFechaIngresado(Date fechaIngresado) {
+        FechaIngresado = fechaIngresado;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        FechaVencimiento = fechaVencimiento;
+    }
+
+    public void setMonto(Integer monto) {
+        Monto = monto;
+    }
+
+    public void setDocumentosOperacion(DocumentosOperacion documentosOperacion) {
+        this.documentosOperacion = documentosOperacion;
+    }
 }

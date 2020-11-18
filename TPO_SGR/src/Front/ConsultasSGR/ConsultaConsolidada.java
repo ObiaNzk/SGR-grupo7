@@ -40,8 +40,7 @@ public class ConsultaConsolidada extends JDialog {
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-
-        DefaultComboBoxModel model = new DefaultComboBoxModel(sistema.getSgr().GetSocios().toArray());
+        DefaultComboBoxModel model = new DefaultComboBoxModel(sistema.getSgr().GetSociosPorTipo(TipoDeSocio.PARTICIPE).toArray());
         comboBox2.setModel(model);
 
 
@@ -49,7 +48,9 @@ public class ConsultaConsolidada extends JDialog {
         obtenerConsultaConsolidadaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                responseDTO = sistema.getInstance().consultaConsolidada(socioSelected);
+                Socio lala = (Socio) comboBox2.getSelectedItem();
+                responseDTO = sistema.consultaConsolidada((Socio) comboBox2.getSelectedItem());
+
                 labelResponse.setText("Riesgo vivo :" + responseDTO.getTotalRiesgoVivo().toString() + " " +
                         "Total utilizado :" + responseDTO.getTotalUtilizado().toString());
             }

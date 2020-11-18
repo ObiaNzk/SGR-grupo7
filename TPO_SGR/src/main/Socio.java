@@ -28,6 +28,11 @@ public class Socio {
     private Empresa empresa;
     private Integer fdr;
 
+    public Socio(){
+        this.comisionesList = new ArrayList<Comision>();
+        this.operacionList = new ArrayList<Operacion>();
+    }
+    public void AgregarOperacion (Operacion operacion) {this.operacionList.add(operacion);}
     public void AgregarComision (Comision comision){
         this.comisionesList.add(comision);
     }
