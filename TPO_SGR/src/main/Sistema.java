@@ -38,15 +38,15 @@ public class Sistema {
     }
 
     public List<Operacion> operacionesDeSocio(Socio socio, Date fechaDesde, Date fechaHasta) {
-        return sgr.operacionesDeSocio(socio, fechaDesde, fechaHasta);
+        return sgr.getInstance().operacionesDeSocio(socio, fechaDesde, fechaHasta);
     }
 
     public Integer getPorcentajeDeComisiones(TipoDeOperacionEnum tipoDeOperacionEnum) {
-        return sgr.getPorcentajeDeComision(tipoDeOperacionEnum);
+        return sgr.getInstance().getPorcentajeDeComision(tipoDeOperacionEnum);
     }
 
     public void RealizarOperacion(Socio socio,Operacion operacion, IOperacionGastos gasto){
-        sgr.RealizarOperacion(socio, operacion, gasto);
+        sgr.getInstance().RealizarOperacion(socio, operacion, gasto);
     }
 
     public ConsultaConsolidadaResponseDTO consultaConsolidada(Socio socio){
@@ -54,7 +54,7 @@ public class Sistema {
     }
 
     public PromedioTasaDescuentoYTotalDTO promedioTasaDescuentoYTotalOperado(TamañoEmpresaEnum tamañoEmpresaEnum, Date fechaDesde, Date fechaHasta){
-        return sgr.promedioTasaDescuentoYTotalOperado(tamañoEmpresaEnum, fechaDesde, fechaHasta);
+        return sgr.getInstance().promedioTasaDescuentoYTotalOperado(tamañoEmpresaEnum, fechaDesde, fechaHasta);
     }
 
     public OperacionesDTO solicitarGarantiaOperacion(Socio socio, Operacion operacion, DocumentosOperacion documentosOperacion){
@@ -67,13 +67,13 @@ public class Sistema {
         socio.AgregarComision(new Comision(operacion));
     }
     public void VentaDeAcciones(Socio socioQueVende, Socio socioQueCompra, Integer cantidadDeAcciones){
-        sgr.VentaDeAcciones(socioQueVende, socioQueCompra, cantidadDeAcciones);
+        sgr.getInstance().VentaDeAcciones(socioQueVende, socioQueCompra, cantidadDeAcciones);
     }
 
 //Singleton sistema
 
-    public Sistema getInstance(){
-        if(this.instance == null){
+    public static Sistema getInstance(){
+        if(instance == null){
             instance = new Sistema();
         }
 

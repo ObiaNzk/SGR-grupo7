@@ -1,8 +1,19 @@
 package enums;
 
 public enum TamañoEmpresaEnum {
-    PEQUEÑA,
-    MEDIANA,
-    GRANDE;
+    PEQUEÑA("Pequeña"),
+    MEDIANA("Mediana"),
+    GRANDE("Grande");
+
+    private String codigo;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    TamañoEmpresaEnum(String codigo) {
+        this.codigo = codigo;
+    }
+
 
 }

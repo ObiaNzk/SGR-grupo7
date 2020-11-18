@@ -251,4 +251,11 @@ public class Socio {
     public void setAccionesSgrB(List<String> accionesSgrB) {
         this.accionesSgrB = accionesSgrB;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre +
+                "   Tipo: " + tipoDeSocio ;
+
+    }
 }
