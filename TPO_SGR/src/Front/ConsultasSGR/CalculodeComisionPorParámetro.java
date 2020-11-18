@@ -38,26 +38,23 @@ public class CalculodeComisionPorParámetro extends JDialog {
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-
         tipoDeOperacionEnumList.add(TipoDeOperacionEnum.TIPO1);
         tipoDeOperacionEnumList.add(TipoDeOperacionEnum.TIPO2);
         tipoDeOperacionEnumList.add(TipoDeOperacionEnum.TIPO3);
 
-        model.addAll(tipoDeOperacionEnumList);
+        DefaultComboBoxModel model = new DefaultComboBoxModel(tipoDeOperacionEnumList.toArray());
 
         comboBox1.setModel(model);
 
         obtenerDeComisiónButton.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                tipoDeOperacionEnumSelected = (TipoDeOperacionEnum) comboBox1.getSelectedItem();
             }
         });
         obtenerDeComisiónButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Integer response =  sistema.getInstance().getPorcentajeDeComisiones(tipoDeOperacionEnumSelected);
+                Integer response =  sistema.getInstance().getPorcentajeDeComisiones((TipoDeOperacionEnum) comboBox1.getSelectedItem());
                 labelResponse.setText("Porecentaje para la operacion: " +response.toString() + "%");
             }
         });

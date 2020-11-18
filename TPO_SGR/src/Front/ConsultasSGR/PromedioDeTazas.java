@@ -40,14 +40,11 @@ public class PromedioDeTazas extends JDialog {
 
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-
         tipoEmpresaList.add(TamañoEmpresaEnum.GRANDE);
         tipoEmpresaList.add(TamañoEmpresaEnum.MEDIANA);
         tipoEmpresaList.add(TamañoEmpresaEnum.PEQUEÑA);
 
-        model.addAll(tipoEmpresaList);
+        DefaultComboBoxModel model = new DefaultComboBoxModel(tipoEmpresaList.toArray());
         tipoEmpresaCombo.setModel(model);
 
         tipoEmpresaCombo.addItemListener(new ItemListener() {

@@ -41,7 +41,6 @@ public class ConsultaConsolidada extends JDialog {
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
 
 //        socioList = this.sistema.getInstance().getSgr().getInstance().getSociosProtectores();
 
@@ -54,7 +53,8 @@ public class ConsultaConsolidada extends JDialog {
         socioList.add(socioMock1);
         socioList.add(socioMock2);
 
-        model.addAll(socioList);
+        DefaultComboBoxModel model = new DefaultComboBoxModel(socioList.toArray());
+
         comboBox1.setModel(model);
 
 

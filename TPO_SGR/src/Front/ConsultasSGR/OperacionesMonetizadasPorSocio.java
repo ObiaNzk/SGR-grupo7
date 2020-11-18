@@ -53,8 +53,7 @@ public class OperacionesMonetizadasPorSocio extends JDialog{
 
 //        socioList = sistema.getInstance().getSgr().getSociosProtectores();
 
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        model.addAll(socioList);
+        DefaultComboBoxModel model = new DefaultComboBoxModel(socioList.toArray());
         comboBox1.setModel(model);
 
         comboBox1.addItemListener(new ItemListener() {

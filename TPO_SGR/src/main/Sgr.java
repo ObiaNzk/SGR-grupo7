@@ -27,13 +27,15 @@ public class Sgr {
     public Sgr(){
         socios = new ArrayList<Socio>();
         Socio socioPrincipalParticipe = new Socio();
+        Empresa empresa = new Empresa();
+        empresa.setTamañoEmpresaEnum(TamañoEmpresaEnum.MEDIANA);
         socioPrincipalParticipe.setTipoDeSocio(TipoDeSocio.PARTICIPE);
         socioPrincipalParticipe.setAccionesSgrA(new ArrayList<String>(Collections.nCopies(100,"accion A")));
         socioPrincipalParticipe.setNombre("Socio General Participe");
         socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(100000, new Date(2022, Calendar.JANUARY, 11), true));
         socioPrincipalParticipe.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
         socioPrincipalParticipe.setFdr(999999999);
-        socioPrincipalParticipe.setEmpresa(new Empresa());
+        socioPrincipalParticipe.setEmpresa(empresa);
 
         Socio socioPrincipalProtector = new Socio();
         socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
@@ -41,7 +43,7 @@ public class Sgr {
         socioPrincipalProtector.setNombre("Socio General Protector");
         socioPrincipalProtector.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
         socioPrincipalProtector.setFdr(999999999);
-        socioPrincipalProtector.setEmpresa(new Empresa());
+        socioPrincipalProtector.setEmpresa(empresa);
 
         this.socios.add(socioPrincipalParticipe);
         this.socios.add(socioPrincipalProtector);
