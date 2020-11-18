@@ -10,15 +10,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class OperacionesMonetizadasPorSocio extends JDialog{
     private JButton consultaOperacionesMonetizadasButton;
-    private JTextField textField1;
     private JComboBox comboBox1;
     private JPanel pnlPrincipal;
+    private JTextField FechaDesde;
+    private JTextField FechaHasta;
+    private JList ListaOperaciones;
     private Sistema sistema;
     private Socio socioSeleccionado;
     private List<Operacion> operacionList = new ArrayList<>();
@@ -26,7 +30,7 @@ public class OperacionesMonetizadasPorSocio extends JDialog{
 
     public OperacionesMonetizadasPorSocio(String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
-
+        sistema = Sistema.getInstance();
 
         //tamaño del panel.
         this.setSize(300, 300);
@@ -42,14 +46,7 @@ public class OperacionesMonetizadasPorSocio extends JDialog{
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        Socio socioMock1 = new Socio();
-        socioMock1.setNombre("Prueba1");
-        socioMock1.setTipoDeSocio(TipoDeSocio.PARTICIPE);
-        Socio socioMock2 = new Socio();
-        socioMock2.setNombre("Prueba1");
-        socioMock2.setTipoDeSocio(TipoDeSocio.PROTECTORES);
-        socioList.add(socioMock1);
-        socioList.add(socioMock2);
+        socioList.addAll(sistema.getSgr().GetSociosPorTipo(TipoDeSocio.PARTICIPE));
 
 //        socioList = sistema.getInstance().getSgr().getSociosProtectores();
 
@@ -66,8 +63,21 @@ public class OperacionesMonetizadasPorSocio extends JDialog{
         consultaOperacionesMonetizadasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    DefaultListModel listModel = new DefaultListModel();
+                    Date dateDesde=new SimpleDateFormat("dd/MM/yyyy").parse(FechaDesde.getText());
+                    Date dateHasta=new SimpleDateFormat("dd/MM/yyyy").parse(FechaHasta.getText());
+                    operacionList = sistema.operacionesDeSocio((Socio) comboBox1.getSelectedItem(), dateDesde, dateHasta);
 
-                operacionList = sistema.getInstance().operacionesDeSocio(socioSeleccionado, new Date(), new Date());
+                    for (int i = 0; i < operacionList.size(); i++)
+                    {
+                        listModel.addElement(operacionList.get(i));
+                    }
+                    ListaOperaciones.setModel(listModel);
+
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
             }
         });
     }

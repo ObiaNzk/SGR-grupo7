@@ -46,6 +46,7 @@ public class Sgr {
         cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
         Date date = cal.getTime();
         operacion.setFechaVencimiento(date);
+        operacion.setFechaMonetizado(date);
         operacion.setMonto(100);
         operacion.setMontoUtilizado(100);
         socioPrincipalParticipe.AgregarOperacion(operacion);
@@ -55,6 +56,7 @@ public class Sgr {
         operacion2.setEstadoOperacion(EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO);
         operacion2.setFechaMonetizado(new Date());
         operacion2.setFechaVencimiento(date);
+        operacion2.setFechaMonetizado(date);
         operacion2.setMonto(100000);
         operacion2.setMontoUtilizado(1000);
         socioPrincipalParticipe.AgregarOperacion(operacion2);
