@@ -95,4 +95,9 @@ public class Operacion {
     public void setDocumentosOperacion(DocumentosOperacion documentosOperacion) {
         this.documentosOperacion = documentosOperacion;
     }
+
+    @Override
+    public String toString() {
+        return "Tipo de operacion: " + "["+TipoDeOperacion+"]" +"   Monto Utilizado: " + "["+MontoUtilizado+"]" + " Estado de la Operacion: " + "["+EstadoOperacion+"]";
+    }
 }

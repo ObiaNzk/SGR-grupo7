@@ -2,6 +2,7 @@ package Front.ConsultasSGR;
 
 import dtos.ConsultaConsolidadaResponseDTO;
 import enums.TipoDeSocio;
+import main.Operacion;
 import main.Sistema;
 import main.Socio;
 
@@ -16,6 +17,7 @@ public class ConsultaConsolidada extends JDialog {
     private JPanel pnlPrincipal;
     private JComboBox comboBox2;
     private JLabel labelResponse;
+    private JList DetallesLabelResponse;
     private List<Socio> socioList = new ArrayList<>();
     private Sistema sistema;
     private Socio socioSelected;
@@ -49,7 +51,16 @@ public class ConsultaConsolidada extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Socio lala = (Socio) comboBox2.getSelectedItem();
+                List<Operacion> todasLasOperaciones = new ArrayList<Operacion>();
                 responseDTO = sistema.consultaConsolidada((Socio) comboBox2.getSelectedItem());
+                todasLasOperaciones.addAll(responseDTO.getOperacionesRiesgoVivo());
+                todasLasOperaciones.addAll(responseDTO.getOperacionesTotalUtilizado());
+                DefaultListModel listModel = new DefaultListModel();
+                for (int i = 0; i < todasLasOperaciones.size(); i++)
+                {
+                    listModel.addElement(todasLasOperaciones.get(i));
+                }
+                DetallesLabelResponse.setModel(listModel);
 
                 labelResponse.setText("Riesgo vivo :" + responseDTO.getTotalRiesgoVivo().toString() + " " +
                         "Total utilizado :" + responseDTO.getTotalUtilizado().toString());
