@@ -24,6 +24,7 @@ public class Sgr {
 
     private String nombre;
     private List<Socio> socios;
+    private static Sgr instance;
 
     public Sgr(){
         socios = new ArrayList<Socio>();
@@ -203,5 +204,12 @@ public class Sgr {
 
     public void VentaDeAcciones(Socio socioQueVende, Socio socioQueCompra, Integer cantidadDeAcciones) {
         socioQueCompra.ComprarAcciones(socioQueVende.VenderAcciones(cantidadDeAcciones));
+    }
+
+    public static Sgr getInstance() {
+        if(instance == null){
+            instance = new Sgr();
+        }
+        return instance;
     }
 }
