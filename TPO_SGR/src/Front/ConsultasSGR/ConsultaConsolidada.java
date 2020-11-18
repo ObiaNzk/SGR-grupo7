@@ -52,10 +52,9 @@ public class ConsultaConsolidada extends JDialog {
         socioMock2.setTipoDeSocio(TipoDeSocio.PROTECTORES);
         socioList.add(socioMock1);
         socioList.add(socioMock2);
+        DefaultComboBoxModel model = new DefaultComboBoxModel(Sistema.getInstance().getSgr().GetSocios().toArray());
+        comboBox2.setModel(model);
 
-        DefaultComboBoxModel model = new DefaultComboBoxModel(socioList.toArray());
-
-        comboBox1.setModel(model);
 
 
         obtenerConsultaConsolidadaButton.addActionListener(new ActionListener() {

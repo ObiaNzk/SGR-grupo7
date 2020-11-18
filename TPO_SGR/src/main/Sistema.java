@@ -25,6 +25,10 @@ public class Sistema {
                                        String balanceCertificado3, String bienesSocios) {
     }
 
+    public Sistema(){
+        this.sgr = new Sgr();
+    }
+
     public EstadoDocumentacion revisarDocumentacion(Solicitante solicitante) {
         return null;
     }
@@ -80,4 +84,7 @@ public class Sistema {
         return instance;
     }
 
+    public Sgr getSgr() {
+        return sgr;
+    }
 }
