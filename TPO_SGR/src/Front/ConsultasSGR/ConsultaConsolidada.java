@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ConsultaConsolidada extends JDialog {
     private JButton obtenerConsultaConsolidadaButton;
-    private JComboBox comboBox1;
     private JPanel pnlPrincipal;
     private JComboBox comboBox2;
     private JLabel labelResponse;
@@ -25,7 +24,7 @@ public class ConsultaConsolidada extends JDialog {
 
     public ConsultaConsolidada(String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
-
+        sistema = Sistema.getInstance();
 
         //tamaño del panel.
         this.setSize(300, 300);
@@ -42,17 +41,7 @@ public class ConsultaConsolidada extends JDialog {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 
-//        socioList = this.sistema.getInstance().getSgr().getInstance().getSociosProtectores();
-
-        Socio socioMock1 = new Socio();
-        socioMock1.setNombre("Prueba1");
-        socioMock1.setTipoDeSocio(TipoDeSocio.PARTICIPE);
-        Socio socioMock2 = new Socio();
-        socioMock2.setNombre("Prueba1");
-        socioMock2.setTipoDeSocio(TipoDeSocio.PROTECTORES);
-        socioList.add(socioMock1);
-        socioList.add(socioMock2);
-        DefaultComboBoxModel model = new DefaultComboBoxModel(Sistema.getInstance().getSgr().GetSocios().toArray());
+        DefaultComboBoxModel model = new DefaultComboBoxModel(sistema.getSgr().GetSocios().toArray());
         comboBox2.setModel(model);
 
 
