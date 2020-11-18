@@ -4,10 +4,12 @@ public class PromedioTasaDescuentoYTotalDTO {
     private double promedioTasa;
     private double promedioMonto;
 
+    public PromedioTasaDescuentoYTotalDTO(){
 
+    }
     public PromedioTasaDescuentoYTotalDTO(double promedioTasa, double promedioMonto){
-        promedioTasa = promedioTasa;
-        promedioMonto = promedioMonto;
+        this.promedioTasa = promedioTasa;
+        this.promedioMonto = promedioMonto;
     }
     public double getPromedioTasa() {
         return promedioTasa;
@@ -23,5 +25,10 @@ public class PromedioTasaDescuentoYTotalDTO {
 
     public void setPromedioMonto(double promedioMonto) {
         this.promedioMonto = promedioMonto;
+    }
+
+    @Override
+    public String toString() {
+        return "Promedio de tasa de descuento: " + promedioTasa+"%" +"    Monto Promedio: " + promedioMonto ;
     }
 }

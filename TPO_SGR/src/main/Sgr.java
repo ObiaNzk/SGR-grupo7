@@ -41,6 +41,7 @@ public class Sgr {
         Operacion operacion = new Operacion();
         operacion.setTipoDeOperacion(TipoDeOperacionEnum.TIPO1);
         operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+        operacion.setTasaDeDescuento(18);
         operacion.setFechaMonetizado(new Date());
         Calendar cal = Calendar.getInstance();
         cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
@@ -60,7 +61,6 @@ public class Sgr {
         operacion2.setMonto(100000);
         operacion2.setMontoUtilizado(1000);
         socioPrincipalParticipe.AgregarOperacion(operacion2);
-
 
         Socio socioPrincipalProtector = new Socio();
         socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
@@ -195,7 +195,7 @@ public class Sgr {
         double promedioTasa;
         double promedioMonto;
         Integer montoTotal = 0;
-        for (Socio socio: socios){
+        for (Socio socio: this.GetSociosPorTipo(TipoDeSocio.PARTICIPE)){
             if(socio.getEmpresa().getTamañoEmpresaEnum() == tamañoEmpresaEnum){
                 for(Operacion operacion: socio.getOperacionList()){
                     if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO &&
@@ -207,6 +207,10 @@ public class Sgr {
                     }
                 }
             }
+        }
+
+        if(montos.size() == 0 || tasaDescuentos.size() == 0){
+            return new PromedioTasaDescuentoYTotalDTO(0,0);
         }
         for (Integer tasa: tasaDescuentos){
             tasaTotal += tasa;

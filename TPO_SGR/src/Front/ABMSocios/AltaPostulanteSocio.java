@@ -2,8 +2,10 @@ package Front.ABMSocios;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class AltaPostulanteSocioParticipe extends JDialog {
+public class AltaPostulanteSocio extends JDialog {
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
@@ -16,14 +18,15 @@ public class AltaPostulanteSocioParticipe extends JDialog {
     private JComboBox comboBox2;
     private JTextField textField4;
     private JPanel pnlPrincipal;
+    private JComboBox comboBox3;
 
 
-    public AltaPostulanteSocioParticipe(Window owner, String titulo) {
+    public AltaPostulanteSocio(String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
-        super(owner, titulo);
+
 
         //tamaño del panel.
-        this.setSize(300, 300);
+        this.setSize(300, 800);
 
         this.setContentPane(pnlPrincipal);
         //No permite volver hasta la pantalla anterior hasta cerrar esta.
@@ -35,5 +38,12 @@ public class AltaPostulanteSocioParticipe extends JDialog {
 
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        agregarAccionistasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AccionistasSocio frame = new AccionistasSocio("Nuevo accionista");
+                frame.setVisible(true);
+            }
+        });
     }
 }

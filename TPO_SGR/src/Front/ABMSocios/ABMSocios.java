@@ -14,9 +14,8 @@ public class ABMSocios extends JDialog {
 
 
 
-    public ABMSocios(Window owner, String titulo) {
+    public ABMSocios(String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
-        super(owner, titulo);
 
         //tamaño del panel.
         this.setSize(300, 300);
@@ -36,22 +35,7 @@ public class ABMSocios extends JDialog {
         altaPostulanteASocioButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AltaPostulanteSocioProtector frame = new AltaPostulanteSocioProtector(owner, "Ingrese los datos del socio");
-                frame.setVisible(true);
-            }
-        });
-        altaPostulanteASocioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AltaPostulanteSocioParticipe frame = new AltaPostulanteSocioParticipe(owner , "Ingrese los datos del socio");
-                frame.setVisible(true);
-
-            }
-        });
-        convertirSocioEnPlenoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConvertirSocioPleno frame = new ConvertirSocioPleno(owner, "Actualizar estado del socio");
+                AltaPostulanteSocio frame = new AltaPostulanteSocio("Nuevo Postulante");
                 frame.setVisible(true);
             }
         });
