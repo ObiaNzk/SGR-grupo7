@@ -56,7 +56,7 @@ public class MenuPrincipal extends JFrame{
         sociosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ABMSocios frame = new ABMSocios( self,"Seleccione el tipo de operatoria para socio.");
+                ABMSocios frame = new ABMSocios( "Seleccione el tipo de operatoria para socio.");
                 frame.setVisible(true);
             }
         });
