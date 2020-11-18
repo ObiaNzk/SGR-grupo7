@@ -44,7 +44,7 @@ public class ConsultasSGR extends JDialog {
         consultaConsolidadaPorSocio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ConsultaConsolidada frame = new ConsultaConsolidada("Consulta Consolidada");
+                PromedioDeTazas frame = new PromedioDeTazas("Valor promedio de la tasa de descuento");
                 frame.setVisible(true);
             }
         });
