@@ -18,18 +18,10 @@
       </component>
       <component id="39157" class="javax.swing.JButton" binding="ConsultaConsolidadaRVTU">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Consulta Consolidada ( RV y TU)"/>
-        </properties>
-      </component>
-      <component id="a65ea" class="javax.swing.JButton" binding="ConsultaSaldoMora">
-        <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Consulta Saldo de Mora por Socio"/>
+          <text value="Consulta Consolidada ( RV y TU)"/>
         </properties>
       </component>
       <component id="98dde" class="javax.swing.JButton" binding="CalculoComisionPorParametro">
@@ -46,6 +38,14 @@
         </constraints>
         <properties>
           <text value="Promedio de Tazas Por Periodo"/>
+        </properties>
+      </component>
+      <component id="15b57" class="javax.swing.JButton" binding="totalDeComisionesCalculadasButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Total de comisiones calculadas en un día por operaciones de cheques "/>
         </properties>
       </component>
     </children>
