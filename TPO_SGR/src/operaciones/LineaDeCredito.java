@@ -16,6 +16,11 @@ public class LineaDeCredito {
     public LineaDeCredito() {
 
     }
+    public LineaDeCredito(Integer monto, Date fechaVencimiento, boolean aprobada) {
+        this.monto = monto;
+        this.fechaVencimiento = fechaVencimiento;
+        this.aprobada = aprobada;
+    }
 
     public Integer getMonto() {
         return monto;

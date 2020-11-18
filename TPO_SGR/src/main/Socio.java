@@ -25,7 +25,6 @@ public class Socio {
     private List<String> accionesSgrB;
     private TipoDeOperacionEnum tipoDeOperacionEnum;
     private String nombre;
-    private Date vigenciaLineaCredito;
     private Empresa empresa;
     private Integer fdr;
 
@@ -227,14 +226,6 @@ public class Socio {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Date getVigenciaLineaCredito() {
-        return vigenciaLineaCredito;
-    }
-
-    public void setVigenciaLineaCredito(Date vigenciaLineaCredito) {
-        this.vigenciaLineaCredito = vigenciaLineaCredito;
     }
 
     public void setEmpresa(Empresa empresa) {
