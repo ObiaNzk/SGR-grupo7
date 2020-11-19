@@ -4,12 +4,14 @@ import javax.swing.*;
 
 public class OperacionCheques extends JDialog {
     private JComboBox comboBox1;
-    private JComboBox comboBox2;
     private JTextField textField1;
-    private JTextField textField2;
+    private JTextField MontoText;
     private JButton cargarOperacionButton;
     private JButton consultaDisponibilidadParaOperarButton;
     private JPanel pnlPrincipal;
+    private JTextField CuitText;
+    private JTextField chequeText;
+    private JTextField BancoText;
 
     public OperacionCheques(String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.

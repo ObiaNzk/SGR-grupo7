@@ -61,7 +61,7 @@ public class Sistema {
         return sgr.getInstance().promedioTasaDescuentoYTotalOperado(tamañoEmpresaEnum, fechaDesde, fechaHasta);
     }
 
-    public OperacionesDTO solicitarGarantiaOperacion(Socio socio, Operacion operacion, DocumentosOperacion documentosOperacion){
+    public OperacionesDTO SolicitarGarantia(Socio socio, Operacion operacion, DocumentosOperacion documentosOperacion){
         return socio.solicitarGarantia(documentosOperacion, operacion);
     }
 
