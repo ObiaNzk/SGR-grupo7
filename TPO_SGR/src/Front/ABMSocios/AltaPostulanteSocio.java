@@ -19,6 +19,9 @@ public class AltaPostulanteSocio extends JDialog {
     private JTextField textField4;
     private JPanel pnlPrincipal;
     private JComboBox comboBox3;
+    private JTextField textField5;
+    private JTextField textField6;
+    private JTextField textField7;
 
 
     public AltaPostulanteSocio(String titulo) {
@@ -26,7 +29,7 @@ public class AltaPostulanteSocio extends JDialog {
 
 
         //tamaño del panel.
-        this.setSize(300, 800);
+        this.setSize(800, 300);
 
         this.setContentPane(pnlPrincipal);
         //No permite volver hasta la pantalla anterior hasta cerrar esta.
@@ -43,6 +46,7 @@ public class AltaPostulanteSocio extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 AccionistasSocio frame = new AccionistasSocio("Nuevo accionista");
                 frame.setVisible(true);
+
             }
         });
     }
