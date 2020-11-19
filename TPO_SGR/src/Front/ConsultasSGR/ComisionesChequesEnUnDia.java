@@ -17,6 +17,7 @@ public class ComisionesChequesEnUnDia extends JDialog {
     private JButton buscarComisionesButton;
     private JPanel pnlPrincipal;
     private JList ListaComisiones;
+    private JTextField totalComisiones;
     private Sistema sistema;
 
     public ComisionesChequesEnUnDia(String titulo) {
@@ -41,6 +42,7 @@ public class ComisionesChequesEnUnDia extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    float totalComisionesValor = 0 ;
                     Date dateDesde = new SimpleDateFormat("dd/MM/yyyy").parse(fecha.getText());
                     List<Comision> comisiones = sistema.getSgr().comisionesEnunDia(dateDesde);
                     DefaultListModel listModel = new DefaultListModel();
@@ -48,8 +50,10 @@ public class ComisionesChequesEnUnDia extends JDialog {
                     for (int i = 0; i < comisiones.size(); i++)
                     {
                         listModel.addElement(comisiones.get(i));
+                        totalComisionesValor += comisiones.get(i).getMonto();
                     }
                     ListaComisiones.setModel(listModel);
+                    totalComisiones.setText(String.valueOf(totalComisionesValor));
 
                 } catch (ParseException parseException) {
                     parseException.printStackTrace();
