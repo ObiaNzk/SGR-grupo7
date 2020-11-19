@@ -2,13 +2,21 @@ package Front.ConsultasSGR;
 
 import enums.TipoDeSocio;
 import main.Sistema;
+import operaciones.Comision;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class ComisionesChequesEnUnDia extends JDialog {
-    private JTextField textField1;
+    private JTextField fecha;
     private JButton buscarComisionesButton;
     private JPanel pnlPrincipal;
+    private JList ListaComisiones;
     private Sistema sistema;
 
     public ComisionesChequesEnUnDia(String titulo) {
@@ -29,5 +37,25 @@ public class ComisionesChequesEnUnDia extends JDialog {
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        buscarComisionesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Date dateDesde = new SimpleDateFormat("dd/MM/yyyy").parse(fecha.getText());
+                    List<Comision> comisiones = sistema.getSgr().comisionesEnunDia(dateDesde);
+                    DefaultListModel listModel = new DefaultListModel();
+
+                    for (int i = 0; i < comisiones.size(); i++)
+                    {
+                        listModel.addElement(comisiones.get(i));
+                    }
+                    ListaComisiones.setModel(listModel);
+
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
+
+            }
+        });
     }
 }
