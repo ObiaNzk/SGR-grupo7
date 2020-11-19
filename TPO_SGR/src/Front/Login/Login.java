@@ -1,6 +1,8 @@
 package Front.Login;
 
 
+import Front.MenuPrincipal;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,11 +16,22 @@ public class Login implements ActionListener {
     private static JLabel success;
     private static JFrame frame;
     private static JPanel panel;
+    private Login login;
 
 
 
 
     public static void main(String[] args){
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         panel = new JPanel();
@@ -80,10 +93,11 @@ public class Login implements ActionListener {
         if(user.equals("grupo7")&&password.equals("grupo7")){
             success.setText("Login correcto");
 
+
             frame.setVisible(false);
             frame.dispose();
-
-            
+            MenuPrincipal frame = new MenuPrincipal("SGR");
+            frame.setVisible(true);
 
 
         }
@@ -95,4 +109,6 @@ public class Login implements ActionListener {
 
 
     }
+
+
 }

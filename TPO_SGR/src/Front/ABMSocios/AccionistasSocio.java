@@ -1,7 +1,7 @@
 package Front.ABMSocios;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.*;import java.awt.event.ActionListener;
 
 public class AccionistasSocio extends JDialog{
     private JButton agregarAccionistaButton;
@@ -27,6 +27,7 @@ public class AccionistasSocio extends JDialog{
 
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     }
 }
 

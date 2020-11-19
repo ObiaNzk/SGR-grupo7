@@ -10,7 +10,7 @@
       <grid id="237cd" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints border-constraint="North"/>
         <properties>
-          <background color="-64768"/>
+          <background color="-47924"/>
           <font name="Yu Gothic Medium" size="22" style="1"/>
           <preferredSize width="-1" height="50"/>
         </properties>
@@ -22,6 +22,7 @@
           <component id="e4fd7" class="javax.swing.JLabel">
             <constraints border-constraint="Center"/>
             <properties>
+              <background color="-16760574"/>
               <font name="Lucida Console" size="20" style="1"/>
               <foreground color="-1180161"/>
               <horizontalAlignment value="11"/>
@@ -40,7 +41,7 @@
         <children>
           <component id="7a5c1" class="javax.swing.JButton" binding="consultasSGRButton" default-binding="true">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Consultas SGR"/>
@@ -48,7 +49,7 @@
           </component>
           <component id="5d70c" class="javax.swing.JButton" binding="sociosButton" default-binding="true">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Socios"/>
@@ -56,7 +57,7 @@
           </component>
           <component id="b3c90" class="javax.swing.JButton" binding="button1" default-binding="true">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Operaciones"/>
