@@ -42,7 +42,6 @@ public class Sgr {
         operacion.setTipoDeOperacion(TipoDeOperacionEnum.TIPO1);
         operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
         operacion.setTasaDeDescuento(18);
-        operacion.setFechaMonetizado(new Date());
         Calendar cal = Calendar.getInstance();
         cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
         Date date = cal.getTime();
@@ -129,9 +128,15 @@ public class Sgr {
 
     public List<Comision> comisionesEnunDia(Date fecha){
         List<Comision> comisiones =  new ArrayList<Comision>();
+
         for (Socio socio: socios){
             for (Operacion operacion: socio.getOperacionList()){
-                if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO1 && operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO && operacion.getFechaMonetizado() == fecha){
+                if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO1 &&
+                        operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO &&
+                        operacion.getFechaMonetizado().getYear() == fecha.getYear() &&
+                        operacion.getFechaMonetizado().getDay() == fecha.getDay() &&
+                        operacion.getFechaMonetizado().getMonth() == fecha.getMonth())
+                {
                    comisiones.add(new Comision(operacion));
                 }
             }

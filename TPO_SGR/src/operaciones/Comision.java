@@ -13,6 +13,7 @@ public class Comision {
     private Date FechaFacturacion;
     private Integer Comision;
     private float Monto;
+    private float MontoOriginal;
     private ComisionEstadoEnum Estado;
 
     public Comision(){
@@ -21,9 +22,10 @@ public class Comision {
     public Comision(Operacion operacion){
         Integer comision = getComisionPorTipo(operacion.getTipoDeOperacion());
         this.Comision = comision;
+        this.MontoOriginal = operacion.getMonto();
         this.TipoDeOperacion = operacion.getTipoDeOperacion();
         this.FechaCreacion = new Date();
-        this.Monto = (float)comision/operacion.getMonto();
+        this.Monto = (float)MontoOriginal/comision;
         this.Estado = ComisionEstadoEnum.CALCULADO;
     }
     public TipoDeOperacionEnum getTipoDeOperacion() {
@@ -58,5 +60,12 @@ public class Comision {
     }
     public Integer getComisionPorTipo(TipoDeOperacionEnum tipoDeOperacion){
         return (tipoDeOperacion == TipoDeOperacionEnum.TIPO1 || tipoDeOperacion == TipoDeOperacionEnum.TIPO2 ) ? 3 : 4;
+    }
+    @Override
+    public String toString() {
+        return "Monto de la Transaccion: " + this.MontoOriginal +
+                "   Monto a pagar: " + this.Monto +
+                " Porcentaje de la comision:" + this.Comision+"%";
+
     }
 }

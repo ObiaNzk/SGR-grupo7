@@ -98,6 +98,6 @@ public class Operacion {
 
     @Override
     public String toString() {
-        return "Tipo de operacion: " + "["+TipoDeOperacion+"]" +"   Monto Utilizado: " + "["+MontoUtilizado+"]" + " Estado de la Operacion: " + "["+EstadoOperacion+"] + ";
+        return " Tipo de operacion: " + "["+TipoDeOperacion+"]" +"   Monto Utilizado: " + "["+MontoUtilizado+"]" + " Estado de la Operacion: " + "["+EstadoOperacion+"] + ";
     }
 }
