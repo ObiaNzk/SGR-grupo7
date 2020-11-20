@@ -6,18 +6,18 @@ import java.util.Date;
 
 public class Cheque implements IDocumentosOperacion {
 
-    private String nombreBanco;
-    private String numero;
-    private Date fecha;
-    private String cuit;
-    private Integer monto;
+    private String NombreBanco;
+    private String NumeroCheque;
+    private Date FechaVencimiento;
+    private String Cuit;
+    private Integer Monto;
 
     public Cheque(String nombreBanco, String numero, Date fecha, String cuit, Integer monto) {
-        this.nombreBanco = nombreBanco;
-        this.numero = numero;
-        this.fecha = fecha;
-        this.cuit = cuit;
-        this.monto = monto;
+        this.NombreBanco = nombreBanco;
+        this.NumeroCheque = numero;
+        this.FechaVencimiento = fecha;
+        this.Cuit = cuit;
+        this.Monto = monto;
     }
 
     public Cheque(){
@@ -25,51 +25,51 @@ public class Cheque implements IDocumentosOperacion {
     }
 
     public boolean validateDocumentacionCompleta(){
-       if((this.getCuit() != null && !this.getCuit().isEmpty()) && (this.getFecha() != null)
+       if((this.getCuit() != null && !this.getCuit().isEmpty()) && (this.getFechaVencimiento() != null)
            && (this.getMonto() != null) && (this.getNombreBanco() != null && !this.getNombreBanco().isEmpty())
-           && (this.getNumero() != null & !this.getNumero().isEmpty())){
+           && (this.getNumeroCheque() != null & !this.getNumeroCheque().isEmpty())){
            return true;
        }
     return false;
     }
 
     public String getNombreBanco() {
-        return nombreBanco;
+        return NombreBanco;
     }
 
     public void setNombreBanco(String nombreBanco) {
-        this.nombreBanco = nombreBanco;
+        this.NombreBanco = nombreBanco;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getNumeroCheque() {
+        return NumeroCheque;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setNumeroCheque(String numeroCheque) {
+        this.NumeroCheque = numeroCheque;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFechaVencimiento() {
+        return FechaVencimiento;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.FechaVencimiento = fechaVencimiento;
     }
 
     public String getCuit() {
-        return cuit;
+        return Cuit;
     }
 
     public void setCuit(String cuit) {
-        this.cuit = cuit;
+        this.Cuit = cuit;
     }
 
     public Integer getMonto() {
-        return monto;
+        return Monto;
     }
 
     public void setMonto(Integer monto) {
-        this.monto = monto;
+        this.Monto = monto;
     }
 }

@@ -25,7 +25,7 @@ public class Comision {
         this.MontoOriginal = operacion.getMonto();
         this.TipoDeOperacion = operacion.getTipoDeOperacion();
         this.FechaCreacion = new Date();
-        this.Monto = (float)MontoOriginal/comision;
+        this.Monto = (float)(MontoOriginal*comision)/100;
         this.Estado = ComisionEstadoEnum.CALCULADO;
     }
     public TipoDeOperacionEnum getTipoDeOperacion() {

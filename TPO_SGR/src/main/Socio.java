@@ -3,6 +3,7 @@ package main;
 import constants.Constants;
 import documentaciones.DocumentosOperacion;
 import dtos.OperacionesDTO;
+import enums.EstadoOperacionEnum;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
 import operaciones.Aporte;
@@ -10,6 +11,7 @@ import operaciones.Comision;
 import operaciones.LineaDeCredito;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -203,6 +205,20 @@ public class Socio {
         this.AccionesSgrB = accionesSgrB;
     }
 
+    public List<Operacion> GetOperacionesCheques(boolean monetizados){
+        List<Operacion> cheques = new ArrayList<Operacion>();
+        for (Operacion operacion: this.OperacionList){
+            if(operacion.getTipoDeOperacion() == enums.TipoDeOperacionEnum.TIPO1 &&
+                    operacion.getFechaVencimiento().after(Calendar.getInstance().getTime())){
+                    if(!monetizados && operacion.getEstadoOperacion() == EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO)
+                        cheques.add(operacion);
+                    else if(monetizados && operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO){
+                        cheques.add(operacion);
+                    }
+            }
+        }
+        return cheques;
+    }
     @Override
     public String toString() {
         return "Nombre: " + Nombre +

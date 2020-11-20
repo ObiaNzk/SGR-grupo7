@@ -1,6 +1,7 @@
 package Front;
 
 import Front.ConsultasSGR.ConsultasSGR;
+import Front.OperacionesSocios.MonetizarOperaciones.MonetizarOperacionesMenu;
 import Front.OperacionesSocios.PanelSolapadoOperaciones;
 import Front.ABMSocios.ABMSocios;
 
@@ -15,6 +16,7 @@ public class MenuPrincipal extends JFrame{
     private JButton button1;
     private JButton consultasSGRButton;
     private JButton sociosButton;
+    private JButton OperarButtom;
     private MenuPrincipal self;
 
     public MenuPrincipal(String titulo) {
@@ -55,6 +57,13 @@ public class MenuPrincipal extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 ABMSocios frame = new ABMSocios( "Seleccione el tipo de operatoria para socio.");
+                frame.setVisible(true);
+            }
+        });
+        OperarButtom.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MonetizarOperacionesMenu frame = new MonetizarOperacionesMenu("Seleccione Operacion a realizar");
                 frame.setVisible(true);
             }
         });
