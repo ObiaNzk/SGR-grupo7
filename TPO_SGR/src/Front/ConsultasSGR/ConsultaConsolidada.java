@@ -62,7 +62,7 @@ public class ConsultaConsolidada extends JDialog {
                 DetallesLabelResponse.setModel(listModel);
 
                 labelResponse.setText("Riesgo vivo :" + responseDTO.getTotalRiesgoVivo() + " " +
-                        "Total utilizado :" + responseDTO.getTotalUtilizado());
+                        "Total utilizado :" + responseDTO.getTotalUtilizado() + "Total de la linea: " + ((Socio) comboBox2.getSelectedItem()).getLineaDeCredito().getMonto());
             }
         });
     }

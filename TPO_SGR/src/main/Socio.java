@@ -17,6 +17,7 @@ public class Socio {
 
     private TipoDeSocio TipoDeSocio;
     private LineaDeCredito LineaDeCredito;
+    private float lineaUtilizada;
     private List<Comision> ComisionesList;
     private List<Operacion> OperacionList;
     private List<Double> FacturasList;
@@ -26,7 +27,6 @@ public class Socio {
     private TipoDeOperacionEnum TipoDeOperacionEnum;
     private String Nombre;
     private Empresa Empresa;
-    private Integer Fdr;
 
     public Socio(){
         this.ComisionesList = new ArrayList<Comision>();
@@ -57,9 +57,6 @@ public class Socio {
         return LineaDeCredito;
     }
 
-    public Integer getFdr() {
-        return Fdr;
-    }
 
     public List<Double> getFacturasList() {
         return FacturasList;
@@ -76,46 +73,6 @@ public class Socio {
             }
             return false;
     }
-
-    public boolean excedeMaximoFDR(Integer FDR, Operacion operacion){
-
-        double porcentajeFdr = this.getFdr() * 0.05;
-
-        if( porcentajeFdr < operacion.getMonto() ){
-            return true;
-        }
-        return false;
-    }
-
-
-    public OperacionesDTO solicitarGarantia(DocumentosOperacion documentosOperacion, Operacion operacion){
-
-        OperacionesDTO responseDTO = new OperacionesDTO();
-
-        if(!validateFacturasVencidasParaOperar()){
-            if(!excedeMaximoFDR(this.getFdr(), operacion)) {
-                if (lineaDeCreditoIsVigente()) {
-                    return this.validateDocumentacion(documentosOperacion);
-
-                } else {
-                    responseDTO.setError(Boolean.TRUE);
-                    responseDTO.setErrorMessage(Constants.ERROR_LINEA_CRED_VENCIDA);
-
-                }
-            }
-
-            responseDTO.setError(Boolean.TRUE);
-            responseDTO.setErrorMessage(Constants.ERROR_OPERACION_EXCEDE_FDR);
-
-        } else {
-            responseDTO.setError(Boolean.TRUE);
-            responseDTO.setErrorMessage(Constants.ERROR_DEBE_FACTURAS);
-
-        }
-
-        return responseDTO;
-    }
-
 
     public OperacionesDTO validateDocumentacion(DocumentosOperacion documentosOperacion) {
 
@@ -228,10 +185,6 @@ public class Socio {
 
     public void setEmpresa(Empresa empresa) {
         this.Empresa = empresa;
-    }
-
-    public void setFdr(Integer fdr) {
-        this.Fdr = fdr;
     }
 
     public List<String> getAccionesSgrA() {

@@ -129,8 +129,9 @@ public class Sgr {
                                 totalUtilizado += cuota.getMonto();
                             }
                         }
+                    }else {
+                        totalUtilizado += operacion.getMontoUtilizado();
                     }
-                    totalUtilizado += operacion.getMontoUtilizado();
                 }
                 if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO){
                     operacionesRiesgoVivo.add(operacion);
@@ -140,8 +141,9 @@ public class Sgr {
                                 totalRiesgoVivo += cuota.getMonto();
                             }
                         }
+                    }else {
+                        totalRiesgoVivo += operacion.getMontoUtilizado();
                     }
-                    totalRiesgoVivo += operacion.getMontoUtilizado();
                 }
             }
         }
@@ -252,9 +254,7 @@ public class Sgr {
         socioPrincipalParticipe.setTipoDeSocio(TipoDeSocio.PARTICIPE);
         socioPrincipalParticipe.setAccionesSgrA(new ArrayList<String>(Collections.nCopies(100,"accion A")));
         socioPrincipalParticipe.setNombre("Socio General Participe");
-        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(100000, new Date(2022, Calendar.JANUARY, 11), true));
         socioPrincipalParticipe.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
-        socioPrincipalParticipe.setFdr(999999999);
         socioPrincipalParticipe.setEmpresa(empresa);
         //operaciones para probar el consolidado
         Operacion operacion = new Operacion();
@@ -264,7 +264,7 @@ public class Sgr {
         Calendar cal = Calendar.getInstance();
         cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
         Date date = cal.getTime();
-        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(123456, date, true));
+        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(1000, date, true));
         operacion.setFechaVencimiento(date);
         operacion.setFechaMonetizado(date);
         operacion.setMonto(100);
@@ -277,8 +277,8 @@ public class Sgr {
         operacion2.setFechaMonetizado(new Date());
         operacion2.setFechaVencimiento(date);
         operacion2.setFechaMonetizado(date);
-        operacion2.setMonto(100000);
-        operacion2.setMontoUtilizado(1000);
+        operacion2.setMonto(250);
+        operacion2.setMontoUtilizado(150);
         socioPrincipalParticipe.AgregarOperacion(operacion2);
 
 
@@ -299,9 +299,8 @@ public class Sgr {
         socioPrincipalProtector.setAccionesSgrB(new ArrayList<String>(Collections.nCopies(100,"accion B")));
         socioPrincipalProtector.setNombre("Socio General Protector");
         socioPrincipalProtector.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
-        socioPrincipalProtector.setFdr(999999999);
         socioPrincipalProtector.setEmpresa(empresa);
-        socioPrincipalParticipe.AgregarOperacion(operacion3);
+        socioPrincipalProtector.AgregarOperacion(operacion3);
 
         this.Socios.add(socioPrincipalParticipe);
         this.Socios.add(socioPrincipalProtector);
