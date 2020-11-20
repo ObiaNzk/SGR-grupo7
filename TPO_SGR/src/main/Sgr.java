@@ -99,14 +99,13 @@ public class Sgr {
     }
 
     public List<Operacion> operacionesDeSocio(Socio socio, Date fechaDesde, Date fechaHasta){
-        return socio.getOperacionList();/*
         List<Operacion> operacionesResultado = new ArrayList<Operacion>();
         for (Operacion operacion: socio.getOperacionList()){
             if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO && operacion.getFechaMonetizado().after(fechaDesde) && operacion.getFechaMonetizado().before(fechaHasta)){
                 operacionesResultado.add(operacion);
             }
         }
-        return operacionesResultado;*/
+        return operacionesResultado;
     }
 
     public Integer getPorcentajeDeComision(TipoDeOperacionEnum tipoDeOperacionEnum){
@@ -130,7 +129,7 @@ public class Sgr {
                             }
                         }
                     }else {
-                        totalUtilizado += operacion.getMonto();
+                        totalUtilizado += operacion.getMontoUtilizado();
                     }
                 }
                 if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO){
@@ -142,7 +141,7 @@ public class Sgr {
                             }
                         }
                     }else {
-                        totalRiesgoVivo += operacion.getMonto();
+                        totalRiesgoVivo += operacion.getMontoUtilizado();
                     }
                 }
             }
