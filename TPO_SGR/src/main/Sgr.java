@@ -130,7 +130,7 @@ public class Sgr {
                             }
                         }
                     }else {
-                        totalUtilizado += operacion.getMontoUtilizado();
+                        totalUtilizado += operacion.getMonto();
                     }
                 }
                 if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO){
@@ -142,7 +142,7 @@ public class Sgr {
                             }
                         }
                     }else {
-                        totalRiesgoVivo += operacion.getMontoUtilizado();
+                        totalRiesgoVivo += operacion.getMonto();
                     }
                 }
             }
