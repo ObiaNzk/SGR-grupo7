@@ -1,5 +1,6 @@
 package Front.OperacionesSocios.OperacionesSociosParticipes;
 
+import Helper.MontoHelper;
 import Interfaces.IDocumentosOperacion;
 import Request.OperacionCheque;
 import Validadores.GarantiasValidador;
@@ -58,7 +59,7 @@ public class OperacionCheques extends JDialog {
                 //custom title, error icon
                 Socio socioSeleccionado = (Socio) comboBox1.getSelectedItem();
 
-                JOptionPane.showMessageDialog(pnlPrincipal,socioSeleccionado.getLineaDeCredito().getMonto(),"Monto Maximo Valido",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(pnlPrincipal, MontoHelper.GetMonto(socioSeleccionado),"Monto Maximo Valido",JOptionPane.INFORMATION_MESSAGE);
             }
         });
         cargarOperacionButton.addActionListener(new ActionListener() {

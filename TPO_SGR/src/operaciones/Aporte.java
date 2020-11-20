@@ -1,10 +1,17 @@
-package main;
+package operaciones;
+
+import Interfaces.IDocumentosOperacion;
 
 import java.util.Date;
 
-public class Aporte {
+public class Aporte implements IDocumentosOperacion {
     Integer Monto;
     Date FechaVencimiento;
+
+    public Aporte(Integer monto, Date fechaVencimiento){
+        this.Monto = monto;
+        this.FechaVencimiento = fechaVencimiento;
+    }
 
     public Integer getMonto() {
         return Monto;

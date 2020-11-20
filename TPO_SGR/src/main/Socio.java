@@ -5,8 +5,8 @@ import documentaciones.DocumentosOperacion;
 import dtos.OperacionesDTO;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
+import operaciones.Aporte;
 import operaciones.Comision;
-import operaciones.ContraGarantia;
 import operaciones.LineaDeCredito;
 
 import java.util.ArrayList;

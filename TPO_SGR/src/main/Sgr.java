@@ -23,51 +23,8 @@ public class Sgr {
     private List<Aporte> Aportes;
     public Sgr(){
         Socios = new ArrayList<Socio>();
-        Socio socioPrincipalParticipe = new Socio();
-        Empresa empresa = new Empresa();
-        empresa.setTamañoEmpresaEnum(TamañoEmpresaEnum.MEDIANA);
-        socioPrincipalParticipe.setTipoDeSocio(TipoDeSocio.PARTICIPE);
-        socioPrincipalParticipe.setAccionesSgrA(new ArrayList<String>(Collections.nCopies(100,"accion A")));
-        socioPrincipalParticipe.setNombre("Socio General Participe");
-        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(100000, new Date(2022, Calendar.JANUARY, 11), true));
-        socioPrincipalParticipe.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
-        socioPrincipalParticipe.setFdr(999999999);
-        socioPrincipalParticipe.setEmpresa(empresa);
-        //operaciones para probar el consolidado
-        Operacion operacion = new Operacion();
-        operacion.setTipoDeOperacion(TipoDeOperacionEnum.TIPO1);
-        operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
-        operacion.setTasaDeDescuento(18);
-        Calendar cal = Calendar.getInstance();
-        cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
-        Date date = cal.getTime();
-        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(123456, date, true));
-        operacion.setFechaVencimiento(date);
-        operacion.setFechaMonetizado(date);
-        operacion.setMonto(100);
-        operacion.setMontoUtilizado(100);
-        socioPrincipalParticipe.AgregarOperacion(operacion);
-
-        Operacion operacion2 = new Operacion();
-        operacion2.setTipoDeOperacion(TipoDeOperacionEnum.TIPO2);
-        operacion2.setEstadoOperacion(EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO);
-        operacion2.setFechaMonetizado(new Date());
-        operacion2.setFechaVencimiento(date);
-        operacion2.setFechaMonetizado(date);
-        operacion2.setMonto(100000);
-        operacion2.setMontoUtilizado(1000);
-        socioPrincipalParticipe.AgregarOperacion(operacion2);
-
-        Socio socioPrincipalProtector = new Socio();
-        socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
-        socioPrincipalProtector.setAccionesSgrB(new ArrayList<String>(Collections.nCopies(100,"accion B")));
-        socioPrincipalProtector.setNombre("Socio General Protector");
-        socioPrincipalProtector.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
-        socioPrincipalProtector.setFdr(999999999);
-        socioPrincipalProtector.setEmpresa(empresa);
-
-        this.Socios.add(socioPrincipalParticipe);
-        this.Socios.add(socioPrincipalProtector);
+        Aportes = new ArrayList<Aporte>();
+        GetSociosGenerales();
     }
 
     public List<Socio> GetSocios(){
@@ -284,6 +241,70 @@ public class Sgr {
 
 
     public void AgregarAporte(Aporte aporte) {
+        this.Aportes.add(aporte);
+    }
+
+    public void GetSociosGenerales(){
+        List<Socio> sociosGenerales = new ArrayList<Socio>();
+        Socio socioPrincipalParticipe = new Socio();
+        Empresa empresa = new Empresa();
+        empresa.setTamañoEmpresaEnum(TamañoEmpresaEnum.MEDIANA);
+        socioPrincipalParticipe.setTipoDeSocio(TipoDeSocio.PARTICIPE);
+        socioPrincipalParticipe.setAccionesSgrA(new ArrayList<String>(Collections.nCopies(100,"accion A")));
+        socioPrincipalParticipe.setNombre("Socio General Participe");
+        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(100000, new Date(2022, Calendar.JANUARY, 11), true));
+        socioPrincipalParticipe.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
+        socioPrincipalParticipe.setFdr(999999999);
+        socioPrincipalParticipe.setEmpresa(empresa);
+        //operaciones para probar el consolidado
+        Operacion operacion = new Operacion();
+        operacion.setTipoDeOperacion(TipoDeOperacionEnum.TIPO1);
+        operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+        operacion.setTasaDeDescuento(18);
+        Calendar cal = Calendar.getInstance();
+        cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
+        Date date = cal.getTime();
+        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(123456, date, true));
+        operacion.setFechaVencimiento(date);
+        operacion.setFechaMonetizado(date);
+        operacion.setMonto(100);
+        operacion.setMontoUtilizado(100);
+        socioPrincipalParticipe.AgregarOperacion(operacion);
+
+        Operacion operacion2 = new Operacion();
+        operacion2.setTipoDeOperacion(TipoDeOperacionEnum.TIPO2);
+        operacion2.setEstadoOperacion(EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO);
+        operacion2.setFechaMonetizado(new Date());
+        operacion2.setFechaVencimiento(date);
+        operacion2.setFechaMonetizado(date);
+        operacion2.setMonto(100000);
+        operacion2.setMontoUtilizado(1000);
+        socioPrincipalParticipe.AgregarOperacion(operacion2);
+
+
+        Operacion operacion3 = new Operacion();
+        Aporte aporte = new Aporte(100000, cal.getTime());
+        operacion3.setTipoDeOperacion(TipoDeOperacionEnum.APORTE);
+        operacion3.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+        operacion3.setFechaMonetizado(new Date());
+        operacion3.setFechaVencimiento(cal.getTime());
+        operacion3.setFechaMonetizado(date);
+        operacion3.setMonto(100000);
+        operacion3.setMontoUtilizado(100000);
+        operacion3.setDocumentosOperacion(aporte);
+
+        Socio socioPrincipalProtector = new Socio();
+
+        socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
+        socioPrincipalProtector.setAccionesSgrB(new ArrayList<String>(Collections.nCopies(100,"accion B")));
+        socioPrincipalProtector.setNombre("Socio General Protector");
+        socioPrincipalProtector.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
+        socioPrincipalProtector.setFdr(999999999);
+        socioPrincipalProtector.setEmpresa(empresa);
+        socioPrincipalParticipe.AgregarOperacion(operacion3);
+
+        this.Socios.add(socioPrincipalParticipe);
+        this.Socios.add(socioPrincipalProtector);
         this.Aportes.add(aporte);
     }
 }

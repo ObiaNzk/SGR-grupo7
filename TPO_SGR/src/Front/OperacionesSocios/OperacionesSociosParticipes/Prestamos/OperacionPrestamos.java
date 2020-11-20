@@ -1,5 +1,6 @@
 package Front.OperacionesSocios.OperacionesSociosParticipes.Prestamos;
 
+import Helper.MontoHelper;
 import Validadores.GarantiasValidador;
 import enums.SistemaPrestamoEnum;
 import enums.TipoDeOperacionEnum;
@@ -61,7 +62,7 @@ public class OperacionPrestamos extends JDialog{
                 //custom title, error icon
                 Socio socioSeleccionado = (Socio) SociosCombo.getSelectedItem();
 
-                JOptionPane.showMessageDialog(pnlPrincipal, socioSeleccionado.getLineaDeCredito().getMonto(), "Monto Maximo Valido", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(pnlPrincipal, MontoHelper.GetMonto(socioSeleccionado), "Monto Maximo Valido", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         cargarOperacionButton.addActionListener(new ActionListener() {

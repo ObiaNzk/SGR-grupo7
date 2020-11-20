@@ -1,5 +1,6 @@
 package Validadores;
 
+import Helper.MontoHelper;
 import main.*;
 
 import javax.swing.*;
@@ -11,11 +12,7 @@ public class GarantiasValidador {
             if (operacion.getFechaVencimiento().before(new Date())){
                 throw new Exception("Fecha invalida");
             }
-            float sumaAportes = 0;
-            float fdr = 0;
-            for(Aporte aporte: sgr.getAportes(true)) sumaAportes += aporte.getMonto();
-            fdr = (5*sumaAportes)/100;
-            float topeDeOperacion = (socio.getLineaDeCredito().getMonto()<= fdr) ? socio.getLineaDeCredito().getMonto() : fdr;
+            float topeDeOperacion = MontoHelper.GetMonto(socio);
 
             if(operacion.getMonto() > topeDeOperacion) {
                 throw new Exception("Monto superior al valido");

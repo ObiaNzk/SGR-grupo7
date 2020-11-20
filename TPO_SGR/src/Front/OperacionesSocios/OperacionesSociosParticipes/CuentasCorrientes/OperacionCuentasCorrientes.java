@@ -1,5 +1,6 @@
 package Front.OperacionesSocios.OperacionesSociosParticipes.CuentasCorrientes;
 
+import Helper.MontoHelper;
 import Validadores.GarantiasValidador;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
@@ -52,7 +53,7 @@ public class OperacionCuentasCorrientes extends JDialog{
                 //custom title, error icon
                 Socio socioSeleccionado = (Socio) SocioBox.getSelectedItem();
 
-                JOptionPane.showMessageDialog(pnlPrincipal,socioSeleccionado.getLineaDeCredito().getMonto(),"Monto Maximo Valido",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(pnlPrincipal, MontoHelper.GetMonto(socioSeleccionado),"Monto Maximo Valido",JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
