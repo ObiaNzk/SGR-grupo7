@@ -8,10 +8,10 @@ import java.util.List;
 public class ConsultaConsolidadaResponseDTO {
     private List<Operacion> operacionesRiesgoVivo;
     private List<Operacion>  operacionesTotalUtilizado;
-    private Integer totalRiesgoVivo ;
-    private Integer totalUtilizado ;
+    private float totalRiesgoVivo ;
+    private float totalUtilizado ;
 
-    public ConsultaConsolidadaResponseDTO(List<Operacion> operacionesRiesgoVivo, List<Operacion> operacionesTotalUtilizado, Integer totalRiesgoVivo, Integer totalUtilizado ){
+    public ConsultaConsolidadaResponseDTO(List<Operacion> operacionesRiesgoVivo, List<Operacion> operacionesTotalUtilizado, float totalRiesgoVivo, float totalUtilizado ){
         this.operacionesRiesgoVivo = operacionesRiesgoVivo;
         this.operacionesTotalUtilizado = operacionesTotalUtilizado;
         this.totalRiesgoVivo = totalRiesgoVivo;
@@ -34,7 +34,7 @@ public class ConsultaConsolidadaResponseDTO {
         this.operacionesTotalUtilizado = operacionesTotalUtilizado;
     }
 
-    public Integer getTotalRiesgoVivo() {
+    public float getTotalRiesgoVivo() {
         return totalRiesgoVivo;
     }
 
@@ -42,7 +42,7 @@ public class ConsultaConsolidadaResponseDTO {
         this.totalRiesgoVivo = totalRiesgoVivo;
     }
 
-    public Integer getTotalUtilizado() {
+    public float getTotalUtilizado() {
         return totalUtilizado;
     }
 

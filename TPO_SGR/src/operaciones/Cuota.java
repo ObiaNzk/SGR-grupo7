@@ -3,11 +3,16 @@ package operaciones;
 import java.util.Date;
 
 public class Cuota {
-    private Integer Monto;
+    private float Monto;
     private Date FechaVencimiento;
     private boolean Pagado;
 
-    public Integer getMonto() {
+    public Cuota(float monto, Date fechaVencimiento, boolean pagado){
+        this.Monto = monto;
+        this.FechaVencimiento = fechaVencimiento;
+        this.Pagado = pagado;
+    }
+    public float getMonto() {
         return Monto;
     }
 
@@ -29,5 +34,11 @@ public class Cuota {
 
     public void setPagado(boolean pagado) {
         Pagado = pagado;
+    }
+
+    @Override
+    public String toString() {
+        String pagadoText = this.Pagado ? "Si" : "No";
+        return " Monto: " + "["+this.Monto+"]" +"   Vence el: " + "["+this.FechaVencimiento+"]"+" Esta Pagado: "+"["+pagadoText+"]";
     }
 }

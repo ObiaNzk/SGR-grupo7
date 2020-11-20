@@ -159,8 +159,8 @@ public class Sgr {
     public ConsultaConsolidadaResponseDTO consultaConsolidada(Socio socio){
         List<Operacion>  operacionesRiesgoVivo = new ArrayList<Operacion>();
         List<Operacion>  operacionesTotalUtilizado = new ArrayList<Operacion>();
-        Integer totalRiesgoVivo = 0;
-        Integer totalUtilizado = 0 ;
+        float totalRiesgoVivo = 0;
+        float totalUtilizado = 0 ;
         for (Operacion operacion : socio.getOperacionList()){
             if(operacion.getFechaVencimiento().after(new Date())){
                 if(operacion.getEstadoOperacion() == EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO){

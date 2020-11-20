@@ -1,7 +1,7 @@
 package enums;
 
 public enum SistemaPrestamoEnum {
-    ALEMAN,
-    AMERICANO,
-    FRANCES
+    Francés,
+    Alemán,
+    Americano;
 }

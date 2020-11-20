@@ -1,16 +1,36 @@
 package Front.OperacionesSocios.OperacionesSociosParticipes.Prestamos;
 
+import enums.SistemaPrestamoEnum;
+import enums.TipoDeOperacionEnum;
+import enums.TipoDeSocio;
+import main.Operacion;
+import main.Sistema;
+import main.Socio;
+import operaciones.Cheque;
+import operaciones.Cuota;
+import operaciones.Prestamo;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class OperacionPrestamos extends JDialog{
-    private JComboBox comboBox1;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JComboBox comboBox2;
-    private JButton pagarCuotaDePrestamoButton;
-    private JComboBox comboBox3;
+    private JTextField ImporteText;
+    private JTextField FechaText;
+    private JTextField CuotasText;
+    private JComboBox SistemaCombo;
+    private JComboBox SociosCombo;
     private JPanel pnlPrincipal;
+    private JButton consultaDisponibilidadParaOperarButton;
+    private JButton cargarOperacionButton;
+    private JTextField BancoText;
+    private JLabel tasaText;
+    private JTextField TasaText;
+    private Sistema sistema;
 
     public OperacionPrestamos(String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
@@ -29,5 +49,54 @@ public class OperacionPrestamos extends JDialog{
 
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        sistema = Sistema.getInstance();
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(sistema.getSgr().GetSociosPorTipo(TipoDeSocio.PARTICIPE).toArray());
+        SociosCombo.setModel(model);
+
+        consultaDisponibilidadParaOperarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //custom title, error icon
+                Socio socioSeleccionado = (Socio) SociosCombo.getSelectedItem();
+
+                JOptionPane.showMessageDialog(pnlPrincipal, socioSeleccionado.getLineaDeCredito().getMonto(), "Monto Maximo Valido", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        cargarOperacionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Socio socioSeleccionado = (Socio) SociosCombo.getSelectedItem();
+                    Date acreditacion = new SimpleDateFormat("dd/MM/yyyy").parse(FechaText.getText());
+                    String banco = BancoText.getText();
+                    Integer monto = Integer.parseInt(ImporteText.getText());
+                    Integer numeroCuotas = Integer.parseInt(CuotasText.getText());
+                    SistemaPrestamoEnum sistemaOperacion = SistemaPrestamoEnum.valueOf(SistemaCombo.getSelectedItem().toString());
+                    Integer tasa = Integer.parseInt(TasaText.getText());
+                    Calendar cal = Calendar.getInstance();
+                    if (acreditacion.before(new Date())){
+                        JOptionPane.showMessageDialog(pnlPrincipal,"Fecha Invalida", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    if(monto > socioSeleccionado.getLineaDeCredito().getMonto()) {
+                        JOptionPane.showMessageDialog(pnlPrincipal,"Monto Superior al permitido para el socio", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    List<Cuota> cuotas = Collections.nCopies(numeroCuotas,new Cuota((float)(monto*tasa)/numeroCuotas, cal.getTime(), false) );
+                    for (int i = 0; i < cuotas.size(); i++){
+                        cal.add(Calendar.MONTH, i+2);
+                        cuotas.get(i).setFechaVencimiento(cal.getTime());
+                    }
+                    Prestamo prestamo = new Prestamo(banco, monto, tasa, acreditacion, cuotas, sistemaOperacion);
+                    Operacion operacion = new Operacion(TipoDeOperacionEnum.TIPO3, new Date(), cal.getTime(), monto, prestamo);
+                    socioSeleccionado.AgregarOperacion(operacion);
+                    JOptionPane.showMessageDialog(pnlPrincipal,"Operacion Creada", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (Exception parseException) {
+                    JOptionPane.showMessageDialog(pnlPrincipal,parseException.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 }

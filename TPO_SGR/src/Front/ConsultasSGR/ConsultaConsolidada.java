@@ -61,8 +61,8 @@ public class ConsultaConsolidada extends JDialog {
                 }
                 DetallesLabelResponse.setModel(listModel);
 
-                labelResponse.setText("Riesgo vivo :" + responseDTO.getTotalRiesgoVivo().toString() + " " +
-                        "Total utilizado :" + responseDTO.getTotalUtilizado().toString());
+                labelResponse.setText("Riesgo vivo :" + responseDTO.getTotalRiesgoVivo() + " " +
+                        "Total utilizado :" + responseDTO.getTotalUtilizado());
             }
         });
     }
