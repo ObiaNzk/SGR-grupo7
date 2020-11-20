@@ -3,7 +3,6 @@ package Front.OperacionesSocios;
 import Front.OperacionesSocios.OperacionesSociosParticipes.CuentasCorrientes.OperacionCuentasCorrientes;
 import Front.OperacionesSocios.OperacionesSociosParticipes.OperacionCheques;
 import Front.OperacionesSocios.OperacionesSociosParticipes.Prestamos.OperacionPrestamos;
-import Front.OperacionesSocios.OperacionesSociosParticipes.TarjetasdeCredito;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -41,13 +40,7 @@ public class SelectorOperacionesSociosParticipes extends JInternalFrame{
                 frame.setVisible(true);
             }
         });
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TarjetasdeCredito frame = new TarjetasdeCredito("Cargar operación TC");
-                frame.setVisible(true);
-            }
-        });
+
         préstamosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

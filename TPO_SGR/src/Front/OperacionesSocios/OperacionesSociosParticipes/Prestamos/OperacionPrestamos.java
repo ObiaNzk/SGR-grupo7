@@ -1,5 +1,6 @@
 package Front.OperacionesSocios.OperacionesSociosParticipes.Prestamos;
 
+import Validadores.GarantiasValidador;
 import enums.SistemaPrestamoEnum;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
@@ -75,14 +76,11 @@ public class OperacionPrestamos extends JDialog{
                     SistemaPrestamoEnum sistemaOperacion = SistemaPrestamoEnum.valueOf(SistemaCombo.getSelectedItem().toString());
                     Integer tasa = Integer.parseInt(TasaText.getText());
                     Calendar cal = Calendar.getInstance();
-                    if (acreditacion.before(new Date())){
-                        JOptionPane.showMessageDialog(pnlPrincipal,"Fecha Invalida", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
+
+                    if(acreditacion.before(cal.getTime())){
+                        throw new Exception("fecha de acreditacion invalida");
                     }
-                    if(monto > socioSeleccionado.getLineaDeCredito().getMonto()) {
-                        JOptionPane.showMessageDialog(pnlPrincipal,"Monto Superior al permitido para el socio", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
+
                     List<Cuota> cuotas = Collections.nCopies(numeroCuotas,new Cuota((float)(monto*tasa)/numeroCuotas, cal.getTime(), false) );
                     for (int i = 0; i < cuotas.size(); i++){
                         cal.add(Calendar.MONTH, i+2);
@@ -90,6 +88,7 @@ public class OperacionPrestamos extends JDialog{
                     }
                     Prestamo prestamo = new Prestamo(banco, monto, tasa, acreditacion, cuotas, sistemaOperacion);
                     Operacion operacion = new Operacion(TipoDeOperacionEnum.TIPO3, new Date(), cal.getTime(), monto, prestamo);
+                    GarantiasValidador.ValidarOperacion(operacion, socioSeleccionado);
                     socioSeleccionado.AgregarOperacion(operacion);
                     JOptionPane.showMessageDialog(pnlPrincipal,"Operacion Creada", "Ok", JOptionPane.INFORMATION_MESSAGE);
 

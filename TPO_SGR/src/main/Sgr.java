@@ -17,12 +17,12 @@ import java.util.*;
 
 public class Sgr {
 
-    private String nombre;
-    private List<Socio> socios;
+    private String Nombre;
+    private List<Socio> Socios;
     private static Sgr instance;
-
+    private List<Aporte> Aportes;
     public Sgr(){
-        socios = new ArrayList<Socio>();
+        Socios = new ArrayList<Socio>();
         Socio socioPrincipalParticipe = new Socio();
         Empresa empresa = new Empresa();
         empresa.setTamañoEmpresaEnum(TamañoEmpresaEnum.MEDIANA);
@@ -66,16 +66,16 @@ public class Sgr {
         socioPrincipalProtector.setFdr(999999999);
         socioPrincipalProtector.setEmpresa(empresa);
 
-        this.socios.add(socioPrincipalParticipe);
-        this.socios.add(socioPrincipalProtector);
+        this.Socios.add(socioPrincipalParticipe);
+        this.Socios.add(socioPrincipalProtector);
     }
 
     public List<Socio> GetSocios(){
-        return this.socios;
+        return this.Socios;
     }
     public List<Socio> GetSociosPorTipo(TipoDeSocio tipoDeSocio){
         List<Socio> socios = new ArrayList<Socio>();
-        for(Socio socio: this.socios){
+        for(Socio socio: this.Socios){
             if (socio.getTipoDeSocio() == tipoDeSocio){
                 socios.add(socio);
             }
@@ -126,7 +126,7 @@ public class Sgr {
     public List<Comision> comisionesEnunDia(Date fecha){
         List<Comision> comisiones =  new ArrayList<Comision>();
 
-        for (Socio socio: socios){
+        for (Socio socio: Socios){
             for (Operacion operacion: socio.getOperacionList()){
                 if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO1 &&
                         operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO &&
@@ -142,13 +142,14 @@ public class Sgr {
     }
 
     public List<Operacion> operacionesDeSocio(Socio socio, Date fechaDesde, Date fechaHasta){
+        return socio.getOperacionList();/*
         List<Operacion> operacionesResultado = new ArrayList<Operacion>();
         for (Operacion operacion: socio.getOperacionList()){
             if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO && operacion.getFechaMonetizado().after(fechaDesde) && operacion.getFechaMonetizado().before(fechaHasta)){
                 operacionesResultado.add(operacion);
             }
         }
-        return operacionesResultado;
+        return operacionesResultado;*/
     }
 
     public Integer getPorcentajeDeComision(TipoDeOperacionEnum tipoDeOperacionEnum){
@@ -260,4 +261,29 @@ public class Sgr {
         return instance;
     }
 
+    public List<Aporte> getAportes() {
+        return Aportes;
+    }
+
+    public List<Aporte> getAportes(boolean sinVencer ){
+        List<Aporte> resultado = new ArrayList<Aporte>();
+        for (Aporte aporte: this.Aportes){
+            if(sinVencer) {
+                if (aporte.getFechaVencimiento().after(Calendar.getInstance().getTime())) {
+                    resultado.add(aporte);
+                }
+            }else{
+                if (aporte.getFechaVencimiento().before(Calendar.getInstance().getTime())) {
+                    resultado.add(aporte);
+                }
+            }
+        }
+        return resultado;
+    }
+
+
+
+    public void AgregarAporte(Aporte aporte) {
+        this.Aportes.add(aporte);
+    }
 }

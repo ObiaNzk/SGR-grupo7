@@ -1,22 +1,34 @@
 package Front.OperacionesSocios.OperacionesSociosParticipes.CuentasCorrientes;
 
+import Validadores.GarantiasValidador;
+import enums.TipoDeOperacionEnum;
+import enums.TipoDeSocio;
+import main.Operacion;
+import main.Sistema;
+import main.Socio;
+import operaciones.Cheque;
+import operaciones.CuentaCorriente;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OperacionCuentasCorrientes extends JDialog{
-    private JButton operarConCuentaCorrienteButton;
-    private JButton consultaDisponibilidadButton;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JTextField textField1;
-    private JFormattedTextField formattedTextField1;
+    private JTextField VencimientoText;
+    private JFormattedTextField MontoText;
     private JButton agregarCuentaCorrienteButton;
     private JPanel pnlPrincipal;
+    private JButton consultaDisponibilidadParaOperarButton;
+    private JButton cargarOperacionButton;
+    private JComboBox SocioBox;
+    private Sistema sistema;
 
     public OperacionCuentasCorrientes(String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
-
+        sistema = Sistema.getInstance();
         //tamaño del panel.
         this.setSize(300, 300);
 
@@ -31,13 +43,36 @@ public class OperacionCuentasCorrientes extends JDialog{
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        DefaultComboBoxModel model = new DefaultComboBoxModel(sistema.getSgr().GetSociosPorTipo(TipoDeSocio.PARTICIPE).toArray());
+        SocioBox.setModel(model);
 
-        agregarCuentaCorrienteButton.addActionListener(new ActionListener() {
+        consultaDisponibilidadParaOperarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AgregarCuentaCorriente frame = new AgregarCuentaCorriente("Agregar cuenta");
-                frame.setVisible(true);
+                //custom title, error icon
+                Socio socioSeleccionado = (Socio) SocioBox.getSelectedItem();
 
+                JOptionPane.showMessageDialog(pnlPrincipal,socioSeleccionado.getLineaDeCredito().getMonto(),"Monto Maximo Valido",JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        cargarOperacionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Socio socioSeleccionado = (Socio) SocioBox.getSelectedItem();
+                    Date vencimiento = new SimpleDateFormat("dd/MM/yyyy").parse(VencimientoText.getText());
+                    Integer monto = Integer.parseInt(MontoText.getText());
+
+                    CuentaCorriente cuentaCorriente = new CuentaCorriente(monto, vencimiento);
+                    Operacion operacion = new Operacion(TipoDeOperacionEnum.TIPO2, new Date(), vencimiento, monto, cuentaCorriente);
+                    GarantiasValidador.ValidarOperacion(operacion, socioSeleccionado);
+                    socioSeleccionado.AgregarOperacion(operacion);
+                    JOptionPane.showMessageDialog(pnlPrincipal,"Operacion Creada", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(pnlPrincipal,exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

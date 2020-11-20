@@ -2,6 +2,7 @@ package Front.OperacionesSocios.OperacionesSociosParticipes;
 
 import Interfaces.IDocumentosOperacion;
 import Request.OperacionCheque;
+import Validadores.GarantiasValidador;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
 import main.Operacion;
@@ -70,21 +71,15 @@ public class OperacionCheques extends JDialog {
                     Integer monto = Integer.parseInt(MontoText.getText());
                     String cuit = CuitText.getText();
                     String chequeNumero = chequeText.getText();
-                    if (vencimiento.before(new Date())){
-                        JOptionPane.showMessageDialog(pnlPrincipal,"Fecha Invalida", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                    if(monto > socioSeleccionado.getLineaDeCredito().getMonto()) {
-                        JOptionPane.showMessageDialog(pnlPrincipal,"Monto Superior al permitido para el socio", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
+
                     Cheque cheque = new Cheque(banco, chequeNumero, vencimiento, cuit, monto);
                     Operacion operacion = new Operacion(TipoDeOperacionEnum.TIPO1, new Date(), vencimiento, monto, cheque);
+                    GarantiasValidador.ValidarOperacion(operacion, socioSeleccionado);
                     socioSeleccionado.AgregarOperacion(operacion);
                     JOptionPane.showMessageDialog(pnlPrincipal,"Operacion Creada", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
-                } catch (ParseException parseException) {
-                    JOptionPane.showMessageDialog(pnlPrincipal,"Error en el formato de la fecha", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(pnlPrincipal,exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
             }

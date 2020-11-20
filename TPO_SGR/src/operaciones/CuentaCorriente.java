@@ -6,12 +6,10 @@ import java.util.Date;
 
 public class CuentaCorriente implements IDocumentosOperacion {
 
-    private String cuit;
     private Integer importeTotal;
     private Date fecha;
 
-    public CuentaCorriente(String cuit, Integer importeTotal, Date fecha) {
-        this.cuit = cuit;
+    public CuentaCorriente(Integer importeTotal, Date fecha) {
         this.importeTotal = importeTotal;
         this.fecha = fecha;
     }
@@ -21,20 +19,13 @@ public class CuentaCorriente implements IDocumentosOperacion {
     }
 
     public boolean validateDocumentacionCompleta(){
-        if((this.getCuit() != null & !this.getCuit().isEmpty()) && (this.getImporteTotal() != null)
+        if((this.getImporteTotal() != null)
             && (this.getFecha() != null)) {
             return true;
         }
         return false;
     }
 
-    public String getCuit() {
-        return cuit;
-    }
-
-    public void setCuit(String cuit) {
-        this.cuit = cuit;
-    }
 
     public Integer getImporteTotal() {
         return importeTotal;

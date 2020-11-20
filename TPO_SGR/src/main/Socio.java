@@ -15,62 +15,63 @@ import java.util.List;
 
 public class Socio {
 
-    private TipoDeSocio tipoDeSocio;
-    private List<ContraGarantia> contraGarantiaList;
-    private LineaDeCredito lineaDeCredito;
-    private List<Comision> comisionesList;
-    private List<Operacion> operacionList;
-    private List<Double> facturasList;
-    private List<String> accionesSgrA;
-    private List<String> accionesSgrB;
-    private TipoDeOperacionEnum tipoDeOperacionEnum;
-    private String nombre;
-    private Empresa empresa;
-    private Integer fdr;
+    private TipoDeSocio TipoDeSocio;
+    private LineaDeCredito LineaDeCredito;
+    private List<Comision> ComisionesList;
+    private List<Operacion> OperacionList;
+    private List<Double> FacturasList;
+    private List<String> AccionesSgrA;
+    private List<String> AccionesSgrB;
+    private List<Aporte> Aportes;
+    private TipoDeOperacionEnum TipoDeOperacionEnum;
+    private String Nombre;
+    private Empresa Empresa;
+    private Integer Fdr;
 
     public Socio(){
-        this.comisionesList = new ArrayList<Comision>();
-        this.operacionList = new ArrayList<Operacion>();
+        this.ComisionesList = new ArrayList<Comision>();
+        this.OperacionList = new ArrayList<Operacion>();
+        this.Aportes = new ArrayList<Aporte>();
     }
-    public void AgregarOperacion (Operacion operacion) {this.operacionList.add(operacion);}
+    public void AgregarOperacion (Operacion operacion) {this.OperacionList.add(operacion);}
     public void AgregarComision (Comision comision){
-        this.comisionesList.add(comision);
+        this.ComisionesList.add(comision);
     }
     public List<Operacion> getOperacionList() {
-        return operacionList;
+        return OperacionList;
     }
 
     public TipoDeOperacionEnum getTipoDeOperacionEnum() {
-        return tipoDeOperacionEnum;
+        return TipoDeOperacionEnum;
     }
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
     public Empresa getEmpresa() {
-        return empresa;
+        return Empresa;
     }
 
     public LineaDeCredito getLineaDeCredito() {
-        return lineaDeCredito;
+        return LineaDeCredito;
     }
 
     public Integer getFdr() {
-        return fdr;
+        return Fdr;
     }
 
     public List<Double> getFacturasList() {
-        return facturasList;
+        return FacturasList;
     }
 
     public void setLineaDeCredito(LineaDeCredito lineaDeCredito) {
-        this.lineaDeCredito = lineaDeCredito;
+        this.LineaDeCredito = lineaDeCredito;
     }
 
     public boolean lineaDeCreditoIsVigente(){
         Date date = new Date();
-            if(date.after(this.lineaDeCredito.getFechaVencimiento())) {
+            if(date.after(this.LineaDeCredito.getFechaVencimiento())) {
                 return true;
             }
             return false;
@@ -157,7 +158,7 @@ public class Socio {
     public boolean validateFacturasVencidasParaOperar(){
 
         double montoFacturasVencidas = 0;
-        double porcentajeLineaCredito = this.lineaDeCredito.getMonto() * 0.10;
+        double porcentajeLineaCredito = this.LineaDeCredito.getMonto() * 0.10;
 
         if(!this.getFacturasList().isEmpty()){
             for(Double facturas : this.getFacturasList()){
@@ -172,10 +173,10 @@ public class Socio {
 
     }
     public void ComprarAcciones (List<String> acciones){
-        if(this.tipoDeSocio == TipoDeSocio.PARTICIPE) {
-            this.accionesSgrA.addAll(acciones);
+        if(this.TipoDeSocio == TipoDeSocio.PARTICIPE) {
+            this.AccionesSgrA.addAll(acciones);
         }else{
-            this.accionesSgrB.addAll(acciones);
+            this.AccionesSgrB.addAll(acciones);
         }
 
 
@@ -184,83 +185,75 @@ public class Socio {
     public List<String> VenderAcciones(Integer cantidadDeAcciones) {
         List<String> acciones = new ArrayList<String>();
         for (int i = 0; i < cantidadDeAcciones; ++i) {
-            if(this.tipoDeSocio == TipoDeSocio.PARTICIPE) {
-                acciones.add(this.accionesSgrA.remove(i));
+            if(this.TipoDeSocio == TipoDeSocio.PARTICIPE) {
+                acciones.add(this.AccionesSgrA.remove(i));
             }else{
-                acciones.add(this.accionesSgrB.remove(i));
+                acciones.add(this.AccionesSgrB.remove(i));
             }
         }
         return acciones;
     }
 
     public TipoDeSocio getTipoDeSocio() {
-        return tipoDeSocio;
+        return TipoDeSocio;
     }
 
     public void setTipoDeSocio(TipoDeSocio tipoDeSocio) {
-        this.tipoDeSocio = tipoDeSocio;
-    }
-
-    public List<ContraGarantia> getContraGarantiaList() {
-        return contraGarantiaList;
-    }
-
-    public void setContraGarantiaList(List<ContraGarantia> contraGarantiaList) {
-        this.contraGarantiaList = contraGarantiaList;
+        this.TipoDeSocio = tipoDeSocio;
     }
 
     public List<Comision> getComisionesList() {
-        return comisionesList;
+        return ComisionesList;
     }
 
     public void setComisionesList(List<Comision> comisionesList) {
-        this.comisionesList = comisionesList;
+        this.ComisionesList = comisionesList;
     }
 
     public void setOperacionList(List<Operacion> operacionList) {
-        this.operacionList = operacionList;
+        this.OperacionList = operacionList;
     }
 
     public void setFacturasList(List<Double> facturasList) {
-        this.facturasList = facturasList;
+        this.FacturasList = facturasList;
     }
 
     public void setTipoDeOperacionEnum(TipoDeOperacionEnum tipoDeOperacionEnum) {
-        this.tipoDeOperacionEnum = tipoDeOperacionEnum;
+        this.TipoDeOperacionEnum = tipoDeOperacionEnum;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.Nombre = nombre;
     }
 
     public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+        this.Empresa = empresa;
     }
 
     public void setFdr(Integer fdr) {
-        this.fdr = fdr;
+        this.Fdr = fdr;
     }
 
     public List<String> getAccionesSgrA() {
-        return accionesSgrA;
+        return AccionesSgrA;
     }
 
     public void setAccionesSgrA(List<String> accionesSgrA) {
-        this.accionesSgrA = accionesSgrA;
+        this.AccionesSgrA = accionesSgrA;
     }
 
     public List<String> getAccionesSgrB() {
-        return accionesSgrB;
+        return AccionesSgrB;
     }
 
     public void setAccionesSgrB(List<String> accionesSgrB) {
-        this.accionesSgrB = accionesSgrB;
+        this.AccionesSgrB = accionesSgrB;
     }
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre +
-                "   Tipo: " + tipoDeSocio ;
+        return "Nombre: " + Nombre +
+                "   Tipo: " + TipoDeSocio;
 
     }
 }
