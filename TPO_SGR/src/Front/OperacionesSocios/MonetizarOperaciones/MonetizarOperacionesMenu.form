@@ -32,12 +32,12 @@
           <text value="Aprobar Prestamo"/>
         </properties>
       </component>
-      <component id="3adac" class="javax.swing.JButton" binding="pagarCuotaButton" default-binding="true">
+      <component id="3adac" class="javax.swing.JButton" binding="PagarCuotaButton">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Pagar Cuota"/>
+          <text value="Pagar Cuota De un Prestamo"/>
         </properties>
       </component>
     </children>

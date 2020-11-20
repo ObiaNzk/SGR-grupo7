@@ -13,7 +13,7 @@ public class MonetizarOperacionesMenu extends JDialog {
     private JButton ChequeButtom;
     private JButton CuentaCorrienteButtom;
     private JButton aprobarPrestamoButton;
-    private JButton pagarCuotaButton;
+    private JButton PagarCuotaButton;
     private JPanel pnlPrincipal;
 
 
