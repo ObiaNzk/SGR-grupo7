@@ -1,10 +1,13 @@
 package main;
 
+import Interfaces.IDocumentosOperacion;
 import documentaciones.DocumentosOperacion;
 import enums.EstadoOperacionEnum;
 import enums.TipoDeOperacionEnum;
 
 import java.util.Date;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Operacion {
 
@@ -14,11 +17,21 @@ public class Operacion {
     private Date FechaMonetizado;
     private Date FechaVencimiento;
     private Integer Monto;
-    private Integer MontoUtilizado;
+    private Integer MontoUtilizado = 0;
     private String NumeroCertificadoGarantia;
     private Integer TasaDeDescuento;
-    private DocumentosOperacion documentosOperacion;
+    private IDocumentosOperacion DocumentosOperacion;
 
+    public Operacion(){}
+    public Operacion(TipoDeOperacionEnum tipoDeOperacion, Date fechaIngresado, Date fechaVencimiento, Integer monto, IDocumentosOperacion documentoOperacion){
+        this.TipoDeOperacion = tipoDeOperacion;
+        this.FechaIngresado = fechaIngresado;
+        this.FechaVencimiento = fechaVencimiento;
+        this.Monto = monto;
+        this.DocumentosOperacion = documentoOperacion;
+        this.EstadoOperacion = EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO;
+        this.NumeroCertificadoGarantia = String.valueOf(ThreadLocalRandom.current().nextInt(1,999999));
+    }
     public TipoDeOperacionEnum getTipoDeOperacion() {
         return TipoDeOperacion;
     }
@@ -56,10 +69,6 @@ public class Operacion {
         MontoUtilizado = montoUtilizado;
     }
 
-    public DocumentosOperacion getDocumentosOperacion() {
-        return documentosOperacion;
-    }
-
     public void setEstadoOperacion(EstadoOperacionEnum estadoOperacion) {
         EstadoOperacion = estadoOperacion;
     }
@@ -92,12 +101,16 @@ public class Operacion {
         Monto = monto;
     }
 
-    public void setDocumentosOperacion(DocumentosOperacion documentosOperacion) {
-        this.documentosOperacion = documentosOperacion;
-    }
-
     @Override
     public String toString() {
-        return " Tipo de operacion: " + "["+TipoDeOperacion+"]" +"   Monto Utilizado: " + "["+MontoUtilizado+"]" + " Estado de la Operacion: " + "["+EstadoOperacion+"] + ";
+        return " Tipo de operacion: " + "["+TipoDeOperacion+"]" +"   Monto Utilizado: " + "["+MontoUtilizado+"]"+" Monto Total: "+"["+Monto+"]" + " Estado de la Operacion: " + "["+EstadoOperacion+"]";
+    }
+
+    public IDocumentosOperacion getDocumentosOperacion() {
+        return DocumentosOperacion;
+    }
+
+    public void setDocumentosOperacion(IDocumentosOperacion documentosOperacion) {
+        DocumentosOperacion = documentosOperacion;
     }
 }

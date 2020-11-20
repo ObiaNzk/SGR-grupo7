@@ -1,11 +1,12 @@
 package operaciones;
 
+import Interfaces.IDocumentosOperacion;
 import enums.SistemaPrestamoEnum;
 
 import java.util.Date;
 import java.util.List;
 
-public class Prestamo {
+public class Prestamo implements IDocumentosOperacion {
     private String Banco;
     private Integer Monto;
     private Integer tasa;

@@ -11,10 +11,7 @@ import enums.EstadoOperacionEnum;
 import enums.TamañoEmpresaEnum;
 import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
-import operaciones.Comision;
-import operaciones.ContraGarantia;
-import operaciones.Cuota;
-import operaciones.LineaDeCredito;
+import operaciones.*;
 
 import java.util.*;
 
@@ -36,7 +33,6 @@ public class Sgr {
         socioPrincipalParticipe.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
         socioPrincipalParticipe.setFdr(999999999);
         socioPrincipalParticipe.setEmpresa(empresa);
-
         //operaciones para probar el consolidado
         Operacion operacion = new Operacion();
         operacion.setTipoDeOperacion(TipoDeOperacionEnum.TIPO1);
@@ -45,6 +41,7 @@ public class Sgr {
         Calendar cal = Calendar.getInstance();
         cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
         Date date = cal.getTime();
+        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(123456, date, true));
         operacion.setFechaVencimiento(date);
         operacion.setFechaMonetizado(date);
         operacion.setMonto(100);
@@ -169,7 +166,7 @@ public class Sgr {
                 if(operacion.getEstadoOperacion() == EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO){
                     operacionesTotalUtilizado.add((operacion));
                     if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){
-                        for (Cuota cuota: operacion.getDocumentosOperacion().getPrestamo().getCuotas()){
+                        for (Cuota cuota: ((Prestamo)operacion.getDocumentosOperacion()).getCuotas()){
                             if(!cuota.isPagado() && cuota.getFechaVencimiento().before(new Date())){
                                 totalUtilizado += cuota.getMonto();
                             }
@@ -180,7 +177,7 @@ public class Sgr {
                 if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO){
                     operacionesRiesgoVivo.add(operacion);
                     if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){
-                        for (Cuota cuota: operacion.getDocumentosOperacion().getPrestamo().getCuotas()){
+                        for (Cuota cuota: ((Prestamo)operacion.getDocumentosOperacion()).getCuotas()){
                             if(!cuota.isPagado() && cuota.getFechaVencimiento().before(new Date())){
                                 totalRiesgoVivo += cuota.getMonto();
                             }

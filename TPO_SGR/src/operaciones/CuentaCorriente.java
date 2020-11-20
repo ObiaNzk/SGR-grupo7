@@ -1,8 +1,10 @@
 package operaciones;
 
+import Interfaces.IDocumentosOperacion;
+
 import java.util.Date;
 
-public class CuentaCorriente {
+public class CuentaCorriente implements IDocumentosOperacion {
 
     private String cuit;
     private Integer importeTotal;

@@ -50,7 +50,6 @@ public class ConsultaConsolidada extends JDialog {
         obtenerConsultaConsolidadaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Socio lala = (Socio) comboBox2.getSelectedItem();
                 List<Operacion> todasLasOperaciones = new ArrayList<Operacion>();
                 responseDTO = sistema.consultaConsolidada((Socio) comboBox2.getSelectedItem());
                 todasLasOperaciones.addAll(responseDTO.getOperacionesRiesgoVivo());

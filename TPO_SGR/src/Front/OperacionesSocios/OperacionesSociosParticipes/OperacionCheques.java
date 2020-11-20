@@ -1,10 +1,24 @@
 package Front.OperacionesSocios.OperacionesSociosParticipes;
 
+import Interfaces.IDocumentosOperacion;
+import Request.OperacionCheque;
+import enums.TipoDeOperacionEnum;
+import enums.TipoDeSocio;
+import main.Operacion;
+import main.Sistema;
+import main.Socio;
+import operaciones.Cheque;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OperacionCheques extends JDialog {
     private JComboBox comboBox1;
-    private JTextField textField1;
+    private JTextField VencimientoText;
     private JTextField MontoText;
     private JButton cargarOperacionButton;
     private JButton consultaDisponibilidadParaOperarButton;
@@ -12,6 +26,7 @@ public class OperacionCheques extends JDialog {
     private JTextField CuitText;
     private JTextField chequeText;
     private JTextField BancoText;
+    private Sistema sistema;
 
     public OperacionCheques(String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
@@ -30,6 +45,50 @@ public class OperacionCheques extends JDialog {
 
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        sistema = Sistema.getInstance();
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(sistema.getSgr().GetSociosPorTipo(TipoDeSocio.PARTICIPE).toArray());
+        comboBox1.setModel(model);
+
+        consultaDisponibilidadParaOperarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //custom title, error icon
+                Socio socioSeleccionado = (Socio) comboBox1.getSelectedItem();
+
+                JOptionPane.showMessageDialog(pnlPrincipal,socioSeleccionado.getLineaDeCredito().getMonto(),"Monto Maximo Valido",JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        cargarOperacionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Socio socioSeleccionado = (Socio) comboBox1.getSelectedItem();
+                    Date vencimiento = new SimpleDateFormat("dd/MM/yyyy").parse(VencimientoText.getText());
+                    String banco = BancoText.getText();
+                    Integer monto = Integer.parseInt(MontoText.getText());
+                    String cuit = CuitText.getText();
+                    String chequeNumero = chequeText.getText();
+                    if (vencimiento.before(new Date())){
+                        JOptionPane.showMessageDialog(pnlPrincipal,"Fecha Invalida", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    if(monto > socioSeleccionado.getLineaDeCredito().getMonto()) {
+                        JOptionPane.showMessageDialog(pnlPrincipal,"Monto Superior al permitido para el socio", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    Cheque cheque = new Cheque(banco, chequeNumero, vencimiento, cuit, monto);
+                    Operacion operacion = new Operacion(TipoDeOperacionEnum.TIPO1, new Date(), vencimiento, monto, cheque);
+                    socioSeleccionado.AgregarOperacion(operacion);
+                    JOptionPane.showMessageDialog(pnlPrincipal,"Operacion Creada", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (ParseException parseException) {
+                    JOptionPane.showMessageDialog(pnlPrincipal,"Error en el formato de la fecha", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        });
     }
 
 }

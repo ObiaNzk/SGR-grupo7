@@ -1,8 +1,10 @@
 package operaciones;
 
+import Interfaces.IDocumentosOperacion;
+
 import java.util.Date;
 
-public class Cheque {
+public class Cheque implements IDocumentosOperacion {
 
     private String nombreBanco;
     private String numero;
