@@ -266,7 +266,7 @@ public class Sgr {
         Calendar cal = Calendar.getInstance();
         cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
         Date date = cal.getTime();
-        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(1000, date, true));
+        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(10000000, date, true));
         operacion.setFechaVencimiento(date);
         operacion.setFechaMonetizado(date);
         operacion.setMonto(100);
@@ -287,7 +287,7 @@ public class Sgr {
         Operacion operacion3 = new Operacion();
         Aporte aporte = new Aporte(100000, cal.getTime());
         operacion3.setTipoDeOperacion(TipoDeOperacionEnum.APORTE);
-        operacion3.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+        operacion3.setEstadoOperacion(EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO);
         operacion3.setFechaMonetizado(new Date());
         operacion3.setFechaVencimiento(cal.getTime());
         operacion3.setFechaMonetizado(date);
@@ -300,7 +300,7 @@ public class Sgr {
         socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
         socioPrincipalProtector.setAccionesSgrB(new ArrayList<String>(Collections.nCopies(100,"accion B")));
         socioPrincipalProtector.setNombre("Socio General Protector");
-        socioPrincipalProtector.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
+        socioPrincipalProtector.setTipoDeOperacionEnum(TipoDeOperacionEnum.APORTE);
         socioPrincipalProtector.setEmpresa(empresa);
         socioPrincipalProtector.AgregarOperacion(operacion3);
 

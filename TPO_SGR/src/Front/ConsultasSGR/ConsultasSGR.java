@@ -16,6 +16,7 @@ public class ConsultasSGR extends JDialog {
     private JButton CalculoComisionPorParametro;
     private JButton consultaConsolidadaPorSocio;
     private JButton totalDeComisionesCalculadasButton;
+    private JButton aportesDeUnSocioButton;
 
     public ConsultasSGR(Window owner, String titulo) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
@@ -70,6 +71,13 @@ public class ConsultasSGR extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ComisionesChequesEnUnDia frame = new ComisionesChequesEnUnDia("Comisiones de cheques en un dia");
+                frame.setVisible(true);
+            }
+        });
+        aportesDeUnSocioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AportesSocio frame = new AportesSocio("Aportes de un socio Protector");
                 frame.setVisible(true);
             }
         });

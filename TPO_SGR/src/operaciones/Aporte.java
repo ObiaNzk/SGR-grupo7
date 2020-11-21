@@ -30,4 +30,11 @@ public class Aporte implements IDocumentosOperacion {
     public void setFechaVencimiento(Date fechaVencimiento) {
         FechaVencimiento = fechaVencimiento;
     }
+
+    @Override
+    public String toString() {
+        return "Monto: " +"["+ this.Monto+"]" +
+                "   Se puede retirar a partir del: " +"["+ FechaVencimiento+"]"
+                +" Fue retirado: " + "["+retirado+"]";
+    }
 }

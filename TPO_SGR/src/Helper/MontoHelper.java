@@ -10,7 +10,9 @@ public class MontoHelper {
         float totalLinea = socio.getLineaDeCredito().getMonto();
         float sumaAportes = 0;
         float fdr = 0;
-        for(Aporte aporte: sgr.getAportes(true)) sumaAportes += aporte.getMonto();
+        for(Aporte aporte: sgr.getAportes(true)){
+            sumaAportes += aporte.getMonto();
+        }
         fdr = (5*sumaAportes)/100;
         float topeDeOperacion = ((totalLinea-totalUtilizado)<= fdr) ? (totalLinea-totalUtilizado) : fdr;
         return topeDeOperacion;
