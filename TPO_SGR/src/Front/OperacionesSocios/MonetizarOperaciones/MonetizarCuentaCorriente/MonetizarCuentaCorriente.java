@@ -66,5 +66,17 @@ public class MonetizarCuentaCorriente extends JDialog {
                 }
             }
         });
+        SocioCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Operacion> cuentaCorrienteList = ((Socio) SocioCombo.getSelectedItem()).GetOperaciones(true, TipoDeOperacionEnum.TIPO2);
+                DefaultComboBoxModel modelCuentaCorriente = new DefaultComboBoxModel(cuentaCorrienteList.toArray());
+                CuentaCorrienteCombo.setModel(modelCuentaCorriente);
+                if (cuentaCorrienteList.size() > 0){
+                    Operacion operacion = (Operacion)CuentaCorrienteCombo.getSelectedItem();
+                    MontoDisponibleLabel.setText(String.valueOf(operacion.getMonto() - operacion.getMontoUtilizado()));
+                }
+            }
+        });
     }
 }

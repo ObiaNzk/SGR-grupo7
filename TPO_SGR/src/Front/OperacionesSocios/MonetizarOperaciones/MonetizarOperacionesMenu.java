@@ -4,6 +4,7 @@ import Front.OperacionesSocios.MonetizarOperaciones.AprobarCuentaCorriente.Aprob
 import Front.OperacionesSocios.MonetizarOperaciones.AprobarPrestamo.AprobarPrestamo;
 import Front.OperacionesSocios.MonetizarOperaciones.MonetizarCheque.MonetizarCheque;
 import Front.OperacionesSocios.MonetizarOperaciones.MonetizarCuentaCorriente.MonetizarCuentaCorriente;
+import Front.OperacionesSocios.MonetizarOperaciones.PagoCuotaPrestamo.PagoCuotaPrestamo;
 import Front.OperacionesSocios.PanelSolapadoOperaciones;
 import enums.TipoDeSocio;
 import main.Sistema;
@@ -64,6 +65,13 @@ public class MonetizarOperacionesMenu extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AprobarPrestamo frame = new AprobarPrestamo("Aprobar prestamo");
+                frame.setVisible(true);
+            }
+        });
+        PagarCuotaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PagoCuotaPrestamo frame = new PagoCuotaPrestamo("Aprobar prestamo");
                 frame.setVisible(true);
             }
         });

@@ -82,10 +82,11 @@ public class OperacionPrestamos extends JDialog{
                         throw new Exception("fecha de acreditacion invalida");
                     }
 
-                    List<Cuota> cuotas = Collections.nCopies(numeroCuotas,new Cuota((float)(monto*tasa)/numeroCuotas, cal.getTime(), false) );
-                    for (int i = 0; i < cuotas.size(); i++){
+                    List<Cuota> cuotas = new ArrayList<Cuota>();
+                    for (int i = 0; i < numeroCuotas; i++){
                         cal.add(Calendar.MONTH, i+2);
-                        cuotas.get(i).setFechaVencimiento(cal.getTime());
+                        Cuota cuota = new Cuota((float)(monto*tasa)/numeroCuotas, cal.getTime(), false);
+                        cuotas.add(cuota);
                     }
                     Prestamo prestamo = new Prestamo(banco, monto, tasa, acreditacion, cuotas, sistemaOperacion);
                     Operacion operacion = new Operacion(TipoDeOperacionEnum.TIPO3, new Date(), cal.getTime(), monto, prestamo);

@@ -3,6 +3,7 @@ package operaciones;
 import Interfaces.IDocumentosOperacion;
 import enums.SistemaPrestamoEnum;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -67,6 +68,19 @@ public class Prestamo implements IDocumentosOperacion {
     public List<Cuota> getCuotas() {
         return cuotas;
     }
+
+    public List<Cuota> getCuotas(boolean pagadas) {
+        List<Cuota> resultado = new ArrayList<Cuota>();
+        for (Cuota cuota: this.cuotas){
+            if (pagadas && cuota.isPagado()){
+                resultado.add(cuota);
+            }else if (!pagadas && !cuota.isPagado()){
+                resultado.add(cuota);
+            }
+        }
+        return resultado;
+    }
+
 
     public void setCuotas(List<Cuota> cuotas) {
         this.cuotas = cuotas;

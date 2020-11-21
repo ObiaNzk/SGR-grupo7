@@ -4,13 +4,16 @@ import Interfaces.IOperacionGastos;
 import operaciones.Cuota;
 
 public class OperacionCuota implements IOperacionGastos {
-    private Cuota cuota;
+    private Cuota Cuota;
 
+    public OperacionCuota(Cuota cuota){
+        this.Cuota = cuota;
+    }
     public Cuota getCuota() {
-        return cuota;
+        return Cuota;
     }
 
     public void setCuota(Cuota cuota) {
-        this.cuota = cuota;
+        this.Cuota = cuota;
     }
 }

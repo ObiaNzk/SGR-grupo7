@@ -208,6 +208,7 @@ public class Sgr {
         }
     }
 
+
     public void VentaDeAcciones(Socio socioQueVende, Socio socioQueCompra, Integer cantidadDeAcciones) {
         socioQueCompra.ComprarAcciones(socioQueVende.VenderAcciones(cantidadDeAcciones));
     }

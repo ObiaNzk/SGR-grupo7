@@ -7,6 +7,7 @@ import main.Operacion;
 import main.Sistema;
 import main.Socio;
 import operaciones.Cheque;
+import operaciones.Comision;
 import operaciones.Prestamo;
 
 import javax.swing.*;
@@ -77,7 +78,7 @@ public class AprobarPrestamo extends JDialog {
                 Prestamo prestamo = (Prestamo) operacionSeleccionada.getDocumentosOperacion();
                 BancoLabel.setText(prestamo.getBanco());
                 MontoPrestamoLabel.setText(prestamo.getMonto().toString());
-                TasaLabel.setText(prestamo.getTasa().toString());
+                TasaLabel.setText((prestamo.getTasa().toString())+"%");
                 FechaAcreditacionLabel.setText(prestamo.getFechaAcreditacion().toString());
                 CuotasLabel.setText(String.valueOf(prestamo.getCuotas().size()));
                 SistemaLabel.setText(prestamo.getSistema().toString());
@@ -86,8 +87,12 @@ public class AprobarPrestamo extends JDialog {
         aprobarPrestamoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Socio socio = (Socio) SocioCombo.getSelectedItem();
                 Operacion operacionSeleccionada = (Operacion) PrestamoCombo.getSelectedItem();
+                operacionSeleccionada.setMontoUtilizado(operacionSeleccionada.getMonto());
                 operacionSeleccionada.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+                Comision comision = new Comision(operacionSeleccionada);
+                socio.AgregarComision(comision);
                 JOptionPane.showMessageDialog(pnlPrincipal,"Operacion procesada correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         });

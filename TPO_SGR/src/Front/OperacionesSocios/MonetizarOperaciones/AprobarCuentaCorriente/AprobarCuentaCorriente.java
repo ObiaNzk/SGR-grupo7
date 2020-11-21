@@ -6,6 +6,7 @@ import enums.TipoDeSocio;
 import main.Operacion;
 import main.Sistema;
 import main.Socio;
+import operaciones.Comision;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -46,8 +47,11 @@ public class AprobarCuentaCorriente extends JDialog {
         aprobarCuentaCorrienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Socio socio = (Socio) SocioCombo.getSelectedItem();
                 Operacion operacion = (Operacion)CuentaCorrienteCombo.getSelectedItem();
                 operacion.setEstadoOperacion(EstadoOperacionEnum.MONETIZADO);
+                Comision comision = new Comision(operacion);
+                socio.AgregarComision(comision);
                 JOptionPane.showMessageDialog(pnlPrincipal,"Operacion procesada correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         });
