@@ -1,6 +1,7 @@
 package Front.OperacionesSocios.MonetizarOperaciones.MonetizarCheque;
 
 import Request.OperacionCheque;
+import enums.TipoDeOperacionEnum;
 import enums.TipoDeSocio;
 import main.Operacion;
 import main.Sistema;
@@ -47,7 +48,7 @@ public class MonetizarCheque extends JDialog {
 
         DefaultComboBoxModel model = new DefaultComboBoxModel(sistema.getSgr().GetSociosPorTipo(TipoDeSocio.PARTICIPE).toArray());
         SocioCombo.setModel(model);
-        List<Operacion> chequeList = ((Socio)SocioCombo.getSelectedItem()).GetOperacionesCheques(false);
+        List<Operacion> chequeList = ((Socio)SocioCombo.getSelectedItem()).GetOperaciones(false, TipoDeOperacionEnum.TIPO1);
         DefaultComboBoxModel modelcheques = new DefaultComboBoxModel(chequeList.toArray());
         ChequeCombo.setModel(modelcheques);
         if(chequeList.size() > 0) {
@@ -64,7 +65,7 @@ public class MonetizarCheque extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Socio socioSeleccionado = (Socio) SocioCombo.getSelectedItem();
-                List<Operacion> chequeList = ((Socio)SocioCombo.getSelectedItem()).GetOperacionesCheques(false);
+                List<Operacion> chequeList = ((Socio)SocioCombo.getSelectedItem()).GetOperaciones(false, TipoDeOperacionEnum.TIPO1);
                 DefaultComboBoxModel modelcheques = new DefaultComboBoxModel(chequeList.toArray());
                 ChequeCombo.setModel(modelcheques);
             }
@@ -90,7 +91,7 @@ public class MonetizarCheque extends JDialog {
                     Integer tasaDescuento = Integer.parseInt(TasaDescuentoText.getText());
                     OperacionCheque gastoCheque = new OperacionCheque(tasaDescuento);
                     sistema.getSgr().RealizarOperacion(socioSeleccionado, operacionSeleccionada, gastoCheque);
-                    JOptionPane.showMessageDialog(pnlPrincipal,"Operacion Procesada", "Ok", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(pnlPrincipal,"Operacion procesada correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
                 }catch (Exception exception){
                     JOptionPane.showMessageDialog(pnlPrincipal,exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }

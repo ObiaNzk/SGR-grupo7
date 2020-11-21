@@ -198,7 +198,7 @@ public class Sgr {
         }
         if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO2){
             OperacionCuentaCorriente gastoCuentaCorriente = (OperacionCuentaCorriente)gasto;
-            operacion.setMontoUtilizado(gastoCuentaCorriente.getMontoUtilizado());
+            operacion.setMontoUtilizado(gastoCuentaCorriente.getMontoUtilizado() + operacion.getMontoUtilizado());
             return;
         }
         if (operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){

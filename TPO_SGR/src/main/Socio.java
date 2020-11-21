@@ -205,19 +205,19 @@ public class Socio {
         this.AccionesSgrB = accionesSgrB;
     }
 
-    public List<Operacion> GetOperacionesCheques(boolean monetizados){
-        List<Operacion> cheques = new ArrayList<Operacion>();
+    public List<Operacion> GetOperaciones(boolean monetizados, TipoDeOperacionEnum tipoDeOperacionEnum){
+        List<Operacion> operaciones = new ArrayList<Operacion>();
         for (Operacion operacion: this.OperacionList){
-            if(operacion.getTipoDeOperacion() == enums.TipoDeOperacionEnum.TIPO1 &&
+            if(operacion.getTipoDeOperacion() == tipoDeOperacionEnum &&
                     operacion.getFechaVencimiento().after(Calendar.getInstance().getTime())){
                     if(!monetizados && operacion.getEstadoOperacion() == EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO)
-                        cheques.add(operacion);
+                        operaciones.add(operacion);
                     else if(monetizados && operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO){
-                        cheques.add(operacion);
+                        operaciones.add(operacion);
                     }
             }
         }
-        return cheques;
+        return operaciones;
     }
     @Override
     public String toString() {
