@@ -122,15 +122,17 @@ public class Sgr {
             if(operacion.getFechaVencimiento().after(new Date())){
                 if(operacion.getEstadoOperacion() == EstadoOperacionEnum.CON_CERTIFICADO_EMITIDO){
                     operacionesTotalUtilizado.add((operacion));
-                    if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){
+                    totalUtilizado += operacion.getMonto(); //borrar esta linea si hay que descomentar lo de abajo
+                    /*if(operacion.getTipoDeOperacion() == TipoDeOperacionEnum.TIPO3){
                         for (Cuota cuota: ((Prestamo)operacion.getDocumentosOperacion()).getCuotas()){
                             if(!cuota.isPagado() && cuota.getFechaVencimiento().before(new Date())){
                                 totalUtilizado += cuota.getMonto();
                             }
                         }
                     }else {
-                        totalUtilizado += operacion.getMontoUtilizado();
-                    }
+                        totalUtilizado += operacion.getMontoUtilizado();;
+                    }*/
+
                 }
                 if(operacion.getEstadoOperacion() == EstadoOperacionEnum.MONETIZADO){
                     operacionesRiesgoVivo.add(operacion);
@@ -278,7 +280,7 @@ public class Sgr {
         operacion2.setFechaVencimiento(date);
         operacion2.setFechaMonetizado(date);
         operacion2.setMonto(250);
-        operacion2.setMontoUtilizado(150);
+        operacion2.setMontoUtilizado(0);
         socioPrincipalParticipe.AgregarOperacion(operacion2);
 
 
