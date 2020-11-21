@@ -266,7 +266,7 @@ public class Sgr {
         Calendar cal = Calendar.getInstance();
         cal.set(2025, Calendar.JANUARY, 9); //Year, month and day of month
         Date date = cal.getTime();
-        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(10000000, date, true));
+        socioPrincipalParticipe.setLineaDeCredito(new LineaDeCredito(1000, date, true));
         operacion.setFechaVencimiento(date);
         operacion.setFechaMonetizado(date);
         operacion.setMonto(100);

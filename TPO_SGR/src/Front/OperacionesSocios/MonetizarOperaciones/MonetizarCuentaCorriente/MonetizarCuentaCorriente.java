@@ -61,6 +61,7 @@ public class MonetizarCuentaCorriente extends JDialog {
                     OperacionCuentaCorriente gasto = new OperacionCuentaCorriente(montoAGastar);
                     sistema.getSgr().RealizarOperacion(socioSeleccionado, operacion, gasto);
                     JOptionPane.showMessageDialog(pnlPrincipal,"Operacion procesada correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
+                    MontoDisponibleLabel.setText(String.valueOf(operacion.getMonto() - operacion.getMontoUtilizado() - montoAGastar));
                 }catch (Exception exception){
                     JOptionPane.showMessageDialog(pnlPrincipal,exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
