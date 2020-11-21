@@ -65,7 +65,7 @@ public class MonetizarCheque extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Socio socioSeleccionado = (Socio) SocioCombo.getSelectedItem();
-                List<Operacion> chequeList = ((Socio)SocioCombo.getSelectedItem()).GetOperaciones(false, TipoDeOperacionEnum.TIPO1);
+                List<Operacion> chequeList = (socioSeleccionado).GetOperaciones(false, TipoDeOperacionEnum.TIPO1);
                 DefaultComboBoxModel modelcheques = new DefaultComboBoxModel(chequeList.toArray());
                 ChequeCombo.setModel(modelcheques);
             }

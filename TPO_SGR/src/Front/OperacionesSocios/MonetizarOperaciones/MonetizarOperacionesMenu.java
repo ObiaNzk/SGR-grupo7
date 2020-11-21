@@ -1,6 +1,7 @@
 package Front.OperacionesSocios.MonetizarOperaciones;
 
 import Front.OperacionesSocios.MonetizarOperaciones.AprobarCuentaCorriente.AprobarCuentaCorriente;
+import Front.OperacionesSocios.MonetizarOperaciones.AprobarPrestamo.AprobarPrestamo;
 import Front.OperacionesSocios.MonetizarOperaciones.MonetizarCheque.MonetizarCheque;
 import Front.OperacionesSocios.MonetizarOperaciones.MonetizarCuentaCorriente.MonetizarCuentaCorriente;
 import Front.OperacionesSocios.PanelSolapadoOperaciones;
@@ -55,7 +56,14 @@ public class MonetizarOperacionesMenu extends JDialog {
         aprobarCuentaCorrienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AprobarCuentaCorriente frame = new AprobarCuentaCorriente("Monetizar Cheque");
+                AprobarCuentaCorriente frame = new AprobarCuentaCorriente("Aprobar cuenta corriente");
+                frame.setVisible(true);
+            }
+        });
+        aprobarPrestamoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AprobarPrestamo frame = new AprobarPrestamo("Aprobar prestamo");
                 frame.setVisible(true);
             }
         });
