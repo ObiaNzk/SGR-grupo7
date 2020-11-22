@@ -4,6 +4,7 @@ import enums.TamañoEmpresaEnum;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Empresa {
 
@@ -89,4 +90,18 @@ public class Empresa {
         this.accionistaList = accionistaList;
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Empresa empresa = (Empresa) o;
+        return ((cuit == ((Empresa) o).getCuit()) && (razonSocial == empresa.getRazonSocial()));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cuit, razonSocial);
+    }
 }

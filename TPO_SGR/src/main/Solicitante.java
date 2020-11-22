@@ -18,4 +18,28 @@ public class Solicitante {
     public void setDocumentacionRegistracion(DocumentosRegistracion documentacionRegistracion) {
         this.documentacionRegistracion = documentacionRegistracion;
     }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public EstadoDocumentacion getEstadoDocumentacion() {
+        return estadoDocumentacion;
+    }
+
+    public void setEstadoDocumentacion(EstadoDocumentacion estadoDocumentacion) {
+        this.estadoDocumentacion = estadoDocumentacion;
+    }
+
+    public TipoDeSocio getTipoDeSocio() {
+        return tipoDeSocio;
+    }
+
+    public void setTipoDeSocio(TipoDeSocio tipoDeSocio) {
+        this.tipoDeSocio = tipoDeSocio;
+    }
 }
