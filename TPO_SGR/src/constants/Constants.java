@@ -8,4 +8,8 @@ public class Constants {
     public static final String SOLICITUD_EXITOSA = "Solicitud de contragarantia exitosa";
     public static final String ERROR_DEBE_FACTURAS = "Debe facturas con monto superior a la linea asignada";
 
+    //ALTA SOCIO
+    public static final String ERR_SOCIO_EXISTE = "El socio ya existe";
+    public static final String ERR_FALTA_DOC = "El socio ya existe";
+
 }

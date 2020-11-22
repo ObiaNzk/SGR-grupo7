@@ -55,6 +55,42 @@ public class DocumentosRegistracion {
         this.usuarioCredor = usuarioCredor;
     }
 
+    public String getBalanceCertificado1() {
+        return balanceCertificado1;
+    }
+
+    public void setBalanceCertificado1(String balanceCertificado1) {
+        this.balanceCertificado1 = balanceCertificado1;
+    }
+
+    public String getBalanceCertificado2() {
+        return balanceCertificado2;
+    }
+
+    public void setBalanceCertificado2(String balanceCertificado2) {
+        this.balanceCertificado2 = balanceCertificado2;
+    }
+
+    public String getBalanceCertificado3() {
+        return balanceCertificado3;
+    }
+
+    public void setBalanceCertificado3(String balanceCertificado3) {
+        this.balanceCertificado3 = balanceCertificado3;
+    }
+
+    public Date getFechaDeRecepcion() {
+        return fechaDeRecepcion;
+    }
+
+    public EstadoDocumentacion getEstadoDocumentacion() {
+        return estadoDocumentacion;
+    }
+
+    public String getUsuarioCredor() {
+        return usuarioCredor;
+    }
+
     public List<String> getBalances(){
         List<String> balancesList = new ArrayList<>();
         balancesList.add(balanceCertificado1);

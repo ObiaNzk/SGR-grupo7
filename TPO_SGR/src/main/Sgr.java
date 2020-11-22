@@ -27,7 +27,7 @@ public class Sgr {
         GetSociosGenerales();
     }
 
-    public List<Socio> GetSocios(){
+    public List<Socio> getSocios(){
         return this.Socios;
     }
     public List<Socio> GetSociosPorTipo(TipoDeSocio tipoDeSocio){

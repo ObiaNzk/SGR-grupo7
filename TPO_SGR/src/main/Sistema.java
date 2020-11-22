@@ -25,6 +25,14 @@ public class Sistema {
                                        String balanceCertificado3, String bienesSocios) {
     }
 
+    public List<Solicitante> getSolicitanteList() {
+        return solicitanteList;
+    }
+
+    public void setSolicitanteList(List<Solicitante> solicitanteList) {
+        this.solicitanteList = solicitanteList;
+    }
+
     public Sistema(){
         this.sgr = new Sgr();
     }

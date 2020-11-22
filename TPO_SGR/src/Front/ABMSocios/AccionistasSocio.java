@@ -1,7 +1,13 @@
 package Front.ABMSocios;
 
+import main.Accionista;
+
 import javax.swing.*;
-import java.awt.*;import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
+import java.util.List;
 
 public class AccionistasSocio extends JDialog{
     private JButton agregarAccionistaButton;
@@ -9,8 +15,10 @@ public class AccionistasSocio extends JDialog{
     private JTextField textField2;
     private JTextField textField3;
     private JPanel pnlPrincipal;
+    private JLabel labelError;
+    private Accionista accionista;
 
-    public AccionistasSocio(String titulo) {
+    public AccionistasSocio(String titulo, List<Accionista> accionistaList) {
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
 
 
@@ -28,6 +36,62 @@ public class AccionistasSocio extends JDialog{
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        accionista = new Accionista();
+
+        textField1.addInputMethodListener(new InputMethodListener() {
+            @Override
+            public void inputMethodTextChanged(InputMethodEvent event) {
+                accionista.setCuit((String) textField1.getText());
+            }
+
+            @Override
+            public void caretPositionChanged(InputMethodEvent event) {
+
+            }
+        });
+        textField2.addInputMethodListener(new InputMethodListener() {
+            @Override
+            public void inputMethodTextChanged(InputMethodEvent event) {
+                accionista.setRazonSocial((String)textField2.getText());
+            }
+
+            @Override
+            public void caretPositionChanged(InputMethodEvent event) {
+
+            }
+        });
+        textField3.addInputMethodListener(new InputMethodListener() {
+            @Override
+            public void inputMethodTextChanged(InputMethodEvent event) {
+                accionista.setPorcentajeParticipacion((String)textField3.getText());
+            }
+
+            @Override
+            public void caretPositionChanged(InputMethodEvent event) {
+
+            }
+        });
+        agregarAccionistaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(validateAccionista(accionista)){
+                    accionistaList.add(accionista);
+                    accionista = new Accionista();
+                } else {
+                    labelError.setText("Ingrese los datos faltantes");
+                }
+            }
+        });
+    }
+
+    public boolean validateAccionista(Accionista accionista){
+        if((accionista.getCuit()!=null && !accionista.getCuit().isBlank())
+            && (accionista.getRazonSocial()!=null && !accionista.getRazonSocial().isEmpty())
+            && (accionista.getPorcentajeParticipacion()!=null && !accionista.getPorcentajeParticipacion().isEmpty())){
+
+            return true;
+        }
+        return false;
     }
 }
 
