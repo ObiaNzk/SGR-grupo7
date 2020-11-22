@@ -13,7 +13,7 @@ public class SelectorOperacionesSociosParticipes extends JInternalFrame{
     private JPanel pnlPrincipal;
     private JButton préstamosButton;
     private JButton cuentasCorrientesButton;
-    private JButton button1;
+    private JButton suscribirAccionesButton;
 
     public SelectorOperacionesSociosParticipes(String titulo) {
             super(titulo);
@@ -48,6 +48,13 @@ public class SelectorOperacionesSociosParticipes extends JInternalFrame{
                 OperacionPrestamos frame = new OperacionPrestamos("Operar con Prestamos");
                 frame.setVisible(true);
 
+            }
+        });
+        suscribirAccionesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SuscribirAccionesSParticipe frame = new SuscribirAccionesSParticipe("Suscribir acciones");
+                frame.setVisible(true);
             }
         });
     }
