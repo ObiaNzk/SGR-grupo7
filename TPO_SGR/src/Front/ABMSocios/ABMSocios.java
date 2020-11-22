@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ABMSocios extends JDialog {
-    private JButton convertirSocioEnPlenoButton;
     private JButton altaPostulanteASocioButton;
     private JButton altaPostulanteASocioButton1;
     private JPanel pnlPrincipal;

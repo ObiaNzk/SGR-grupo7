@@ -31,7 +31,7 @@ public class OperacionCuentasCorrientes extends JDialog{
         //Define un owner que gestiona su lanzamiento, (panel principal, clase Operatoria Cheque.
         sistema = Sistema.getInstance();
         //tamaño del panel.
-        this.setSize(300, 300);
+        this.setSize(600, 300);
 
         this.setContentPane(pnlPrincipal);
         //No permite volver hasta la pantalla anterior hasta cerrar esta.

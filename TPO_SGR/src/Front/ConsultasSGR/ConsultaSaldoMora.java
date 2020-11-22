@@ -13,7 +13,7 @@ public class ConsultaSaldoMora extends JDialog{
 
 
         //tamaño del panel.
-        this.setSize(300, 300);
+        this.setSize(600, 300);
 
         this.setContentPane(pnlPrincipal);
         //No permite volver hasta la pantalla anterior hasta cerrar esta.

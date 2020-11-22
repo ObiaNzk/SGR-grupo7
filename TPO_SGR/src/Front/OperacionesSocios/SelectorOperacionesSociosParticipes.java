@@ -20,6 +20,7 @@ public class SelectorOperacionesSociosParticipes extends JInternalFrame{
 
 
         this.setContentPane(pnlPrincipal);
+        this.setSize(600,300);
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 

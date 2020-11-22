@@ -35,7 +35,7 @@ public class MenuPrincipal extends JFrame{
         this.setContentPane(pnlPrincipal);
 
         //Definición de tamaño del panel.
-        this.setSize(400, 400);
+        this.setSize(600, 600);
 
         //Comportamiento de Cierre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -92,4 +92,7 @@ public class MenuPrincipal extends JFrame{
 
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }

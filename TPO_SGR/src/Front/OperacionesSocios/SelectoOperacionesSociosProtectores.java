@@ -28,6 +28,7 @@ public class SelectoOperacionesSociosProtectores extends JInternalFrame {
     public SelectoOperacionesSociosProtectores(String titulo) {
         super(titulo);
         this.setContentPane(pnlPrincipal);
+        this.setSize(600,300);
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         sistema = Sistema.getInstance();

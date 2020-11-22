@@ -25,7 +25,7 @@ public class CalculodeComisionPorParámetro extends JDialog {
 
 
         //tamaño del panel.
-        this.setSize(300, 300);
+        this.setSize(600, 300);
 
         this.setContentPane(pnlPrincipal);
         //No permite volver hasta la pantalla anterior hasta cerrar esta.
@@ -55,7 +55,7 @@ public class CalculodeComisionPorParámetro extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Integer response =  sistema.getInstance().getPorcentajeDeComisiones((TipoDeOperacionEnum) comboBox1.getSelectedItem());
-                labelResponse.setText("Porecentaje para la operacion: " +response.toString() + "%");
+                labelResponse.setText("Porcentaje para la operacion: " +response.toString() + "%");
             }
         });
     }

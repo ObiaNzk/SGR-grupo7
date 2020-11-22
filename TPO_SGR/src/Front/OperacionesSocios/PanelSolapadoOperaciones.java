@@ -15,7 +15,7 @@ public class PanelSolapadoOperaciones extends JDialog {
         super(owner, titulo);
 
         //tamaño del panel.
-        this.setSize(300, 300);
+        this.setSize(600, 400);
 
         this.setContentPane(pnlPrincipal);
         //No permite volver hasta la pantalla anterior hasta cerrar esta.
