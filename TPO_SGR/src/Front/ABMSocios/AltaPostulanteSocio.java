@@ -34,6 +34,7 @@ public class AltaPostulanteSocio extends JDialog {
     private JTextField textField9;
     private JLabel balancesField;
     private JLabel estatutoField;
+    private Date dateDesde = null;
     private List<TipoDeSocio> tipoDeSocioList = new ArrayList<>();
     private List<TamañoEmpresaEnum> tamañoEmpresaEnumList = new ArrayList<>();
     private Empresa empresa;
@@ -87,8 +88,16 @@ public class AltaPostulanteSocio extends JDialog {
         agregarAccionistasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                List<Accionista> accionistaList;
 
-                List<Accionista> accionistaList = empresa.getAccionistaList();
+                if(empresa.getAccionistaList() != null){
+                     accionistaList = empresa.getAccionistaList();
+                } else {
+                    empresa.setAccionistaList(new ArrayList<>());
+                    accionistaList = empresa.getAccionistaList();
+                }
+
+
 
                 AccionistasSocio frame = new AccionistasSocio("Nuevo accionista", accionistaList);
                 frame.setVisible(true);
@@ -120,7 +129,7 @@ public class AltaPostulanteSocio extends JDialog {
         comboBox1.addInputMethodListener(new InputMethodListener() {
             @Override
             public void inputMethodTextChanged(InputMethodEvent event) {
-                empresa.setFechaDeInicio((Date) comboBox1.getSelectedItem());
+                empresa.setTamañoEmpresaEnum((TamañoEmpresaEnum) comboBox1.getSelectedItem());
             }
 
             @Override
@@ -131,7 +140,7 @@ public class AltaPostulanteSocio extends JDialog {
         textField3.addInputMethodListener(new InputMethodListener() {
             @Override
             public void inputMethodTextChanged(InputMethodEvent event) {
-                Date dateDesde = null;
+
                 try {
                     dateDesde = new SimpleDateFormat("dd/MM/yyyy").parse(textField3.getText());
                 } catch (ParseException e) {
@@ -158,28 +167,31 @@ public class AltaPostulanteSocio extends JDialog {
 
             }
         });
+
         ALTASOCIOButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 List<Socio> sociosSgrList = sistema.getInstance().getSgr().getSocios();
 
-                if(validateDatosSocio(socio) && validateSocioExiste(sociosSgrList) && validateDocRegistracion(documentosRegistracion)){
+                setAttributes();
 
-                    labelError.setText("");
+                if(validateDatosSocio(socio) && !validateSocioExiste(sociosSgrList) && validateDocRegistracion(documentosRegistracion)){
 
                     solicitante.setEmpresa(empresa);
                     solicitante.setEstadoDocumentacion(EstadoDocumentacion.INGRESADO);
                     solicitante.setDocumentacionRegistracion(documentosRegistracion);
 
-                    if(sistema.getSolicitanteList().isEmpty()){
-                        sistema.setSolicitanteList(new ArrayList<>());
+                    if(sistema.getInstance().getSolicitanteList() != null){
+                        sistema.getInstance().getSolicitanteList().add(solicitante);
+                    } else {
+                        sistema.getInstance().setSolicitanteList(new ArrayList<>());
+                        sistema.getInstance().getSolicitanteList().add(solicitante);
                     }
 
-                    sistema.getSolicitanteList().add(solicitante);
-
-                    socio.setEmpresa(empresa);
                     sociosSgrList.add(socio);
+                    labelError.setText("Socio agregado exitosamente");
+                    resetFields();
 
                 } else {
 
@@ -246,6 +258,7 @@ public class AltaPostulanteSocio extends JDialog {
                 && (empresa.getTelefono() != null && !empresa.getTelefono().isEmpty()) && empresa.getTamañoEmpresaEnum() != null
                     && socio.getTipoDeSocio() != null){
 
+            altaSocioDTO.setErrorFaltaDoc(Boolean.FALSE);
             return Boolean.TRUE;
         }
 
@@ -259,7 +272,9 @@ public class AltaPostulanteSocio extends JDialog {
         if(!documentosRegistracion.getBienesSocios().isEmpty() && documentosRegistracion.getBalanceCertificado1()!= null &&
             !documentosRegistracion.getBalanceCertificado1().isEmpty() && documentosRegistracion.getEstatuto() != null
                 && !documentosRegistracion.getEstatuto().isEmpty()){
+            altaSocioDTO.setErrorFaltaDoc(Boolean.FALSE);
             return Boolean.TRUE;
+
         }
         altaSocioDTO.setErrorFaltaDoc(Boolean.TRUE);
         return Boolean.FALSE;
@@ -269,11 +284,12 @@ public class AltaPostulanteSocio extends JDialog {
     public Boolean validateSocioExiste(List<Socio> sociosSgrList){
 
         for(Socio so : sociosSgrList){
-            if(empresa.getCuit().equals(so.getEmpresa().getCuit())){
+            if(empresa.getCuit() == so.getEmpresa().getCuit()){
                 altaSocioDTO.setErrorSocioExiste(Boolean.TRUE);
                 return Boolean.TRUE;
             }
         }
+        altaSocioDTO.setErrorSocioExiste(Boolean.FALSE);
         return Boolean.FALSE;
     }
 
@@ -284,6 +300,47 @@ public class AltaPostulanteSocio extends JDialog {
         } else if (altaSocioDTO.getErrorSocioExiste()){
             labelError.setText(Constants.ERR_SOCIO_EXISTE);
         }
+    }
+
+    public void setAttributes(){
+
+        empresa.setRazonSocial((String) textField1.getText());
+
+        empresa.setCuit((String)textField2.getText());
+        empresa.setTamañoEmpresaEnum((TamañoEmpresaEnum) comboBox1.getSelectedItem());
+        empresa.setDireccion((String) textField6.getText());
+        empresa.setTelefono((String) textField5.getText());
+        empresa.setCorreoElectronico((String) textField6.getText());
+
+        try {
+            dateDesde = new SimpleDateFormat("dd/MM/yyyy").parse(textField3.getText());
+            empresa.setFechaDeInicio(dateDesde);
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        }
+
+        documentosRegistracion.setBienesSocios(new ArrayList<>());
+        documentosRegistracion.getBienesSocios().add((String) bienesFIeld.getText());
+        documentosRegistracion.setBalanceCertificado1((String) textField8.getText());
+        documentosRegistracion.setEstatuto((String) textField9.getText());
+
+        socio.setNombre((String) textField1.getText());
+        socio.setTipoDeSocio((TipoDeSocio) comboBox3.getSelectedItem());
+        socio.setEmpresa(empresa);
+    }
+
+    private void resetFields(){
+        textField1.setText("");
+        textField2.setText("");
+        textField3.setText("");
+        textField5.setText("");
+        textField6.setText("");
+        textField7.setText("");
+        textField8.setText("");
+        textField9.setText("");
+        balancesField.setText("");
+        estatutoField.setText("");
+        bienesFIeld.setText("");
     }
 
 }

@@ -74,9 +74,13 @@ public class AccionistasSocio extends JDialog{
         agregarAccionistaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                setAttributesAcc();
+
                 if(validateAccionista(accionista)){
                     accionistaList.add(accionista);
                     accionista = new Accionista();
+                    resetFields();
                 } else {
                     labelError.setText("Ingrese los datos faltantes");
                 }
@@ -92,6 +96,18 @@ public class AccionistasSocio extends JDialog{
             return true;
         }
         return false;
+    }
+
+    private void setAttributesAcc(){
+        accionista.setCuit((String) textField1.getText());
+        accionista.setRazonSocial((String)textField2.getText());
+        accionista.setPorcentajeParticipacion((String)textField3.getText());
+    }
+
+    private void resetFields(){
+        textField1.setText("");
+        textField2.setText("");
+        textField3.setText("");
     }
 }
 
