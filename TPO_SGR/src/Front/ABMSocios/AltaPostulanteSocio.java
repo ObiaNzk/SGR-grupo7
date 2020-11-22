@@ -7,12 +7,14 @@ import enums.EstadoDocumentacion;
 import enums.TamañoEmpresaEnum;
 import enums.TipoDeSocio;
 import main.*;
+import operaciones.LineaDeCredito;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -326,6 +328,13 @@ public class AltaPostulanteSocio extends JDialog {
 
         socio.setNombre((String) textField1.getText());
         socio.setTipoDeSocio((TipoDeSocio) comboBox3.getSelectedItem());
+
+        if(TipoDeSocio.PARTICIPE.equals(socio.getTipoDeSocio())){
+            Calendar cal = Calendar.getInstance();
+            Date date = cal.getTime();
+            socio.setLineaDeCredito(new LineaDeCredito(1000, date, true));
+        }
+
         socio.setEmpresa(empresa);
     }
 
