@@ -82,8 +82,8 @@ public class AccionistasSocio extends JDialog{
                     accionista = new Accionista();
                     resetFields();
                 } else {
-                    labelError.setText("Ingrese los datos faltantes");
-                }
+                    JOptionPane.showMessageDialog(pnlPrincipal,"Ingrese los datos faltantes", "Ok", JOptionPane.INFORMATION_MESSAGE);                }
+
             }
         });
     }

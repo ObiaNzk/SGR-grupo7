@@ -254,7 +254,14 @@ public class Sgr {
         Empresa empresa = new Empresa();
         empresa.setTamañoEmpresaEnum(TamañoEmpresaEnum.MEDIANA);
         socioPrincipalParticipe.setTipoDeSocio(TipoDeSocio.PARTICIPE);
-        socioPrincipalParticipe.setAccionesSgrA(new ArrayList<String>(Collections.nCopies(100,"accion A")));
+
+        socioPrincipalParticipe.setAccionesSgrA(new ArrayList<>());
+        List<String> participeAux = new ArrayList<>();
+        for(int i= 0 ; i < 100 ; i++){
+            participeAux.add("accion A");
+        }
+        socioPrincipalParticipe.getAccionesSgrA().addAll(participeAux);
+
         socioPrincipalParticipe.setNombre("Socio General Participe");
         socioPrincipalParticipe.setTipoDeOperacionEnum(TipoDeOperacionEnum.TIPO1);
         socioPrincipalParticipe.setEmpresa(empresa);
@@ -298,7 +305,11 @@ public class Sgr {
         Socio socioPrincipalProtector = new Socio();
 
         socioPrincipalProtector.setTipoDeSocio(TipoDeSocio.PROTECTORES);
-        socioPrincipalProtector.setAccionesSgrB(new ArrayList<String>(Collections.nCopies(100,"accion B")));
+
+        socioPrincipalProtector.setAccionesSgrB(new ArrayList<>());
+        for(int i= 0 ; i < 100 ; i++){
+            socioPrincipalProtector.getAccionesSgrB().add("accion B");
+        }
         socioPrincipalProtector.setNombre("Socio General Protector");
         socioPrincipalProtector.setTipoDeOperacionEnum(TipoDeOperacionEnum.APORTE);
         socioPrincipalProtector.setEmpresa(empresa);

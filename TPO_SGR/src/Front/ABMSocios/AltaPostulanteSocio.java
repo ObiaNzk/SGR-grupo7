@@ -192,8 +192,9 @@ public class AltaPostulanteSocio extends JDialog {
                     }
 
                     sociosSgrList.add(socio);
-                    labelError.setText("Socio agregado exitosamente");
-                    resetFields();
+                    JOptionPane.showMessageDialog(pnlPrincipal,"Socio agregado exitosamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+                resetFields();
 
                 } else {
 
@@ -333,6 +334,9 @@ public class AltaPostulanteSocio extends JDialog {
             Calendar cal = Calendar.getInstance();
             Date date = cal.getTime();
             socio.setLineaDeCredito(new LineaDeCredito(1000, date, true));
+            socio.setAccionesSgrA(new ArrayList<>());
+        } else {
+            socio.setAccionesSgrB(new ArrayList<>());
         }
 
         socio.setEmpresa(empresa);

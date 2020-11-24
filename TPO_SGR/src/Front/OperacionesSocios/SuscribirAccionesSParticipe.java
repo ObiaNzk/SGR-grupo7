@@ -75,7 +75,7 @@ public class SuscribirAccionesSParticipe extends JDialog{
                     if(socioVendedor != null && socioComprador != null){
 
                         try {
-                            sistema.getInstance().VentaDeAcciones(socioComprador, socioVendedor, cantidad);
+                            sistema.getInstance().VentaDeAcciones(socioVendedor, socioComprador, cantidad);
                             JOptionPane.showMessageDialog(jPanel,"Operacion procesada correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
                         } catch (Exception e1){
                             JOptionPane.showMessageDialog(jPanel,"Error al querer suscribir acciones", "Error", JOptionPane.INFORMATION_MESSAGE);
