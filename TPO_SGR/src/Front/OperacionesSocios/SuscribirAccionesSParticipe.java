@@ -67,10 +67,10 @@ public class SuscribirAccionesSParticipe extends JDialog{
                 Socio socioComprador = (Socio) comboBox2.getSelectedItem();
                 Integer cantidad = Integer.valueOf(textField1.getText());
 
-//                if(validateExcedeMonto(socioVendedor.getAccionesSgrA(), cantidad)){
-//
-//                    JOptionPane.showMessageDialog(jPanel,"La cantidad a comprar es mayor a la del vendedor", "Error", JOptionPane.INFORMATION_MESSAGE);
-//                } else {
+                if(validateExcedeMonto(socioVendedor.getAccionesSgrA(), cantidad)){
+
+                    JOptionPane.showMessageDialog(jPanel,"La cantidad a comprar es mayor a la del vendedor", "Error", JOptionPane.INFORMATION_MESSAGE);
+                } else {
 
                     if(socioVendedor != null && socioComprador != null){
 
@@ -82,19 +82,18 @@ public class SuscribirAccionesSParticipe extends JDialog{
                             e1.printStackTrace();
                         }
                     }
-//                }
+                }
 
             }
         });
     }
 
-//    private Boolean validateExcedeMonto(List<String> accionesVendedor, Integer cantidadAComprar){
-//
-//        Integer cantidadVendedor = 0;
-//        for(String aux : accionesVendedor){
-//            cantidadVendedor += Integer.valueOf(aux);
-//        }
-//
-//        return cantidadAComprar<cantidadVendedor ? Boolean.FALSE : Boolean.TRUE;
-//    }
+    private Boolean validateExcedeMonto(List<String> accionesVendedor, Integer cantidadAComprar){
+
+        if(accionesVendedor.size() < cantidadAComprar){
+            return Boolean.TRUE;
+        }
+
+        return Boolean.FALSE;
+    }
 }
