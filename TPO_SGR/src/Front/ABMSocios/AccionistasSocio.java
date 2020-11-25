@@ -23,7 +23,7 @@ public class AccionistasSocio extends JDialog{
 
 
         //tamaño del panel.
-        this.setSize(300, 800);
+        this.setSize(600, 800);
 
         this.setContentPane(pnlPrincipal);
         //No permite volver hasta la pantalla anterior hasta cerrar esta.
@@ -80,6 +80,8 @@ public class AccionistasSocio extends JDialog{
                 if(validateAccionista(accionista)){
                     accionistaList.add(accionista);
                     accionista = new Accionista();
+                    JOptionPane.showMessageDialog(pnlPrincipal,"Accionista agregado exitosamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
                     resetFields();
                 } else {
                     JOptionPane.showMessageDialog(pnlPrincipal,"Ingrese los datos faltantes", "Ok", JOptionPane.INFORMATION_MESSAGE);                }
